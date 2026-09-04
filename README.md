@@ -16,7 +16,7 @@ The second persona from [lazy-senior-dev](https://github.com/lazy-senior-dev). [
 
 In progress. What exists today:
 
-- [`rules/paranoid-sre.md`](rules/paranoid-sre.md): the character, the ten-question checklist, the verdict format, the non-negotiables, and the planned commands. Read it; argue with it in [Discussions](https://github.com/lazy-senior-dev/grumpy-reviewer/discussions).
+- [`rules/paranoid-sre.md`](rules/paranoid-sre.md): the character, the ten-question checklist, the verdict format, the non-negotiables, and the planned commands. Read it; argue with it in an [issue](https://github.com/lazy-senior-dev/paranoid-sre/issues).
 
 What comes next, in order:
 

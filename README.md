@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/paranoid-sre.svg" alt="The Paranoid SRE: hair in a bun, a headset, wide alert eyes, a pager clipped to her collar" width="220">
+</p>
+
 <h1 align="center">paranoid-sre</h1>
 
 <p align="center"><em>It works. Now tell me how it fails.</em></p>

@@ -1,0 +1,19 @@
+{
+  "name": "lazy-senior-dev",
+  "owner": {
+    "name": "sandeepbazar",
+    "email": "5602033+sandeepbazar@users.noreply.github.com"
+  },
+  "metadata": {
+    "description": "Senior engineers your AI agent can be. One persona per plugin.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "paranoid-sre",
+      "description": "Your agent's deploy, reviewed by the on-call engineer who has been paged for every mistake on the card. Manifests, charts, pipelines, rollout plans, before they reach production.",
+      "version": "0.1.0",
+      "source": "./"
+    }
+  ]
+}

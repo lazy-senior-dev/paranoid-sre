@@ -1,0 +1,6 @@
+{
+  "name": "paranoid-sre",
+  "version": "0.1.0",
+  "description": "Your agent's deploy, reviewed by the on-call engineer who has been paged for every mistake on the card. Manifests, charts, pipelines, rollout plans, before they reach production.",
+  "contextFileName": "GEMINI.md"
+}

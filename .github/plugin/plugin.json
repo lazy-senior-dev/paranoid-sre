@@ -1,0 +1,25 @@
+{
+  "name": "paranoid-sre",
+  "version": "0.1.0",
+  "description": "Your agent's deploy, reviewed by the on-call engineer who has been paged for every mistake on the card. Manifests, charts, pipelines, rollout plans, before they reach production.",
+  "author": {
+    "name": "Sandeep Bazar",
+    "url": "https://github.com/sandeepbazar"
+  },
+  "homepage": "https://lazy-senior-dev.github.io/paranoid-sre",
+  "repository": "https://github.com/lazy-senior-dev/paranoid-sre",
+  "license": "Apache-2.0",
+  "keywords": [
+    "sre",
+    "deploy",
+    "kubernetes",
+    "terraform",
+    "ci",
+    "ai-agents",
+    "claude-code",
+    "github-action",
+    "persona"
+  ],
+  "skills": "./skills",
+  "hooks": "./hooks/copilot-hooks.json"
+}

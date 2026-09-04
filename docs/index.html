@@ -4,22 +4,22 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>paranoid-sre: the on-call engineer who asks how it fails</title>
-<meta name="description" content="Your agent's deploy, reviewed by the on-call engineer who has been paged for every mistake on the card. Ruleset draft published; adapters, gate, and benchmark in progress.">
+<meta name="description" content="Your agent's deploy, reviewed by the on-call engineer who has been paged for every mistake on the card. Plugin for 14 agents and a GitHub Action, with a benchmark of seeded rollout failures.">
 <meta name="author" content="Sandeep Bazar">
 <link rel="icon" href="assets/paranoid-sre.svg" type="image/svg+xml">
 <link rel="canonical" href="https://lazy-senior-dev.github.io/paranoid-sre/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="paranoid-sre: the on-call engineer who asks how it fails">
-<meta property="og:description" content="Your agent's deploy, reviewed by the on-call engineer who has been paged for every mistake on the card. Ruleset draft published; adapters, gate, and benchmark in progress.">
+<meta property="og:description" content="Your agent's deploy, reviewed by the on-call engineer who has been paged for every mistake on the card. Plugin for 14 agents and a GitHub Action, with a benchmark of seeded rollout failures.">
 <meta property="og:url" content="https://lazy-senior-dev.github.io/paranoid-sre/">
 <meta property="og:image" content="https://lazy-senior-dev.github.io/assets/social-card.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="paranoid-sre: the on-call engineer who asks how it fails">
-<meta name="twitter:description" content="Your agent's deploy, reviewed by the on-call engineer who has been paged for every mistake on the card. Ruleset draft published; adapters, gate, and benchmark in progress.">
+<meta name="twitter:description" content="Your agent's deploy, reviewed by the on-call engineer who has been paged for every mistake on the card. Plugin for 14 agents and a GitHub Action, with a benchmark of seeded rollout failures.">
 <meta name="twitter:image" content="https://lazy-senior-dev.github.io/assets/social-card.png">
 <meta name="theme-color" content="#fff6d6">
 <!-- Custom domain: create a CNAME file containing only the bare domain in this Pages folder, then set it under Settings > Pages. -->
-<link rel="stylesheet" href="assets/site.css?v=eb00b0ca">
+<link rel="stylesheet" href="assets/site.css?v=0b4bd67f">
 </head>
 <body>
 <header class="top">
@@ -42,7 +42,7 @@
 
 <main>
 <section class="hero wrap">
-  <div class="pill"><i style="background:var(--warn);animation:none"></i> in progress · ruleset draft published · Apache-2.0</div>
+  <div class="pill"><i></i> v0.1.0 · plugin for 14 agents · GitHub Action · Apache-2.0</div>
   <div style="margin:1.6rem 0 .4rem"><span class="sketch"><svg viewBox="0 0 320 320" aria-hidden="true">
   <title id="t">The Paranoid SRE</title>
   <desc id="d">Line sketch of an on-call engineer with her hair in a bun, a headset, wide alert eyes, and a pager clipped to her collar.</desc>
@@ -101,7 +101,7 @@
     <path d="M 150 250 L 200 262" stroke-width="2"/>
   </g>
 </svg></span></div>
-  <h1 class="display">The Paranoid SRE<br><span class="g">asks how it fails.</span></h1>
+  <h1 class="display">It works.<br><span class="g">Now tell me how it fails.</span></h1>
   <p class="lede">Your agent's deploy, reviewed by the on-call engineer who has been paged for every mistake on the laminated card taped to her monitor. Manifests, charts, pipelines, rollout plans. <strong>It works. Now tell me how it fails.</strong></p>
   <div class="ctas">
     <a class="btn primary" href="https://github.com/lazy-senior-dev/paranoid-sre/blob/main/rules/paranoid-sre.md">Read the ruleset draft →</a>
@@ -116,6 +116,18 @@
     <div class="node ok"><small>Production</small><b>only what has a rollback</b><em>SHIP → Ship it.</em></div>
   </div>
   <p class="pipe-note">Never approve a rollout without a rollback you have read.</p>
+</section>
+
+<section class="wrap reveal" id="recordings">
+  <div class="eyebrow">Recorded</div>
+  <h2>Watch her work on every agent</h2>
+  <p class="sub">The same staged diff, one CLI, 4 agents. Real runs captured from the terminal transcript and rendered frame by frame, nothing typed by hand and nothing cut. Captions come from the recording itself. Captured 2026-09-04.</p>
+  <div class="recs">
+    <figure class="rec"><img src="assets/recordings/claude.gif" loading="lazy" width="1000" height="456" alt="Terminal recording of the Paranoid SRE reviewing a staged diff with Claude Code: SRE: PAGE"><figcaption><strong>Claude Code</strong><span>SRE: PAGE · 4 findings · 40 s · $0.05</span></figcaption></figure>
+    <figure class="rec"><img src="assets/recordings/codex.gif" loading="lazy" width="1000" height="390" alt="Terminal recording of the Paranoid SRE reviewing a staged diff with Codex CLI: SRE: PAGE"><figcaption><strong>Codex CLI</strong><span>SRE: PAGE · 4 findings · 30 s</span></figcaption></figure>
+    <figure class="rec"><img src="assets/recordings/agy.gif" loading="lazy" width="1000" height="302" alt="Terminal recording of the Paranoid SRE reviewing a staged diff with Antigravity CLI: SRE: PAGE"><figcaption><strong>Antigravity CLI</strong><span>SRE: PAGE · 2 findings · 86 s</span></figcaption></figure>
+    <figure class="rec"><img src="assets/recordings/bob.gif" loading="lazy" width="1000" height="324" alt="Terminal recording of the Paranoid SRE reviewing a staged diff with IBM Bob Shell: SRE: PAGE"><figcaption><strong>IBM Bob Shell</strong><span>SRE: PAGE · 2 findings · 17 s · $0.01</span></figcaption></figure>
+  </div>
 </section>
 
 <section class="wrap reveal">
@@ -136,21 +148,21 @@
   <p class="sub" style="margin-top:1.4rem">Verdict block: <code>SRE: SHIP | HOLD | PAGE</code>. <code>PAGE</code> is reserved for changes that will page a human: unbounded resources, no rollback path, secrets in the wrong place, a rollout with no stop signal, a dependency with no timeout.</p>
 </section>
 
-<section class="wrap reveal">
-  <div class="eyebrow">Status</div>
-  <h2>What exists, what is next</h2>
+<section class="wrap reveal" id="ships">
+  <div class="eyebrow">What ships</div>
+  <h2>Everything the Grump has, pointed at the deploy</h2>
   <div class="grid c4">
-    <div class="stat"><b>1</b><span>ruleset draft, v0</span></div>
+    <div class="stat"><b>14</b><span>agent adapters, one ruleset</span></div>
     <div class="stat"><b>10</b><span>questions, with a stop rule</span></div>
     <div class="stat"><b>3</b><span>verdicts: SHIP · HOLD · PAGE</span></div>
-    <div class="stat"><b>0</b><span>adapters shipped yet</span></div>
+    <div class="stat"><b>25</b><span>benchmark cases: 15 seeded · 5 clean · 5 needle</span></div>
   </div>
   <div class="grid c3" style="margin-top:1rem">
-    <div class="card"><h3>1. Adapters</h3><p>Generated from the ruleset with the grumpy-reviewer generator, for every host it already supports.</p></div>
-    <div class="card"><h3>2. The gate</h3><p>The same <code>PreToolUse</code> hook, scoped to deploy, infra, and CI file paths.</p></div>
-    <div class="card"><h3>3. The benchmark</h3><p>Seeded rollout failures: missing limits, no readiness probe, one-way migrations, unpinned images, rollouts with no stop signal. Measured on incidents prevented, raw replies committed.</p></div>
+    <div class="card"><h3>Adapters</h3><p>Generated from <code>rules/paranoid-sre.md</code> for Claude Code, Codex, Copilot CLI, Gemini CLI and Antigravity, OpenCode, Cursor, Windsurf, Cline, Kiro, OpenClaw, Devin, Qoder, IBM Bob, and any <code>AGENTS.md</code> reader. <code>sre install &lt;host&gt;</code> drops the right files in.</p></div>
+    <div class="card"><h3>The gate</h3><p>The same <code>PreToolUse</code> hook, scoped to deploy, infra, and CI file paths. <code>PAGE</code> denies the write in every mode; <code>HOLD</code> denies in gate mode.</p></div>
+    <div class="card"><h3>The benchmark</h3><p>Three arms (agent alone, generic reviewer prompt, the Paranoid SRE) on the same diffs, every reply kept. Numbers and the per-diff table live in the README and <code>benchmarks/results</code>.</p></div>
   </div>
-  <p class="sub" style="margin-top:1.2rem">Have an incident that one of the ten questions would have caught? <a href="https://github.com/lazy-senior-dev/paranoid-sre/issues">Open an issue</a>; it becomes a benchmark case.</p>
+  <p class="sub" style="margin-top:1.2rem">Have a rollout failure one of the ten questions would have caught? <a href="https://github.com/lazy-senior-dev/paranoid-sre/issues">Open an issue</a>; it becomes a benchmark case.</p>
 </section>
 
 <section class="wrap reveal">
@@ -422,7 +434,7 @@
   </g>
   <text x="258" y="286" font-family="Menlo, Consolas, monospace" font-size="8.5" font-weight="700" text-anchor="middle" fill="#000">NOT LGTM</text>
 </svg></span><h3>The Grump <small style="color:var(--ok);font-weight:500">live</small></h3><p><em>Show me where it breaks.</em> Reviews the diff before it reaches your branch.</p></a>
-    <a class="card" href="https://lazy-senior-dev.github.io/tenured/" style="display:block"><span class="sketch dim" style="animation:none;filter:none"><svg viewBox="0 0 320 320" aria-hidden="true" style="width:120px">
+    <a class="card" href="https://lazy-senior-dev.github.io/tenured/" style="display:block"><span class="sketch" style="animation:none"><svg viewBox="0 0 320 320" aria-hidden="true" style="width:120px">
   <title id="t">Tenured</title>
   <desc id="d">Line sketch of a veteran engineer: bald on top with hair at the sides, thick round glasses, a calm half-smile, a cardigan, and a notebook marked 2017 in the pocket.</desc>
   <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
@@ -482,7 +494,7 @@
     <path d="M 194 170 C 196 178, 194 186, 188 192" stroke-width="1.5"/>
   </g>
   <text x="90" y="300" font-family="Menlo, Consolas, monospace" font-size="7" font-weight="700" text-anchor="middle" fill="currentColor">2017</text>
-</svg></span><h3>Tenured <small style="color:var(--faint);font-weight:500">coming soon</small></h3><p><em>We tried that in 2017.</em> Reviews the change against the repository's own history.</p></a>
+</svg></span><h3>Tenured</h3><p><em>We tried that in 2017.</em> Reviews the change against the repository's own history.</p></a>
     <a class="card" href="https://lazy-senior-dev.github.io/" style="display:block"><h3>All personas</h3><p>One persona per plugin, each measured on the number that engineer cares about.</p></a>
   </div>
 </section>

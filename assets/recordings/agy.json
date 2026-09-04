@@ -1,0 +1,18 @@
+{
+  "persona": "paranoid-sre",
+  "agent": "agy",
+  "case": "s24-k8s-latest-tag",
+  "command": "npx github:lazy-senior-dev/paranoid-sre review --staged --agent agy",
+  "durationMs": 86077,
+  "exitCode": 1,
+  "stderr": [
+    "Reading the staged changes (45 lines) with Antigravity CLI. The Paranoid SRE does not skim; give it a moment.",
+    "86 s · 21006 in / 32192 out tokens"
+  ],
+  "stdout": [
+    "SRE: PAGE",
+    "1. deploy/k8s/api-deployment.yaml:20 — image uses mutable latest tag, so redeploying the previous revision cannot restore a known version leaving no rollback path — pin the image to an immutable tag or digest",
+    "2. deploy/k8s/api-deployment.yaml:33 — no liveness probe defined, so a hung or deadlocked container is never restarted by kubelet — define an independent livenessProbe"
+  ],
+  "recordedAt": "2026-09-04T18:55:13.943Z"
+}

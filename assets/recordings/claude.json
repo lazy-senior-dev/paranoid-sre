@@ -1,0 +1,20 @@
+{
+  "persona": "paranoid-sre",
+  "agent": "claude",
+  "case": "s24-k8s-latest-tag",
+  "command": "npx github:lazy-senior-dev/paranoid-sre review --staged --agent claude",
+  "durationMs": 40021,
+  "exitCode": 1,
+  "stderr": [
+    "Reading the staged changes (45 lines) with Claude Code (claude-sonnet-5). The Paranoid SRE does not skim; give it a moment.",
+    "40 s · 7771 in / 3256 out tokens · $0.0524"
+  ],
+  "stdout": [
+    "SRE: PAGE",
+    "1. deploy/k8s/api-deployment.yaml:17 — image is pinned to :latest, so there is no previous version to redeploy and no rollback path — pin to an immutable tag or digest (git SHA) built by CI",
+    "2. deploy/k8s/api-deployment.yaml:29 — only a readinessProbe is defined, no liveness probe, so a hung process that still answers TCP on 8080 never gets restarted and keeps serving dead traffic — add a livenessProbe (process-level, no dependency checks)",
+    "3. deploy/k8s/api-deployment.yaml:6 — replicas: 2 with no PodDisruptionBudget, so a single node drain or cluster upgrade can evict both pods at once and take the service fully down — add a PDB with minAvailable: 1",
+    "4. deploy/k8s/api-deployment.yaml:1 — no alert or annotation ties this workload to an on-call rotation, so a crashloop here pages nobody — confirm/attach an existing rule (e.g. KubePodCrashLooping) scoped to app=api, namespace=staging"
+  ],
+  "recordedAt": "2026-09-04T18:47:49.389Z"
+}

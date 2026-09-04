@@ -1,0 +1,20 @@
+{
+  "persona": "paranoid-sre",
+  "agent": "codex",
+  "case": "s24-k8s-latest-tag",
+  "command": "npx github:lazy-senior-dev/paranoid-sre review --staged --agent codex",
+  "durationMs": 30010,
+  "exitCode": 1,
+  "stderr": [
+    "Reading the staged changes (45 lines) with Codex CLI. The Paranoid SRE does not skim; give it a moment.",
+    "30 s · 18469 in / 2269 out tokens"
+  ],
+  "stdout": [
+    "SRE: PAGE",
+    "1. deploy/k8s/api-deployment.yaml:8 — the rolling deployment has no automated stop signal, so unhealthy revisions can replace every replica — add a monitored canary step that aborts on a named health alert",
+    "2. deploy/k8s/api-deployment.yaml:20 — the mutable `latest` image makes rollback non-reproducible because redeploying the previous manifest can pull the same broken image — pin the image to an immutable digest",
+    "3. deploy/k8s/api-deployment.yaml:32 — there is no liveness probe, so a wedged process can remain running indefinitely and permanently reduce capacity — add a process-only liveness probe distinct from readiness",
+    "4. deploy/k8s/api-deployment.yaml:1 — no alert or runbook covers loss of available API replicas, so this failure can remain undetected until users report it — add a named availability alert routed to the owning rotation with a rollback runbook"
+  ],
+  "recordedAt": "2026-09-04T18:48:19.636Z"
+}

@@ -22,6 +22,22 @@
 **Numbers: TBD.** Run `npm run bench` and `npm run bench:report`.
 <!-- bench:hero:end -->
 
+<!-- recordings:start -->
+## Watch her work on every agent
+
+The same staged diff, one CLI, 4 agents. Each recording is a real run captured with `node scripts/capture-run.mjs --agent <name>` and rendered frame by frame from the transcript, nothing typed by hand and nothing cut. The captions come from the recording itself. Captured 2026-09-04.
+
+| **Claude Code** | **Codex CLI** |
+|---|---|
+| <img src="assets/recordings/claude.gif" alt="Terminal recording of the Paranoid SRE reviewing a staged diff with Claude Code: SRE: PAGE with 4 numbered findings" width="440"> | <img src="assets/recordings/codex.gif" alt="Terminal recording of the Paranoid SRE reviewing a staged diff with Codex CLI: SRE: PAGE with 4 numbered findings" width="440"> |
+| SRE: PAGE · 4 findings · 40 s · $0.05 | SRE: PAGE · 4 findings · 30 s |
+| **Antigravity CLI** | **IBM Bob Shell** |
+| <img src="assets/recordings/agy.gif" alt="Terminal recording of the Paranoid SRE reviewing a staged diff with Antigravity CLI: SRE: PAGE with 2 numbered findings" width="440"> | <img src="assets/recordings/bob.gif" alt="Terminal recording of the Paranoid SRE reviewing a staged diff with IBM Bob Shell: SRE: PAGE with 2 numbered findings" width="440"> |
+| SRE: PAGE · 2 findings · 86 s | SRE: PAGE · 2 findings · 17 s · $0.01 |
+
+Agents that narrate the whole checklist before the verdict (Bob does) are shown from the verdict block down; the CLI prints it the same way. Re-capture any of them with `--agent claude|codex|agy|bob`; Bob needs `BOB_API_KEY`.
+<!-- recordings:end -->
+
 ## The thirty-second version
 
 Your agent edits a manifest, a Helm chart, a Terraform file, a Dockerfile, a pipeline. It looks fine. It has resource requests and a readiness probe. It also has no memory limit, a liveness probe that pings the database, and a rollout strategy that takes every replica down at once. Nothing between the agent and your cluster asks what happens at 3 a.m.

@@ -1,0 +1,18 @@
+{
+  "persona": "paranoid-sre",
+  "agent": "bob",
+  "case": "s24-k8s-latest-tag",
+  "command": "npx github:lazy-senior-dev/paranoid-sre review --staged --agent bob",
+  "durationMs": 16730,
+  "exitCode": 1,
+  "stderr": [
+    "Reading the staged changes (45 lines) with IBM Bob Shell. The Paranoid SRE does not skim; give it a moment.",
+    "17 s · $0.0109"
+  ],
+  "stdout": [
+    "SRE: PAGE",
+    "1. deploy/k8s/api-deployment.yaml:19 — image tag is :latest; kubectl rollout undo will redeploy whatever digest is currently tagged latest at that moment, not the prior known-good image — pin to an immutable digest or a semver tag; rollback is non-functional until this is fixed",
+    "2. deploy/k8s/api-deployment.yaml:33 — no liveness probe; a deadlocked process stays in rotation indefinitely and the rollout stalls with no automatic recovery — add a liveness probe on a separate path (e.g. /livez) that checks only process health, not dependencies"
+  ],
+  "recordedAt": "2026-09-04T18:56:25.455Z"
+}

@@ -1,0 +1,46 @@
+[
+  {
+    "agent": "claude",
+    "label": "Claude Code",
+    "verdict": "PAGE",
+    "findings": 4,
+    "seconds": 40,
+    "cost": 0.0524,
+    "recordedAt": "2026-09-04",
+    "width": 1000,
+    "height": 456
+  },
+  {
+    "agent": "codex",
+    "label": "Codex CLI",
+    "verdict": "PAGE",
+    "findings": 4,
+    "seconds": 30,
+    "cost": null,
+    "recordedAt": "2026-09-04",
+    "width": 1000,
+    "height": 390
+  },
+  {
+    "agent": "agy",
+    "label": "Antigravity CLI",
+    "verdict": "PAGE",
+    "findings": 2,
+    "seconds": 86,
+    "cost": null,
+    "recordedAt": "2026-09-04",
+    "width": 1000,
+    "height": 302
+  },
+  {
+    "agent": "bob",
+    "label": "IBM Bob Shell",
+    "verdict": "PAGE",
+    "findings": 2,
+    "seconds": 17,
+    "cost": 0.0109,
+    "recordedAt": "2026-09-04",
+    "width": 1000,
+    "height": 324
+  }
+]

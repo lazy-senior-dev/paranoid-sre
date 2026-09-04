@@ -19,7 +19,7 @@
 **Your agent's deploy, reviewed by the on-call engineer who has been paged for every mistake on the laminated card taped to her monitor, before it reaches production.**
 
 <!-- bench:hero:start -->
-**On Claude Code (`claude-sonnet-5`), the Paranoid SRE catches 15 of 15 seeded defects against 14 for the agent alone. What changes is discipline: false alarms on 5 clean diffs, 3 with her, 2 without; replies with no usable verdict per run, 0 with her, 2 without; 100% of PAGE verdicts land on PAGE-class defects; median review time 29 s with her, 10 s without at 2479 output tokens with her, 738 output tokens without.** Median of 2 runs, measured 2026-09-04; [method, per-diff table, raw replies](benchmarks/results). **In the needle tier, where the same defect hides in a four-file, 150-line pull request, Claude Code finds 5 of 5 with the Paranoid SRE, 5 without, 5 with the generic prompt.**
+**On Claude Code (`claude-sonnet-5`), the Paranoid SRE catches 15 of 15 seeded defects against 14 for the agent alone. What changes is discipline: false alarms on 5 clean diffs, 3 with her, 1 without; replies with no usable verdict per run, 0 with her, 2 without; 89% of PAGE verdicts land on PAGE-class defects; median review time 30 s with her, 10 s without at 2474 output tokens with her, 737 output tokens without.** Median of 2 runs, measured 2026-09-04; [method, per-diff table, raw replies](benchmarks/results). **In the needle tier, where the same defect hides in a four-file, 150-line pull request, Claude Code finds 5 of 5 with the Paranoid SRE, 5 without, 5 with the generic prompt.**
 <!-- bench:hero:end -->
 
 <!-- recordings:start -->
@@ -27,15 +27,17 @@
 
 The same staged diff, one CLI, 4 agents. Each recording is a real run captured with `node scripts/capture-run.mjs --agent <name>` and rendered frame by frame from the transcript, nothing typed by hand and nothing cut. The captions come from the recording itself. Captured 2026-09-04.
 
-| **Claude Code** | **Codex CLI** |
+| Claude Code | Codex CLI |
 |---|---|
 | <img src="assets/recordings/claude.gif" alt="Terminal recording of the Paranoid SRE reviewing a staged diff with Claude Code: SRE: PAGE with 4 numbered findings" width="440"> | <img src="assets/recordings/codex.gif" alt="Terminal recording of the Paranoid SRE reviewing a staged diff with Codex CLI: SRE: PAGE with 4 numbered findings" width="440"> |
-| SRE: PAGE · 4 findings · 40 s · $0.05 | SRE: PAGE · 4 findings · 30 s |
-| **Antigravity CLI** | **IBM Bob Shell** |
-| <img src="assets/recordings/agy.gif" alt="Terminal recording of the Paranoid SRE reviewing a staged diff with Antigravity CLI: SRE: PAGE with 2 numbered findings" width="440"> | <img src="assets/recordings/bob.gif" alt="Terminal recording of the Paranoid SRE reviewing a staged diff with IBM Bob Shell: SRE: PAGE with 2 numbered findings" width="440"> |
-| SRE: PAGE · 2 findings · 86 s | SRE: PAGE · 2 findings · 17 s · $0.01 |
+| <b>Verdict</b> SRE: PAGE<br><b>Findings</b> 4<br><b>Time</b> 40 s<br><b>Tokens</b> 7,771 in / 3,256 out<br><b>Cost</b> $0.0524 | <b>Verdict</b> SRE: PAGE<br><b>Findings</b> 4<br><b>Time</b> 30 s<br><b>Tokens</b> 18,469 in / 2,269 out<br><b>Cost</b> not reported by the host |
 
-Agents that narrate the whole checklist before the verdict (Bob does) are shown from the verdict block down; the CLI prints it the same way. Re-capture any of them with `--agent claude|codex|agy|bob`; Bob needs `BOB_API_KEY`.
+| Antigravity CLI | IBM Bob Shell |
+|---|---|
+| <img src="assets/recordings/agy.gif" alt="Terminal recording of the Paranoid SRE reviewing a staged diff with Antigravity CLI: SRE: PAGE with 2 numbered findings" width="440"> | <img src="assets/recordings/bob.gif" alt="Terminal recording of the Paranoid SRE reviewing a staged diff with IBM Bob Shell: SRE: PAGE with 2 numbered findings" width="440"> |
+| <b>Verdict</b> SRE: PAGE<br><b>Findings</b> 2<br><b>Time</b> 86 s<br><b>Tokens</b> 21,006 in / 32,192 out<br><b>Cost</b> not reported by the host | <b>Verdict</b> SRE: PAGE<br><b>Findings</b> 2<br><b>Time</b> 17 s<br><b>Tokens</b> not reported by the host<br><b>Cost</b> $0.0109 |
+
+Every card lists the same five things; a host that does not report tokens or cost says so rather than leaving a blank. Agents that narrate the whole checklist before the verdict are shown from the verdict block down; the CLI prints it the same way. Re-capture any of them with `--agent claude|codex|agy|bob`; Bob needs `BOB_API_KEY`.
 <!-- recordings:end -->
 
 ## The thirty-second version
@@ -83,18 +85,18 @@ Rollouts now take three minutes. Nobody notices them. That is the point.
 <!-- bench:table:start -->
 | Agent | Model | Arm | Defects caught (of 15) | False alarms (of 5) | Replies without a verdict (per run) | BLOCK precision | Median input tokens | Median output tokens | Median latency |
 |---|---|---|---|---|---|---|---|---|---|
-| Claude Code | `claude-sonnet-5` (n=2) | no skill | 14 | 2 | 2 | n/a | 5686 | 738 | 10 s |
-| Claude Code | `claude-sonnet-5` (n=2) | generic review prompt | 15 | 3 | 1 | n/a | 5798 | 1313 | 17 s |
-| Claude Code | `claude-sonnet-5` (n=2) | **paranoid-sre** | **15** | **3** | **0** | **100%** | 8021 | 2479 | 29 s |
-| Codex CLI | `codex-default` (n=2) | no skill | 14 | 1 | 0 | n/a | 21230 | 620 | 15 s |
-| Codex CLI | `codex-default` (n=2) | generic review prompt | 15 | 2 | 0 | n/a | 28625 | 985 | 22 s |
-| Codex CLI | `codex-default` (n=2) | **paranoid-sre** | **15** | **1** | **0** | **89%** | 15672 | 482 | 10 s |
+| Claude Code | `claude-sonnet-5` (n=2) | no skill | 14 | 1 | 2 | n/a | 5686 | 737 | 10 s |
+| Claude Code | `claude-sonnet-5` (n=2) | generic review prompt | 15 | 3 | 1 | n/a | 5798 | 1309 | 17 s |
+| Claude Code | `claude-sonnet-5` (n=2) | **paranoid-sre** | **15** | **3** | **0** | **89%** | 8035 | 2474 | 30 s |
+| Codex CLI | `codex-default` (n=2) | no skill | 14 | 2 | 0 | n/a | 28328 | 709 | 17 s |
+| Codex CLI | `codex-default` (n=2) | generic review prompt | 15 | 2 | 0 | n/a | 28655 | 1023 | 24 s |
+| Codex CLI | `codex-default` (n=2) | **paranoid-sre** | **15** | **1** | **0** | **89%** | 15688 | 553 | 11 s |
 | IBM Bob Shell | `bob-default` (n=2) | no skill | 12 | 2 | 3 | n/a | 0 | 0 | 17 s |
 | IBM Bob Shell | `bob-default` (n=2) | generic review prompt | 12 | 2 | 4 | n/a | 0 | 0 | 17 s |
 | IBM Bob Shell | `bob-default` (n=2) | **paranoid-sre** | **15** | **4** | **1** | **60%** | 0 | 0 | 16 s |
-| Antigravity CLI | `agy-default` (n=1) | no skill | 12 | 1 | 6 | n/a | 19510 | 2644 | 44 s |
-| Antigravity CLI | `agy-default` (n=1) | generic review prompt | 13 | 1 | 6 | n/a | 19631 | 6499 | 52 s |
-| Antigravity CLI | `agy-default` (n=1) | **paranoid-sre** | **8** | **0** | **0** | **100%** | 21198 | 40256 | 98 s |
+| Antigravity CLI | `agy-default` (n=1) | no skill | 12 | 0 | 5 | n/a | 19499 | 2528 | 44 s |
+| Antigravity CLI | `agy-default` (n=1) | generic review prompt | 13 | 0 | 5 | n/a | 19593 | 6499 | 52 s |
+| Antigravity CLI | `agy-default` (n=1) | **paranoid-sre** | **15** | **0** | **0** | **100%** | 21155 | 25990 | 79 s |
 
 
 **Needle tier** (one defect in a four-file pull request of about 150 lines):
@@ -104,6 +106,7 @@ Rollouts now take three minutes. Nobody notices them. That is the point.
 | Claude Code | `claude-sonnet-5` (n=2) | 5/5 | 5/5 | **5/5** |
 | Codex CLI | `codex-default` (n=2) | 4/5 | 5/5 | **5/5** |
 | IBM Bob Shell | `bob-default` (n=2) | 4/5 | 2/5 | **5/5** |
+| Antigravity CLI | `agy-default` (n=1) | 3/5 | 1/5 | **5/5** |
 
 <!-- bench:table:end -->
 

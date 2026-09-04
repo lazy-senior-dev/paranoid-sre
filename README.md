@@ -6,28 +6,171 @@
 
 <p align="center"><em>It works. Now tell me how it fails.</em></p>
 
-<p align="center"><img alt="status: in progress" src="https://img.shields.io/badge/status-in%20progress-7a746b"> <a href="LICENSE"><img alt="Apache-2.0" src="https://img.shields.io/badge/license-Apache--2.0-1f1f1f"></a></p>
+<p align="center"><strong>Site:</strong> <a href="https://lazy-senior-dev.github.io/paranoid-sre/">lazy-senior-dev.github.io/paranoid-sre</a> · <strong>The cast:</strong> <a href="https://lazy-senior-dev.github.io/">lazy-senior-dev.github.io</a></p>
 
-**Your agent's deploy, reviewed by the on-call engineer who has been paged for every mistake on the laminated card taped to her monitor.**
+<p align="center">
+  <a href="https://github.com/lazy-senior-dev/paranoid-sre"><img alt="GitHub stars" src="https://img.shields.io/github/stars/lazy-senior-dev/paranoid-sre?style=flat&color=1f1f1f"></a>
+  <a href="CHANGELOG.md"><img alt="Version 0.1.0" src="https://img.shields.io/badge/version-0.1.0-1f1f1f"></a>
+  <img alt="Works with 14 agents" src="https://img.shields.io/badge/works%20with-14%20agents-1f1f1f">
+  <a href="#github-action"><img alt="GitHub Action" src="https://img.shields.io/badge/GitHub%20Action-v1-1f1f1f"></a>
+  <a href="LICENSE"><img alt="Apache-2.0" src="https://img.shields.io/badge/license-Apache--2.0-1f1f1f"></a>
+</p>
 
-The second persona from [lazy-senior-dev](https://github.com/lazy-senior-dev). [grumpy-reviewer](https://github.com/lazy-senior-dev/grumpy-reviewer) reads the diff for what breaks in production. The Paranoid SRE reads the manifest, the chart, the pipeline, and the rollout plan for what pages a human at 3 a.m. Same mechanics: a persona injected every turn, an ordered checklist with a stop rule, a fixed verdict block (`SRE: SHIP | HOLD | PAGE`), a hook that can stop the write, and a benchmark on the number an SRE cares about: incidents prevented per rollout.
+**Your agent's deploy, reviewed by the on-call engineer who has been paged for every mistake on the laminated card taped to her monitor, before it reaches production.**
 
-## Status
+<!-- bench:hero:start -->
+**Numbers: TBD.** Run `npm run bench` and `npm run bench:report`.
+<!-- bench:hero:end -->
 
-In progress. What exists today:
+## The thirty-second version
 
-- [`rules/paranoid-sre.md`](rules/paranoid-sre.md): the character, the ten-question checklist, the verdict format, the non-negotiables, and the planned commands. Read it; argue with it in an [issue](https://github.com/lazy-senior-dev/paranoid-sre/issues).
+Your agent edits a manifest, a Helm chart, a Terraform file, a Dockerfile, a pipeline. It looks fine. It has resource requests and a readiness probe. It also has no memory limit, a liveness probe that pings the database, and a rollout strategy that takes every replica down at once. Nothing between the agent and your cluster asks what happens at 3 a.m.
 
-What comes next, in order:
-
-1. Adapters generated from the ruleset for every host grumpy-reviewer supports, using the same generator.
-2. The gate hook, scoped to deploy, infra, and CI file paths.
-3. A benchmark of seeded rollout failures: missing limits, no readiness probe, one-way migrations, unpinned images, rollouts with no stop signal, secrets in the wrong place. Measured on incidents prevented, with raw replies committed.
-4. A project site and a `v0.1.0`.
+paranoid-sre puts the on-call engineer in the loop. Installed once, she reviews every write to deploy, infra, and CI files before it happens: ten questions about what happens after deploy, answered in writing, then a verdict. `SHIP` goes through. `HOLD` lists what pages and the smallest fix. `PAGE` (unbounded resources, no rollback, secrets in the wrong place, a rollout with no stop signal, privileged access) stops the write, whatever mode you are in. Same mechanics as [grumpy-reviewer](https://github.com/lazy-senior-dev/grumpy-reviewer), scoped to the files that page people. Works in Claude Code, Codex, Copilot CLI, IBM Bob, Antigravity, OpenCode, Cursor, and seven more. Also a GitHub Action.
 
 ## Who she is
 
-Sleeves rolled, a pager on the belt in 2026 because "the phone is not reliable enough", a laminated card of the last five incidents taped to the monitor. She assumes the deploy will fail in the most expensive way available and makes the author show why it cannot. She approves with two words: `Ship it.`
+Sleeves rolled, a pager on the belt in 2026 because "the phone is not reliable enough", a laminated card of the last five incidents taped to the monitor. She has been paged for every mistake on that card and has no intention of being paged for a sixth. She assumes the deploy will fail in the most expensive way available and makes the author show her why it cannot. Every objection names the resource, the failure mode in production, and the smallest change that removes it. She approves with two words: `Ship it.`
+
+Paranoid, not obstructive: every finding comes with the smallest fix and a sentence on blast radius. "It passed staging" is not evidence. Staging has one replica and no customers.
+
+## Before / after
+
+**Friday, 16:40.** The ticket says "speed up api rollouts, they take 12 minutes". The agent writes:
+
+```yaml
+strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxUnavailable: 100%
+    maxSurge: 0
+```
+
+Rollouts now take forty seconds. So does the outage each one causes. The Paranoid SRE reads it first:
+
+```
+SRE: HOLD
+1. charts/api/values.yaml:10 — maxUnavailable 100% with maxSurge 0 takes all six replicas down on every deploy, so every rollout is a full outage — maxUnavailable: 25%, maxSurge: 25%, and let readiness gate the rest
+```
+
+The write is denied. The agent fixes it in two lines and reviews again:
+
+```
+SRE: SHIP — charts/api/values.yaml
+Ship it.
+```
+
+Rollouts now take three minutes. Nobody notices them. That is the point.
+
+## Numbers
+
+<!-- bench:table:start -->
+_No results yet._
+<!-- bench:table:end -->
+
+Fifteen deploy diffs, each with one seeded failure (a `latest` tag, no limits, a liveness probe on a dependency, an all-at-once rollout, a public bucket, a database with no deletion protection, a root container with a baked-in token, a deploy with no concurrency guard, a job with no deadline, an autoscaler deleted to save money), plus five clean ones. Every diff goes to the same agent three ways: no skill, a generic "review this carefully" prompt, and the Paranoid SRE. Method, per-diff table, raw replies and limitations: [benchmarks/results](benchmarks/results). Reproduce: `npm run bench && npm run bench:report`.
+
+<p align="center"><img src="assets/benchmark.png" alt="Bar chart per agent: incidents caught, false alarms on clean diffs, and replies without a verdict, for no skill, a generic prompt, and paranoid-sre" width="860"></p>
+
+## How it works
+
+One file, [`rules/paranoid-sre.md`](rules/paranoid-sre.md), is the whole ruleset. Every adapter in this repo is generated from it.
+
+1. **Blast radius.** How many users, tenants, regions if it goes wrong? Can it touch fewer first?
+2. **Health.** Readiness and liveness defined, distinct, and honest?
+3. **Limits.** CPU, memory, connections, queue depth bounded? What happens at the bound?
+4. **Rollout.** All at once, rolling, canary, flag? What signal stops it, and who watches?
+5. **Rollback.** Undone by redeploying the previous version alone?
+6. **Dependencies.** Timeout, retry budget, breaker, and what the user sees when it is down.
+7. **Config and secrets.** Where from at runtime, what if missing, anything secret in the wrong place?
+8. **Alerts.** Which alert fires, does it page the right rotation, does the runbook exist?
+9. **Capacity.** Sized for what load, current peak, busiest day of the year?
+10. **Cleanup.** Old resources, flags, dashboards removed, and who owns that?
+
+**The verdict**: `SRE: SHIP | HOLD | PAGE`, then numbered `file:line — what fails in production — smallest fix` lines. `SHIP` names the files it covers and is followed by `Ship it.`
+
+**The gate** fires only for files in her scope (manifests, charts, Terraform, Dockerfiles, CI, config). Code files are the Grump's job; she does not read them. **Modes**: `nag` (default), `gate`, `off`, shared with every persona through `GRUMPY_MODE`, a repository's `.grumpy.json`, or `~/.config/grumpy-reviewer/config.json`.
+
+## Try her in 60 seconds, install nothing
+
+```
+npx github:lazy-senior-dev/paranoid-sre review            # working tree
+npx github:lazy-senior-dev/paranoid-sre pr 123            # a pull request, via gh
+```
+
+Finds `claude`, `codex`, `agy`, or `bob` on your PATH, sends the diff with her ruleset, prints the verdict, and exits 1 on anything but `SHIP`.
+
+## Install
+
+### Claude Code
+
+```
+/plugin marketplace add lazy-senior-dev/grumpy-reviewer
+/plugin install paranoid-sre@lazy-senior-dev
+```
+
+One marketplace lists the whole cast; install any persona from it.
+
+### Everything else
+
+```
+npx github:lazy-senior-dev/paranoid-sre install <host>     # bob, cursor, windsurf, cline, kiro, qoder, opencode, gemini, copilot, agents, all
+```
+
+Antigravity: `git clone https://github.com/lazy-senior-dev/paranoid-sre ~/.paranoid-sre && agy plugin install ~/.paranoid-sre`. Codex, Copilot CLI, Gemini CLI, Devin, Qoder: the same manifests and commands as grumpy-reviewer, see [docs/agent-portability.md](docs/agent-portability.md). Uninstall is one command everywhere: `npx github:lazy-senior-dev/paranoid-sre uninstall <host>`.
+
+## GitHub Action
+
+```yaml
+- uses: lazy-senior-dev/paranoid-sre@v1
+  with:
+    mode: nag          # gate: request changes and fail the check until SHIP
+    ignore: |
+      docs/**
+  env:
+    ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+```
+
+One review per pull request, inline findings, updated in place. Point it at the same repository as the Grump's Action: one reviews the code, the other the deploy, and each posts its own review.
+
+## Commands
+
+| Command | What it does |
+|---|---|
+| `/sre [nag\|gate\|off]` | Set the mode. With no argument, report it. |
+| `/sre-review` | Review the working-tree changes to deploy, infra, and CI files. Returns a numbered hold list. No edits. |
+| `/sre-pr <number\|url>` | Review a pull request the same way. |
+| `/sre-fix` | The only command that touches files: apply the findings from the last review, each as a separate minimal edit, then review again. |
+| `/sre-scorecard` | What the Paranoid SRE caught this session, as a table. |
+| `/sre-help` | This table. |
+
+## Same desk
+
+Three engineers, three jobs, one install path, one mode switch.
+
+| Persona | Reads | Verdict | Measured on |
+|---|---|---|---|
+| [grumpy-reviewer](https://github.com/lazy-senior-dev/grumpy-reviewer) · [site](https://lazy-senior-dev.github.io/grumpy-reviewer/) | the diff, before it reaches your branch | `GRUMP: APPROVE \| REQUEST_CHANGES \| BLOCK` | defects caught |
+| **paranoid-sre** · [site](https://lazy-senior-dev.github.io/paranoid-sre/) | the deploy: manifests, charts, Terraform, CI | `SRE: SHIP \| HOLD \| PAGE` | incidents prevented per rollout |
+| [tenured](https://github.com/lazy-senior-dev/tenured) · [site](https://lazy-senior-dev.github.io/tenured/) | the change against the repository's history | `TENURED: NEW \| SEEN_BEFORE \| DO_NOT_REPEAT` | repeated outages avoided |
+
+Install all three and each reviews its own territory: the Grump reads code, the Paranoid SRE reads what runs it, Tenured reads what history says about both. Every persona is generated from one markdown ruleset with the same machinery, so a fix in one lands in all. The cast: [lazy-senior-dev.github.io](https://lazy-senior-dev.github.io/).
+
+## Security posture
+
+No runtime dependencies, no network calls from the hooks, every third-party action pinned to a SHA, CodeQL and OpenSSF Scorecard on every push, provenance on npm publishes, and a written [threat model](SECURITY.md#threat-model). The hooks read the tool call and the transcript the host hands them; the only outbound traffic is the diff going to the agent you already run.
+
+## FAQ
+
+**Why a second persona instead of more rules for the Grump?** Because the questions are different. The Grump asks what the code does wrong; she asks what the cluster does when the code is right and the manifest is wrong. Keeping them apart keeps each ruleset short enough to read every turn, and lets a team run one without the other.
+
+**Does she fight with the Grump?** No. Her gate fires only on deploy, infra, and CI paths; his fires on everything. A Terraform file gets her review; a Go file gets his; a Helm chart gets hers and, because he reads everything, his too, which is the point of having two reviewers.
+
+**Who wrote this?** [Sandeep Bazar](https://www.linkedin.com/in/sandeepbazar/) ([@sandeepbazar](https://github.com/sandeepbazar)): fourteen years of platform infrastructure at IBM, Kubernetes and storage, and enough 3 a.m. pages to laminate a card.
+
+## Contributing
+
+The most valuable contribution is an incident: a change that shipped, paged someone, and would have been caught by one of the ten questions. Open an [issue](https://github.com/lazy-senior-dev/paranoid-sre/issues) with the change, what paged, and which question should have caught it; it becomes a benchmark case. Details in [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 

@@ -1,0 +1,49 @@
+{
+  "slug": "paranoid-sre",
+  "command": "sre",
+  "name": "The Paranoid SRE",
+  "short": "Paranoid SRE",
+  "displayName": "Paranoid SRE",
+  "asName": "the Paranoid SRE",
+  "possessive": "the Paranoid SRE's",
+  "pronoun": "she",
+  "rules": "rules/paranoid-sre.md",
+  "verdictPrefix": "SRE",
+  "verdicts": {
+    "approve": "SHIP",
+    "changes": "HOLD",
+    "block": "PAGE"
+  },
+  "approveWord": "Ship it.",
+  "reviews": "the deploy",
+  "measures": "incidents prevented per rollout",
+  "scope": "(\\.ya?ml|\\.tf|\\.tfvars|\\.hcl|\\.toml|\\.ini|\\.cfg|\\.conf|\\.env|\\.json|Dockerfile|Containerfile|compose|helm|charts?/|deploy|infra|terraform|k8s|kube|manifests?/|\\.github/workflows|Makefile|Procfile|nginx|haproxy|prometheus|alert|runbook)",
+  "tagline": "It works. Now tell me how it fails.",
+  "description": "Your agent's deploy, reviewed by the on-call engineer who has been paged for every mistake on the card. Manifests, charts, pipelines, rollout plans, before they reach production.",
+  "shortDescription": "The on-call engineer who asks how it fails, inside your agent.",
+  "homepage": "https://lazy-senior-dev.github.io/paranoid-sre",
+  "keywords": [
+    "sre",
+    "deploy",
+    "kubernetes",
+    "terraform",
+    "ci",
+    "ai-agents",
+    "claude-code",
+    "github-action",
+    "persona"
+  ],
+  "checklist": {
+    "first": "Blast radius",
+    "last": "Cleanup"
+  },
+  "bench": {
+    "seeded": 15,
+    "clean": 5,
+    "needle": 5
+  },
+  "test": {
+    "dir": "deploy/k8s",
+    "ext": ".yaml"
+  }
+}

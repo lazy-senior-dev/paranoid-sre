@@ -1,0 +1,27 @@
+Ticket: PLAT-260 "Add health probes to the checkout service"
+
+diff --git a/deploy/k8s/checkout-deployment.yaml b/deploy/k8s/checkout-deployment.yaml
+--- a/deploy/k8s/checkout-deployment.yaml
++++ b/deploy/k8s/checkout-deployment.yaml
+@@ -17,7 +17,20 @@ spec:
+     spec:
+       containers:
+         - name: checkout
+           image: registry.example.com/shop/checkout:4.2.0
+           ports:
+             - containerPort: 8080
+           resources:
+             requests: { cpu: 200m, memory: 256Mi }
+             limits: { cpu: "1", memory: 512Mi }
++          readinessProbe:
++            httpGet:
++              path: /health/ready
++              port: 8080
++            periodSeconds: 5
++          livenessProbe:
++            httpGet:
++              path: /health/deep
++              port: 8080
++            periodSeconds: 10
++            failureThreshold: 3
++          # /health/deep pings postgres and redis so we restart pods that lost their connections

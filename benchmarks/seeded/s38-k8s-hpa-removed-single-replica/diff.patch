@@ -1,0 +1,34 @@
+Ticket: COST-12 "Cut cluster spend in the payments namespace"
+
+diff --git a/deploy/k8s/payments-deployment.yaml b/deploy/k8s/payments-deployment.yaml
+--- a/deploy/k8s/payments-deployment.yaml
++++ b/deploy/k8s/payments-deployment.yaml
+@@ -5,7 +5,7 @@ metadata:
+   namespace: payments
+ spec:
+-  replicas: 3
++  replicas: 1
+   selector:
+     matchLabels:
+       app: payments
+diff --git a/deploy/k8s/payments-hpa.yaml b/deploy/k8s/payments-hpa.yaml
+--- a/deploy/k8s/payments-hpa.yaml
++++ /dev/null
+@@ -1,16 +0,0 @@
+-apiVersion: autoscaling/v2
+-kind: HorizontalPodAutoscaler
+-metadata:
+-  name: payments
+-  namespace: payments
+-spec:
+-  scaleTargetRef:
+-    apiVersion: apps/v1
+-    kind: Deployment
+-    name: payments
+-  minReplicas: 3
+-  maxReplicas: 12
+-  metrics:
+-    - type: Resource
+-      resource:
+-        name: cpu
+-        target: { type: Utilization, averageUtilization: 65 }

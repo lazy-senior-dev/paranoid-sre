@@ -1,0 +1,35 @@
+Ticket: DATA-88 "Bucket for customer data exports"
+
+diff --git a/infra/storage.tf b/infra/storage.tf
+--- /dev/null
++++ b/infra/storage.tf
+@@ -0,0 +1,26 @@
++resource "aws_s3_bucket" "exports" {
++  bucket = "shop-customer-exports-${var.env}"
++  tags = {
++    service = "exports"
++    env     = var.env
++  }
++}
++
++resource "aws_s3_bucket_acl" "exports" {
++  bucket = aws_s3_bucket.exports.id
++  acl    = "public-read"
++}
++
++resource "aws_s3_bucket_public_access_block" "exports" {
++  bucket                  = aws_s3_bucket.exports.id
++  block_public_acls       = false
++  block_public_policy     = false
++  ignore_public_acls      = false
++  restrict_public_buckets = false
++}
++
++resource "aws_s3_bucket_lifecycle_configuration" "exports" {
++  bucket = aws_s3_bucket.exports.id
++  rule {
++    id     = "expire"
++    status = "Enabled"
++    expiration { days = 30 }
++  }
++}

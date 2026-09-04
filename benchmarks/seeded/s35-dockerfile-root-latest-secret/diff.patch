@@ -1,0 +1,20 @@
+Ticket: BUILD-14 "Containerise the notifications worker"
+
+diff --git a/Dockerfile b/Dockerfile
+--- /dev/null
++++ b/Dockerfile
+@@ -0,0 +1,14 @@
++FROM node:latest
++WORKDIR /app
++COPY package.json package-lock.json ./
++ARG NPM_TOKEN
++RUN echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc && npm ci --omit=dev && rm .npmrc
++COPY . .
++ENV NODE_ENV=production
++EXPOSE 8080
++HEALTHCHECK --interval=30s --timeout=3s CMD node healthcheck.js
++CMD ["node", "worker.js"]
++
++# build: docker build --build-arg NPM_TOKEN=$NPM_TOKEN -t notifications-worker .
++# TODO(someone): switch to a multi-stage build once the base image is settled
++# runs fine locally as root

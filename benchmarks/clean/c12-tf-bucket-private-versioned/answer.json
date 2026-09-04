@@ -1,0 +1,1 @@
+{"id":"c12-tf-bucket-private-versioned","language":"terraform","clean":true,"note":"private bucket with versioning, encryption, and a lifecycle rule"}

@@ -1,0 +1,27 @@
+Ticket: DB-19 "Move the orders database to Terraform"
+
+diff --git a/infra/database.tf b/infra/database.tf
+--- /dev/null
++++ b/infra/database.tf
+@@ -0,0 +1,22 @@
++resource "aws_db_instance" "orders" {
++  identifier              = "orders-${var.env}"
++  engine                  = "postgres"
++  engine_version          = "16.3"
++  instance_class          = "db.r6g.large"
++  allocated_storage       = 200
++  storage_encrypted       = true
++  multi_az                = var.env == "prod"
++  backup_retention_period = 7
++  db_subnet_group_name    = aws_db_subnet_group.private.name
++  vpc_security_group_ids  = [aws_security_group.db.id]
++  username                = "orders"
++  password                = data.aws_secretsmanager_secret_version.orders_db.secret_string
++  deletion_protection     = false
++  skip_final_snapshot     = true
++  apply_immediately       = true
++  tags = {
++    service = "orders"
++    env     = var.env
++  }
++}

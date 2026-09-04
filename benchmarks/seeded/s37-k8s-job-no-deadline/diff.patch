@@ -1,0 +1,30 @@
+Ticket: SEARCH-33 "Nightly reindex of the product catalogue"
+
+diff --git a/deploy/k8s/reindex-job.yaml b/deploy/k8s/reindex-job.yaml
+--- /dev/null
++++ b/deploy/k8s/reindex-job.yaml
+@@ -0,0 +1,24 @@
++apiVersion: batch/v1
++kind: CronJob
++metadata:
++  name: catalogue-reindex
++  namespace: search
++spec:
++  schedule: "0 2 * * *"
++  concurrencyPolicy: Allow
++  jobTemplate:
++    spec:
++      backoffLimit: 1000
++      template:
++        spec:
++          restartPolicy: OnFailure
++          containers:
++            - name: reindex
++              image: registry.example.com/search/reindex:1.4.0
++              args: ["--full"]
++              resources:
++                requests: { cpu: 500m, memory: 1Gi }
++                limits: { cpu: "2", memory: 2Gi }
++              env:
++                - name: ES_URL
++                  value: http://elasticsearch.search.svc:9200

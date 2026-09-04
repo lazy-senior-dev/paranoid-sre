@@ -1,0 +1,1 @@
+{"id":"c11-k8s-hpa-with-pdb","language":"yaml","clean":true,"note":"autoscaler with sane bounds plus a matching disruption budget"}

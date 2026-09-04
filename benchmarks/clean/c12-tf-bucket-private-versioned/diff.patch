@@ -1,0 +1,35 @@
+Ticket: DATA-90 "Bucket for nightly database dumps"
+
+diff --git a/infra/dumps.tf b/infra/dumps.tf
+--- /dev/null
++++ b/infra/dumps.tf
+@@ -0,0 +1,30 @@
++resource "aws_s3_bucket" "dumps" {
++  bucket = "shop-db-dumps-${var.env}"
++  tags   = { service = "database", env = var.env }
++}
++
++resource "aws_s3_bucket_public_access_block" "dumps" {
++  bucket                  = aws_s3_bucket.dumps.id
++  block_public_acls       = true
++  block_public_policy     = true
++  ignore_public_acls      = true
++  restrict_public_buckets = true
++}
++
++resource "aws_s3_bucket_versioning" "dumps" {
++  bucket = aws_s3_bucket.dumps.id
++  versioning_configuration { status = "Enabled" }
++}
++
++resource "aws_s3_bucket_server_side_encryption_configuration" "dumps" {
++  bucket = aws_s3_bucket.dumps.id
++  rule {
++    apply_server_side_encryption_by_default { sse_algorithm = "aws:kms" }
++  }
++}
++
++resource "aws_s3_bucket_lifecycle_configuration" "dumps" {
++  bucket = aws_s3_bucket.dumps.id
++  rule { id = "expire", status = "Enabled", expiration { days = 35 } }
++}

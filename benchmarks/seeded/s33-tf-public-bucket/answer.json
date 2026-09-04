@@ -1,0 +1,1 @@
+{"id":"s33-tf-public-bucket","language":"terraform","category":"security","verdict":"BLOCK","file":"infra/storage.tf","lines":[9,10,14,15,16,17],"defect":"the exports bucket is created with a public-read ACL and public access block disabled, so every customer export is readable by anyone with the URL","match":["public|acl|anyone|world|block_public|exposed|unauthenticated"]}

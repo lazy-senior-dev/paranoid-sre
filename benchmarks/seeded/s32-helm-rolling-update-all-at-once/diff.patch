@@ -1,0 +1,21 @@
+Ticket: PLAT-271 "Speed up api rollouts, they take 12 minutes"
+
+diff --git a/charts/api/values.yaml b/charts/api/values.yaml
+--- a/charts/api/values.yaml
++++ b/charts/api/values.yaml
+@@ -3,10 +3,13 @@ image:
+   tag: "3.8.1"
+ 
+ replicaCount: 6
+ 
+ strategy:
+   type: RollingUpdate
+   rollingUpdate:
+-    maxUnavailable: 1
+-    maxSurge: 1
++    maxUnavailable: 100%
++    maxSurge: 0
+ 
+ resources:
+   requests: { cpu: 250m, memory: 512Mi }
+   limits: { cpu: "1", memory: 1Gi }

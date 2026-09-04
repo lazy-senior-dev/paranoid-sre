@@ -1,0 +1,1 @@
+{"id":"s35-dockerfile-root-latest-secret","language":"dockerfile","category":"security","verdict":"BLOCK","file":"Dockerfile","lines":[1,4,5],"defect":"the image builds from an unpinned latest base, bakes an npm token into a build ARG that stays in the layer history, and runs as root","match":["root|USER|latest|token|ARG|layer|secret|non-root|pin"]}

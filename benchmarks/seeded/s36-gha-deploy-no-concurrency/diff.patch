@@ -1,0 +1,28 @@
+Ticket: CD-7 "Deploy the storefront automatically"
+
+diff --git a/.github/workflows/deploy.yml b/.github/workflows/deploy.yml
+--- /dev/null
++++ b/.github/workflows/deploy.yml
+@@ -0,0 +1,22 @@
++name: deploy
++
++on:
++  push:
++    branches: [main]
++
++permissions:
++  contents: read
++  id-token: write
++
++jobs:
++  production:
++    runs-on: ubuntu-latest
++    steps:
++      - uses: actions/checkout@v4
++      - uses: aws-actions/configure-aws-credentials@v4
++        with:
++          role-to-assume: arn:aws:iam::123456789012:role/storefront-deploy
++          aws-region: eu-west-1
++      - run: ./scripts/build.sh
++      - run: aws s3 sync dist/ s3://storefront-prod --delete
++      - run: aws cloudfront create-invalidation --distribution-id E2ABCDEF --paths "/*"

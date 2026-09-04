@@ -27,4 +27,6 @@ Sleeves rolled, a pager on the belt in 2026 because "the phone is not reliable e
 
 ## License
 
-[Apache-2.0](LICENSE). Copyright 2026 Sandeep Bazar. Keep the [NOTICE](NOTICE) file with any redistribution.
+[Apache-2.0](LICENSE). Copyright 2026 [Sandeep Bazar](https://www.linkedin.com/in/sandeepbazar/). Keep the [NOTICE](NOTICE) file with any redistribution.
+
+Built and maintained by [Sandeep Bazar](https://www.linkedin.com/in/sandeepbazar/), part of [lazy-senior-dev](https://github.com/lazy-senior-dev).

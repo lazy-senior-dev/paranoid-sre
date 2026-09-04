@@ -6,13 +6,15 @@
   "agents": {
     "claude": {
       "label": "Claude Code",
-      "calls": 150,
+      "calls": 100,
       "errors": 0,
       "arms": {
         "bare": {
           "label": "no skill",
           "model": "claude-sonnet-5",
           "runs": 2,
+          "seeded": 15,
+          "clean": 5,
           "caughtMedian": 14,
           "caughtMean": 14,
           "falsePositivesMedian": 1,
@@ -27,6 +29,8 @@
           "label": "generic review prompt",
           "model": "claude-sonnet-5",
           "runs": 2,
+          "seeded": 15,
+          "clean": 5,
           "caughtMedian": 15,
           "caughtMean": 15,
           "falsePositivesMedian": 3,
@@ -36,20 +40,6 @@
           "inputTokensMedian": 5798,
           "outputTokensMedian": 1309,
           "latencyMedianMs": 17285
-        },
-        "grump": {
-          "label": "paranoid-sre",
-          "model": "claude-sonnet-5",
-          "runs": 2,
-          "caughtMedian": 15,
-          "caughtMean": 15,
-          "falsePositivesMedian": 3,
-          "blockPrecision": 0.8888888888888888,
-          "blocks": 18,
-          "unparseable": 0,
-          "inputTokensMedian": 8034.5,
-          "outputTokensMedian": 2473.5,
-          "latencyMedianMs": 29980.5
         }
       },
       "needle": {
@@ -72,28 +62,20 @@
           "unparseable": 1,
           "inputTokensMedian": 6932,
           "latencyMedianMs": 29130
-        },
-        "grump": {
-          "label": "paranoid-sre",
-          "model": "claude-sonnet-5",
-          "runs": 2,
-          "caughtMedian": 5,
-          "caughtMean": 5,
-          "unparseable": 0,
-          "inputTokensMedian": 9170,
-          "latencyMedianMs": 40533
         }
       }
     },
     "codex": {
       "label": "Codex CLI",
-      "calls": 150,
+      "calls": 100,
       "errors": 0,
       "arms": {
         "bare": {
           "label": "no skill",
           "model": "codex-default",
           "runs": 2,
+          "seeded": 15,
+          "clean": 5,
           "caughtMedian": 14,
           "caughtMean": 14,
           "falsePositivesMedian": 1.5,
@@ -108,6 +90,8 @@
           "label": "generic review prompt",
           "model": "codex-default",
           "runs": 2,
+          "seeded": 15,
+          "clean": 5,
           "caughtMedian": 15,
           "caughtMean": 15,
           "falsePositivesMedian": 2,
@@ -117,20 +101,6 @@
           "inputTokensMedian": 28655,
           "outputTokensMedian": 1022.5,
           "latencyMedianMs": 23917.5
-        },
-        "grump": {
-          "label": "paranoid-sre",
-          "model": "codex-default",
-          "runs": 2,
-          "caughtMedian": 15,
-          "caughtMean": 15,
-          "falsePositivesMedian": 0.5,
-          "blockPrecision": 0.8888888888888888,
-          "blocks": 18,
-          "unparseable": 0,
-          "inputTokensMedian": 15687.5,
-          "outputTokensMedian": 553,
-          "latencyMedianMs": 10511
         }
       },
       "needle": {
@@ -153,65 +123,61 @@
           "unparseable": 0,
           "inputTokensMedian": 45295,
           "latencyMedianMs": 32354.5
-        },
-        "grump": {
-          "label": "paranoid-sre",
-          "model": "codex-default",
-          "runs": 2,
-          "caughtMedian": 5,
-          "caughtMean": 5,
-          "unparseable": 0,
-          "inputTokensMedian": 16417,
-          "latencyMedianMs": 13095.5
         }
       }
     },
     "bob": {
       "label": "IBM Bob Shell",
       "calls": 150,
-      "errors": 14,
+      "errors": 0,
       "arms": {
-        "grump": {
-          "label": "paranoid-sre",
-          "model": "bob-default",
-          "runs": 2,
-          "caughtMedian": 15,
-          "caughtMean": 15,
-          "falsePositivesMedian": 3.5,
-          "blockPrecision": 0.6,
-          "blocks": 25,
-          "unparseable": 1,
-          "inputTokensMedian": 0,
-          "outputTokensMedian": 0,
-          "latencyMedianMs": 15874
-        },
         "bare": {
           "label": "no skill",
           "model": "bob-default",
           "runs": 2,
-          "caughtMedian": 11.5,
-          "caughtMean": 11.5,
-          "falsePositivesMedian": 2,
+          "seeded": 15,
+          "clean": 5,
+          "caughtMedian": 15,
+          "caughtMean": 15,
+          "falsePositivesMedian": 2.5,
           "blockPrecision": null,
           "blocks": 0,
-          "unparseable": 6,
+          "unparseable": 0,
           "inputTokensMedian": 0,
           "outputTokensMedian": 0,
-          "latencyMedianMs": 16808.5
+          "latencyMedianMs": 15227.5
         },
         "generic": {
           "label": "generic review prompt",
           "model": "bob-default",
           "runs": 2,
-          "caughtMedian": 12,
-          "caughtMean": 12,
-          "falsePositivesMedian": 1.5,
+          "seeded": 15,
+          "clean": 5,
+          "caughtMedian": 15,
+          "caughtMean": 15,
+          "falsePositivesMedian": 4,
           "blockPrecision": null,
           "blocks": 0,
-          "unparseable": 8,
+          "unparseable": 0,
           "inputTokensMedian": 0,
           "outputTokensMedian": 0,
-          "latencyMedianMs": 17432
+          "latencyMedianMs": 18738
+        },
+        "grump": {
+          "label": "paranoid-sre",
+          "model": "bob-default",
+          "runs": 2,
+          "seeded": 15,
+          "clean": 5,
+          "caughtMedian": 15,
+          "caughtMean": 15,
+          "falsePositivesMedian": 1.5,
+          "blockPrecision": 0.9375,
+          "blocks": 16,
+          "unparseable": 0,
+          "inputTokensMedian": 0,
+          "outputTokensMedian": 0,
+          "latencyMedianMs": 10612
         }
       },
       "needle": {
@@ -219,21 +185,21 @@
           "label": "no skill",
           "model": "bob-default",
           "runs": 2,
-          "caughtMedian": 4,
-          "caughtMean": 4,
+          "caughtMedian": 5,
+          "caughtMean": 5,
           "unparseable": 0,
           "inputTokensMedian": 0,
-          "latencyMedianMs": 17801.5
+          "latencyMedianMs": 16181
         },
         "generic": {
           "label": "generic review prompt",
           "model": "bob-default",
           "runs": 2,
-          "caughtMedian": 1.5,
-          "caughtMean": 1.5,
-          "unparseable": 4,
+          "caughtMedian": 4,
+          "caughtMean": 4,
+          "unparseable": 0,
           "inputTokensMedian": 0,
-          "latencyMedianMs": 12221
+          "latencyMedianMs": 20910.5
         },
         "grump": {
           "label": "paranoid-sre",
@@ -243,56 +209,62 @@
           "caughtMean": 4.5,
           "unparseable": 0,
           "inputTokensMedian": 0,
-          "latencyMedianMs": 28280
+          "latencyMedianMs": 18445.5
         }
       }
     },
     "agy": {
       "label": "Antigravity CLI",
-      "calls": 71,
-      "errors": 0,
+      "calls": 78,
+      "errors": 4,
       "arms": {
         "bare": {
           "label": "no skill",
           "model": "agy-default",
           "runs": 1,
+          "seeded": 15,
+          "clean": 4,
           "caughtMedian": 12,
           "caughtMean": 12,
-          "falsePositivesMedian": 0,
+          "falsePositivesMedian": 1,
           "blockPrecision": null,
           "blocks": 0,
           "unparseable": 5,
-          "inputTokensMedian": 19499,
-          "outputTokensMedian": 2528,
-          "latencyMedianMs": 44164
+          "inputTokensMedian": 19500,
+          "outputTokensMedian": 2534,
+          "latencyMedianMs": 44245
         },
         "generic": {
           "label": "generic review prompt",
           "model": "agy-default",
           "runs": 1,
+          "seeded": 15,
+          "clean": 4,
           "caughtMedian": 13,
           "caughtMean": 13,
-          "falsePositivesMedian": 0,
+          "falsePositivesMedian": 1,
           "blockPrecision": null,
           "blocks": 0,
           "unparseable": 5,
-          "inputTokensMedian": 19593,
-          "outputTokensMedian": 6498.5,
-          "latencyMedianMs": 52089
+          "inputTokensMedian": 19613,
+          "outputTokensMedian": 6602,
+          "latencyMedianMs": 52206
         },
         "grump": {
           "label": "paranoid-sre",
           "model": "agy-default",
           "runs": 1,
+          "seeded": 15,
+          "clean": 4,
           "caughtMedian": 15,
           "caughtMean": 15,
           "falsePositivesMedian": 0,
           "blockPrecision": 1,
-          "blocks": 8,
+          "blocks": 7,
           "unparseable": 0,
-          "inputTokensMedian": 21155,
-          "outputTokensMedian": 25990,
-          "latencyMedianMs": 78505
+          "inputTokensMedian": 21154,
+          "outputTokensMedian": 29716,
+          "latencyMedianMs": 81465
         }
       },
       "needle": {
@@ -323,8 +295,8 @@
           "caughtMedian": 5,
           "caughtMean": 5,
           "unparseable": 0,
-          "inputTokensMedian": 22177,
-          "latencyMedianMs": 127842
+          "inputTokensMedian": 21973,
+          "latencyMedianMs": 109254
         }
       }
     }

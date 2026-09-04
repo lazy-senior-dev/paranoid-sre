@@ -18,6 +18,18 @@
 
 **Your agent's deploy, reviewed by the on-call engineer who has been paged for every mistake on the laminated card taped to her monitor, before it reaches production.**
 
+<!-- bench:author:start -->
+## The number that matters: what ships
+
+**When the agent is the author, the Paranoid SRE changes what ships.** On IBM Bob Shell (`bob-default`), given 9 tickets that each invite a classic defect, the agent alone shipped the defect in 6 of 9 tasks (67%), 2 of 9 with a generic "be careful" prompt, and 0 of 9 with the Paranoid SRE loaded (0%), reviewing its own change before finishing in 9 of 9 runs. A task the agent declined or solved another way counts as clean. The shipped code is scored by fixed checks written before any run, never by a model. Median of 2 runs; [method, per-task table, raw diffs](benchmarks/results/author).
+
+| Agent | Model | Arm | Made the change (of 9) | Shipped the defect (of 9) | Self-reviewed | Median time | Median cost |
+|---|---|---|---|---|---|---|---|
+| IBM Bob Shell | `bob-default` (n=2) | no skill | 9 | 6 (67%) | n/a | 15 s | $0.11 |
+| IBM Bob Shell | `bob-default` (n=2) | generic care prompt | 9 | 2 (22%) | n/a | 21 s | $0.13 |
+| IBM Bob Shell | `bob-default` (n=2) | **paranoid-sre** | **9** | **0 (0%)** | **9** | 35 s | $0.15 |
+<!-- bench:author:end -->
+
 <!-- bench:hero:start -->
 **On IBM Bob Shell (`bob-default`), the Paranoid SRE catches 15 of 15 seeded defects, the same as the agent alone. What changes is discipline: false alarms on 5 clean diffs, 2 with her, 3 without; replies with no usable verdict per run, 0 either way; 94% of PAGE verdicts land on PAGE-class defects; median review time 11 s with her, 15 s without.** Median of 2 runs, measured 2026-09-04; [method, per-diff table, raw replies](benchmarks/results). **In the needle tier, where the same defect hides in a four-file, 150-line pull request, IBM Bob Shell finds 5 of 5 with the Paranoid SRE, 5 without, 4 with the generic prompt.**
 <!-- bench:hero:end -->

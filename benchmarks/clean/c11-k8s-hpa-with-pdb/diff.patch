@@ -31,7 +31,7 @@ diff --git a/deploy/k8s/search-pdb.yaml b/deploy/k8s/search-pdb.yaml
 +  name: search
 +  namespace: search
 +spec:
-+  minAvailable: 2
++  minAvailable: 50%
 +  selector:
 +    matchLabels:
 +      app: search

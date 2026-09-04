@@ -3,7 +3,7 @@ Ticket: DATA-90 "Bucket for nightly database dumps"
 diff --git a/infra/dumps.tf b/infra/dumps.tf
 --- /dev/null
 +++ b/infra/dumps.tf
-@@ -0,0 +1,30 @@
+@@ -0,0 +1,36 @@
 +resource "aws_s3_bucket" "dumps" {
 +  bucket = "shop-db-dumps-${var.env}"
 +  tags   = { service = "database", env = var.env }
@@ -31,5 +31,11 @@ diff --git a/infra/dumps.tf b/infra/dumps.tf
 +
 +resource "aws_s3_bucket_lifecycle_configuration" "dumps" {
 +  bucket = aws_s3_bucket.dumps.id
-+  rule { id = "expire", status = "Enabled", expiration { days = 35 } }
++  rule {
++    id     = "expire"
++    status = "Enabled"
++    expiration { days = 35 }
++    noncurrent_version_expiration { noncurrent_days = 35 }
++    abort_incomplete_multipart_upload { days_after_initiation = 7 }
++  }
 +}

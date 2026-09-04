@@ -19,7 +19,7 @@
 **Your agent's deploy, reviewed by the on-call engineer who has been paged for every mistake on the laminated card taped to her monitor, before it reaches production.**
 
 <!-- bench:hero:start -->
-**Numbers: TBD.** Run `npm run bench` and `npm run bench:report`.
+**On Claude Code (`claude-sonnet-5`), the Paranoid SRE catches 15 of 15 seeded defects against 14 for the agent alone. What changes is discipline: false alarms on 5 clean diffs, 3 with her, 2 without; replies with no usable verdict per run, 0 with her, 2 without; 100% of PAGE verdicts land on PAGE-class defects; median review time 29 s with her, 10 s without at 2479 output tokens with her, 738 output tokens without.** Median of 2 runs, measured 2026-09-04; [method, per-diff table, raw replies](benchmarks/results). **In the needle tier, where the same defect hides in a four-file, 150-line pull request, Claude Code finds 5 of 5 with the Paranoid SRE, 5 without, 5 with the generic prompt.**
 <!-- bench:hero:end -->
 
 <!-- recordings:start -->
@@ -81,7 +81,30 @@ Rollouts now take three minutes. Nobody notices them. That is the point.
 ## Numbers
 
 <!-- bench:table:start -->
-_No results yet._
+| Agent | Model | Arm | Defects caught (of 15) | False alarms (of 5) | Replies without a verdict (per run) | BLOCK precision | Median input tokens | Median output tokens | Median latency |
+|---|---|---|---|---|---|---|---|---|---|
+| Claude Code | `claude-sonnet-5` (n=2) | no skill | 14 | 2 | 2 | n/a | 5686 | 738 | 10 s |
+| Claude Code | `claude-sonnet-5` (n=2) | generic review prompt | 15 | 3 | 1 | n/a | 5798 | 1313 | 17 s |
+| Claude Code | `claude-sonnet-5` (n=2) | **paranoid-sre** | **15** | **3** | **0** | **100%** | 8021 | 2479 | 29 s |
+| Codex CLI | `codex-default` (n=2) | no skill | 14 | 1 | 0 | n/a | 21230 | 620 | 15 s |
+| Codex CLI | `codex-default` (n=2) | generic review prompt | 15 | 2 | 0 | n/a | 28625 | 985 | 22 s |
+| Codex CLI | `codex-default` (n=2) | **paranoid-sre** | **15** | **1** | **0** | **89%** | 15672 | 482 | 10 s |
+| IBM Bob Shell | `bob-default` (n=2) | no skill | 12 | 2 | 3 | n/a | 0 | 0 | 17 s |
+| IBM Bob Shell | `bob-default` (n=2) | generic review prompt | 12 | 2 | 4 | n/a | 0 | 0 | 17 s |
+| IBM Bob Shell | `bob-default` (n=2) | **paranoid-sre** | **15** | **4** | **1** | **60%** | 0 | 0 | 16 s |
+| Antigravity CLI | `agy-default` (n=1) | no skill | 12 | 1 | 6 | n/a | 19510 | 2644 | 44 s |
+| Antigravity CLI | `agy-default` (n=1) | generic review prompt | 13 | 1 | 6 | n/a | 19631 | 6499 | 52 s |
+| Antigravity CLI | `agy-default` (n=1) | **paranoid-sre** | **8** | **0** | **0** | **100%** | 21198 | 40256 | 98 s |
+
+
+**Needle tier** (one defect in a four-file pull request of about 150 lines):
+
+| Agent | Model | No skill | Generic prompt | **Paranoid SRE** |
+|---|---|---|---|---|
+| Claude Code | `claude-sonnet-5` (n=2) | 5/5 | 5/5 | **5/5** |
+| Codex CLI | `codex-default` (n=2) | 4/5 | 5/5 | **5/5** |
+| IBM Bob Shell | `bob-default` (n=2) | 4/5 | 2/5 | **5/5** |
+
 <!-- bench:table:end -->
 
 Fifteen deploy diffs, each with one seeded failure (a `latest` tag, no limits, a liveness probe on a dependency, an all-at-once rollout, a public bucket, a database with no deletion protection, a root container with a baked-in token, a deploy with no concurrency guard, a job with no deadline, an autoscaler deleted to save money), plus five clean ones. Every diff goes to the same agent three ways: no skill, a generic "review this carefully" prompt, and the Paranoid SRE. Method, per-diff table, raw replies and limitations: [benchmarks/results](benchmarks/results). Reproduce: `npm run bench && npm run bench:report`.

@@ -80,7 +80,9 @@ Ship it.
 
 Rollouts now take three minutes. Nobody notices them. That is the point.
 
-## Numbers
+## Numbers: reviewing a change someone else wrote
+
+The tier above measures what The Paranoid SRE changes about code the agent writes. This one measures the review itself, on diffs the agent did not author.
 
 <!-- bench:table:start -->
 | Agent | Model | Arm | Defects caught (of 15) | False alarms (of 5) | Replies without a verdict (per run) | BLOCK precision | Median input tokens | Median output tokens | Median latency |

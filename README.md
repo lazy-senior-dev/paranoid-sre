@@ -19,7 +19,7 @@
 **Your agent's deploy, reviewed by the on-call engineer who has been paged for every mistake on the laminated card taped to her monitor, before it reaches production.**
 
 <!-- bench:hero:start -->
-**On Claude Code (`claude-sonnet-5`), the Paranoid SRE catches 15 of 15 seeded defects against 14 for the agent alone. What changes is discipline: false alarms on 5 clean diffs, 3 with her, 1 without; replies with no usable verdict per run, 0 with her, 2 without; 89% of PAGE verdicts land on PAGE-class defects; median review time 30 s with her, 10 s without at 2474 output tokens with her, 737 output tokens without.** Median of 2 runs, measured 2026-09-04; [method, per-diff table, raw replies](benchmarks/results). **In the needle tier, where the same defect hides in a four-file, 150-line pull request, Claude Code finds 5 of 5 with the Paranoid SRE, 5 without, 5 with the generic prompt.**
+**On Antigravity CLI (`agy-default`), the Paranoid SRE catches 15 of 15 seeded defects against 12 for the agent alone. What changes is discipline: false alarms on 5 clean diffs, 0 with her, 1 without; replies with no usable verdict per run, 0 with her, 5 without; 100% of PAGE verdicts land on PAGE-class defects; median review time 81 s with her, 44 s without at 29716 output tokens with her, 2534 output tokens without.** Median of 1 run, measured 2026-09-04; [method, per-diff table, raw replies](benchmarks/results). **In the needle tier, where the same defect hides in a four-file, 150-line pull request, Antigravity CLI finds 5 of 5 with the Paranoid SRE, 3 without, 1 with the generic prompt.**
 <!-- bench:hero:end -->
 
 <!-- recordings:start -->
@@ -85,29 +85,17 @@ Rollouts now take three minutes. Nobody notices them. That is the point.
 The tier above measures what The Paranoid SRE changes about code the agent writes. This one measures the review itself, on diffs the agent did not author.
 
 <!-- bench:table:start -->
-| Agent | Model | Arm | Defects caught (of 15) | False alarms (of 5) | Replies without a verdict (per run) | BLOCK precision | Median input tokens | Median output tokens | Median latency |
+| Agent | Model | Arm | Defects caught (of 15) | False alarms (of 4) | Replies without a verdict (per run) | BLOCK precision | Median input tokens | Median output tokens | Median latency |
 |---|---|---|---|---|---|---|---|---|---|
-| Claude Code | `claude-sonnet-5` (n=2) | no skill | 14 | 1 | 2 | n/a | 5686 | 737 | 10 s |
-| Claude Code | `claude-sonnet-5` (n=2) | generic review prompt | 15 | 3 | 1 | n/a | 5798 | 1309 | 17 s |
-| Claude Code | `claude-sonnet-5` (n=2) | **paranoid-sre** | **15** | **3** | **0** | **89%** | 8035 | 2474 | 30 s |
-| Codex CLI | `codex-default` (n=2) | no skill | 14 | 2 | 0 | n/a | 28328 | 709 | 17 s |
-| Codex CLI | `codex-default` (n=2) | generic review prompt | 15 | 2 | 0 | n/a | 28655 | 1023 | 24 s |
-| Codex CLI | `codex-default` (n=2) | **paranoid-sre** | **15** | **1** | **0** | **89%** | 15688 | 553 | 11 s |
-| IBM Bob Shell | `bob-default` (n=2) | no skill | 12 | 2 | 3 | n/a | 0 | 0 | 17 s |
-| IBM Bob Shell | `bob-default` (n=2) | generic review prompt | 12 | 2 | 4 | n/a | 0 | 0 | 17 s |
-| IBM Bob Shell | `bob-default` (n=2) | **paranoid-sre** | **15** | **4** | **1** | **60%** | 0 | 0 | 16 s |
-| Antigravity CLI | `agy-default` (n=1) | no skill | 12 | 0 | 5 | n/a | 19499 | 2528 | 44 s |
-| Antigravity CLI | `agy-default` (n=1) | generic review prompt | 13 | 0 | 5 | n/a | 19593 | 6499 | 52 s |
-| Antigravity CLI | `agy-default` (n=1) | **paranoid-sre** | **15** | **0** | **0** | **100%** | 21155 | 25990 | 79 s |
+| Antigravity CLI | `agy-default` (n=1) | no skill | 12 | 1 | 5 | n/a | 19500 | 2534 | 44 s |
+| Antigravity CLI | `agy-default` (n=1) | generic review prompt | 13 | 1 | 5 | n/a | 19613 | 6602 | 52 s |
+| Antigravity CLI | `agy-default` (n=1) | **paranoid-sre** | **15** | **0** | **0** | **100%** | 21154 | 29716 | 81 s |
 
 
 **Needle tier** (one defect in a four-file pull request of about 150 lines):
 
 | Agent | Model | No skill | Generic prompt | **Paranoid SRE** |
 |---|---|---|---|---|
-| Claude Code | `claude-sonnet-5` (n=2) | 5/5 | 5/5 | **5/5** |
-| Codex CLI | `codex-default` (n=2) | 4/5 | 5/5 | **5/5** |
-| IBM Bob Shell | `bob-default` (n=2) | 4/5 | 2/5 | **5/5** |
 | Antigravity CLI | `agy-default` (n=1) | 3/5 | 1/5 | **5/5** |
 
 <!-- bench:table:end -->

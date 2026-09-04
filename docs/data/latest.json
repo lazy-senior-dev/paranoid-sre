@@ -1,0 +1,332 @@
+{
+  "date": "2026-09-04",
+  "seeded": 15,
+  "clean": 5,
+  "needle": 5,
+  "agents": {
+    "claude": {
+      "label": "Claude Code",
+      "calls": 150,
+      "errors": 0,
+      "arms": {
+        "bare": {
+          "label": "no skill",
+          "model": "claude-sonnet-5",
+          "runs": 2,
+          "caughtMedian": 14,
+          "caughtMean": 14,
+          "falsePositivesMedian": 1.5,
+          "blockPrecision": null,
+          "blocks": 0,
+          "unparseable": 3,
+          "inputTokensMedian": 5685.5,
+          "outputTokensMedian": 737.5,
+          "latencyMedianMs": 10073
+        },
+        "generic": {
+          "label": "generic review prompt",
+          "model": "claude-sonnet-5",
+          "runs": 2,
+          "caughtMedian": 15,
+          "caughtMean": 15,
+          "falsePositivesMedian": 3,
+          "blockPrecision": null,
+          "blocks": 0,
+          "unparseable": 2,
+          "inputTokensMedian": 5798,
+          "outputTokensMedian": 1312.5,
+          "latencyMedianMs": 17498
+        },
+        "grump": {
+          "label": "paranoid-sre",
+          "model": "claude-sonnet-5",
+          "runs": 2,
+          "caughtMedian": 15,
+          "caughtMean": 15,
+          "falsePositivesMedian": 3.5,
+          "blockPrecision": 0.5333333333333333,
+          "blocks": 30,
+          "unparseable": 0,
+          "inputTokensMedian": 7727.5,
+          "outputTokensMedian": 3548.5,
+          "latencyMedianMs": 40707.5
+        }
+      },
+      "needle": {
+        "bare": {
+          "label": "no skill",
+          "model": "claude-sonnet-5",
+          "runs": 2,
+          "caughtMedian": 4.5,
+          "caughtMean": 4.5,
+          "unparseable": 1,
+          "inputTokensMedian": 6824.5,
+          "latencyMedianMs": 29041
+        },
+        "generic": {
+          "label": "generic review prompt",
+          "model": "claude-sonnet-5",
+          "runs": 2,
+          "caughtMedian": 4.5,
+          "caughtMean": 4.5,
+          "unparseable": 1,
+          "inputTokensMedian": 6932,
+          "latencyMedianMs": 29130
+        },
+        "grump": {
+          "label": "paranoid-sre",
+          "model": "claude-sonnet-5",
+          "runs": 2,
+          "caughtMedian": 4.5,
+          "caughtMean": 4.5,
+          "unparseable": 1,
+          "inputTokensMedian": 8865.5,
+          "latencyMedianMs": 54307
+        }
+      }
+    },
+    "codex": {
+      "label": "Codex CLI",
+      "calls": 150,
+      "errors": 0,
+      "arms": {
+        "grump": {
+          "label": "paranoid-sre",
+          "model": "codex-default",
+          "runs": 2,
+          "caughtMedian": 15,
+          "caughtMean": 15,
+          "falsePositivesMedian": 4,
+          "blockPrecision": 0.5517241379310345,
+          "blocks": 29,
+          "unparseable": 0,
+          "inputTokensMedian": 15465.5,
+          "outputTokensMedian": 855.5,
+          "latencyMedianMs": 15602.5
+        },
+        "bare": {
+          "label": "no skill",
+          "model": "codex-default",
+          "runs": 2,
+          "caughtMedian": 14,
+          "caughtMean": 14,
+          "falsePositivesMedian": 1,
+          "blockPrecision": null,
+          "blocks": 0,
+          "unparseable": 0,
+          "inputTokensMedian": 21229.5,
+          "outputTokensMedian": 620,
+          "latencyMedianMs": 14619
+        },
+        "generic": {
+          "label": "generic review prompt",
+          "model": "codex-default",
+          "runs": 2,
+          "caughtMedian": 15,
+          "caughtMean": 15,
+          "falsePositivesMedian": 2,
+          "blockPrecision": null,
+          "blocks": 0,
+          "unparseable": 0,
+          "inputTokensMedian": 28625,
+          "outputTokensMedian": 985,
+          "latencyMedianMs": 22384
+        }
+      },
+      "needle": {
+        "bare": {
+          "label": "no skill",
+          "model": "codex-default",
+          "runs": 2,
+          "caughtMedian": 3.5,
+          "caughtMean": 3.5,
+          "unparseable": 0,
+          "inputTokensMedian": 29901.5,
+          "latencyMedianMs": 21034
+        },
+        "grump": {
+          "label": "paranoid-sre",
+          "model": "codex-default",
+          "runs": 2,
+          "caughtMedian": 5,
+          "caughtMean": 5,
+          "unparseable": 0,
+          "inputTokensMedian": 16203,
+          "latencyMedianMs": 18591
+        },
+        "generic": {
+          "label": "generic review prompt",
+          "model": "codex-default",
+          "runs": 2,
+          "caughtMedian": 5,
+          "caughtMean": 5,
+          "unparseable": 0,
+          "inputTokensMedian": 45295,
+          "latencyMedianMs": 32354.5
+        }
+      }
+    },
+    "bob": {
+      "label": "IBM Bob Shell",
+      "calls": 150,
+      "errors": 14,
+      "arms": {
+        "grump": {
+          "label": "paranoid-sre",
+          "model": "bob-default",
+          "runs": 2,
+          "caughtMedian": 15,
+          "caughtMean": 15,
+          "falsePositivesMedian": 3.5,
+          "blockPrecision": 0.6,
+          "blocks": 25,
+          "unparseable": 1,
+          "inputTokensMedian": 0,
+          "outputTokensMedian": 0,
+          "latencyMedianMs": 15874
+        },
+        "bare": {
+          "label": "no skill",
+          "model": "bob-default",
+          "runs": 2,
+          "caughtMedian": 11.5,
+          "caughtMean": 11.5,
+          "falsePositivesMedian": 2,
+          "blockPrecision": null,
+          "blocks": 0,
+          "unparseable": 6,
+          "inputTokensMedian": 0,
+          "outputTokensMedian": 0,
+          "latencyMedianMs": 16808.5
+        },
+        "generic": {
+          "label": "generic review prompt",
+          "model": "bob-default",
+          "runs": 2,
+          "caughtMedian": 12,
+          "caughtMean": 12,
+          "falsePositivesMedian": 1.5,
+          "blockPrecision": null,
+          "blocks": 0,
+          "unparseable": 8,
+          "inputTokensMedian": 0,
+          "outputTokensMedian": 0,
+          "latencyMedianMs": 17432
+        }
+      },
+      "needle": {
+        "bare": {
+          "label": "no skill",
+          "model": "bob-default",
+          "runs": 2,
+          "caughtMedian": 4,
+          "caughtMean": 4,
+          "unparseable": 0,
+          "inputTokensMedian": 0,
+          "latencyMedianMs": 17801.5
+        },
+        "generic": {
+          "label": "generic review prompt",
+          "model": "bob-default",
+          "runs": 2,
+          "caughtMedian": 1.5,
+          "caughtMean": 1.5,
+          "unparseable": 4,
+          "inputTokensMedian": 0,
+          "latencyMedianMs": 12221
+        },
+        "grump": {
+          "label": "paranoid-sre",
+          "model": "bob-default",
+          "runs": 2,
+          "caughtMedian": 4.5,
+          "caughtMean": 4.5,
+          "unparseable": 0,
+          "inputTokensMedian": 0,
+          "latencyMedianMs": 28280
+        }
+      }
+    },
+    "agy": {
+      "label": "Antigravity CLI",
+      "calls": 75,
+      "errors": 1,
+      "arms": {
+        "bare": {
+          "label": "no skill",
+          "model": "agy-default",
+          "runs": 1,
+          "caughtMedian": 12,
+          "caughtMean": 12,
+          "falsePositivesMedian": 1,
+          "blockPrecision": null,
+          "blocks": 0,
+          "unparseable": 6,
+          "inputTokensMedian": 19510,
+          "outputTokensMedian": 2643.5,
+          "latencyMedianMs": 44297
+        },
+        "generic": {
+          "label": "generic review prompt",
+          "model": "agy-default",
+          "runs": 1,
+          "caughtMedian": 13,
+          "caughtMean": 13,
+          "falsePositivesMedian": 1,
+          "blockPrecision": null,
+          "blocks": 0,
+          "unparseable": 6,
+          "inputTokensMedian": 19631,
+          "outputTokensMedian": 6498.5,
+          "latencyMedianMs": 52089
+        },
+        "grump": {
+          "label": "paranoid-sre",
+          "model": "agy-default",
+          "runs": 1,
+          "caughtMedian": 12,
+          "caughtMean": 12,
+          "falsePositivesMedian": 2,
+          "blockPrecision": 0.6,
+          "blocks": 10,
+          "unparseable": 3,
+          "inputTokensMedian": 20921,
+          "outputTokensMedian": 41469,
+          "latencyMedianMs": 98619
+        }
+      },
+      "needle": {
+        "generic": {
+          "label": "generic review prompt",
+          "model": "agy-default",
+          "runs": 1,
+          "caughtMedian": 1,
+          "caughtMean": 1,
+          "unparseable": 4,
+          "inputTokensMedian": 20358,
+          "latencyMedianMs": 47100
+        },
+        "bare": {
+          "label": "no skill",
+          "model": "agy-default",
+          "runs": 1,
+          "caughtMedian": 3,
+          "caughtMean": 3,
+          "unparseable": 2,
+          "inputTokensMedian": 20295,
+          "latencyMedianMs": 49593
+        },
+        "grump": {
+          "label": "paranoid-sre",
+          "model": "agy-default",
+          "runs": 1,
+          "caughtMedian": 5,
+          "caughtMean": 5,
+          "unparseable": 0,
+          "inputTokensMedian": 21719,
+          "latencyMedianMs": 152317
+        }
+      }
+    }
+  }
+}

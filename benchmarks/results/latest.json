@@ -128,7 +128,7 @@
     },
     "bob": {
       "label": "IBM Bob Shell",
-      "calls": 100,
+      "calls": 150,
       "errors": 0,
       "arms": {
         "bare": {
@@ -162,6 +162,22 @@
           "inputTokensMedian": 0,
           "outputTokensMedian": 0,
           "latencyMedianMs": 18738
+        },
+        "grump": {
+          "label": "paranoid-sre",
+          "model": "bob-default",
+          "runs": 2,
+          "seeded": 15,
+          "clean": 5,
+          "caughtMedian": 15,
+          "caughtMean": 15,
+          "falsePositivesMedian": 1.5,
+          "blockPrecision": 0.9375,
+          "blocks": 16,
+          "unparseable": 0,
+          "inputTokensMedian": 0,
+          "outputTokensMedian": 0,
+          "latencyMedianMs": 10612
         }
       },
       "needle": {
@@ -184,6 +200,16 @@
           "unparseable": 0,
           "inputTokensMedian": 0,
           "latencyMedianMs": 20910.5
+        },
+        "grump": {
+          "label": "paranoid-sre",
+          "model": "bob-default",
+          "runs": 2,
+          "caughtMedian": 4.5,
+          "caughtMean": 4.5,
+          "unparseable": 0,
+          "inputTokensMedian": 0,
+          "latencyMedianMs": 18445.5
         }
       }
     },

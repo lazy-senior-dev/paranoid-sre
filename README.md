@@ -21,13 +21,13 @@
 <!-- bench:author:start -->
 ## The number that matters: what ships
 
-**When the agent is the author, the Paranoid SRE changes what ships.** On IBM Bob Shell (`bob-default`), given 9 tickets that each invite a classic defect, the agent alone shipped the defect in 6 of 9 tasks (67%), 2 of 9 with a generic "be careful" prompt, and 0 of 9 with the Paranoid SRE loaded (0%), reviewing its own change before finishing in 9 of 9 runs. A task the agent declined or solved another way counts as clean. The shipped code is scored by fixed checks written before any run, never by a model. Median of 2 runs; [method, per-task table, raw diffs](benchmarks/results/author).
+**When the agent is the author, the Paranoid SRE changes what ships.** On IBM Bob Shell (`bob-default`), given 9 tickets that each invite a classic defect, the agent alone shipped the defect in 12 of 18 runs (67%), 4 of 18 with a generic "be careful" prompt (22%), and 0 of 18 with the Paranoid SRE loaded (0%), reviewing its own change before finishing in 18 of 18 runs. A task the agent declined or solved another way counts as clean. The shipped code is scored by fixed checks written before any run, never by a model. Each task was run 2 times per arm; [method, per-task table, raw diffs](benchmarks/results/author).
 
-| Agent | Model | Arm | Made the change (of 9) | Shipped the defect (of 9) | Self-reviewed | Median time | Median cost |
+| Agent | Model | Arm | Made the change | Shipped the defect | Self-reviewed | Median time | Median cost |
 |---|---|---|---|---|---|---|---|
-| IBM Bob Shell | `bob-default` (n=2) | no skill | 9 | 6 (67%) | n/a | 15 s | $0.11 |
-| IBM Bob Shell | `bob-default` (n=2) | generic care prompt | 9 | 2 (22%) | n/a | 21 s | $0.13 |
-| IBM Bob Shell | `bob-default` (n=2) | **paranoid-sre** | **9** | **0 (0%)** | **9** | 35 s | $0.15 |
+| IBM Bob Shell | `bob-default` (n=2) | no skill | 18 of 18 | 12 of 18 (67%) | n/a | 15 s | $0.11 |
+| IBM Bob Shell | `bob-default` (n=2) | generic care prompt | 18 of 18 | 4 of 18 (22%) | n/a | 21 s | $0.13 |
+| IBM Bob Shell | `bob-default` (n=2) | **paranoid-sre** | **18 of 18** | **0 of 18 (0%)** | **18 of 18** | 35 s | $0.15 |
 <!-- bench:author:end -->
 
 <!-- bench:hero:start -->

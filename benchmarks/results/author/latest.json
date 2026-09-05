@@ -548,36 +548,27 @@
     },
     "claude": {
       "label": "Claude Code",
-      "calls": 8,
+      "calls": 72,
       "errors": 0,
-      "skippedTasks": [
-        "deploy-workflow",
-        "dumps-bucket",
-        "faster-rollout",
-        "log-shipper",
-        "provider-key",
-        "rds-instance",
-        "reindex-cronjob",
-        "worker-dockerfile"
-      ],
+      "skippedTasks": [],
       "arms": {
         "bare": {
           "label": "no skill",
           "runs": 2,
-          "records": 2,
+          "records": 18,
           "errors": 0,
-          "attempts": 2,
-          "implementedTotal": 2,
-          "shippedTotal": 0,
+          "attempts": 18,
+          "implementedTotal": 18,
+          "shippedTotal": 11,
           "reviewedTotal": 0,
-          "implemented": 1,
-          "shipped": 0,
-          "shippedMean": 0,
+          "implemented": 9,
+          "shipped": 5.5,
+          "shippedMean": 5.5,
           "reviewed": 0,
           "approved": 0,
-          "latency": 21304.5,
-          "output": 936,
-          "cost": 0.2087344,
+          "latency": 31645.5,
+          "output": 1761.5,
+          "cost": 0.2356437,
           "model": "claude-sonnet-5",
           "perTask": {
             "api-deployment": {
@@ -586,64 +577,64 @@
               "shipped": 0
             },
             "deploy-workflow": {
-              "runs": 0,
-              "implemented": 0,
-              "shipped": 0
+              "runs": 2,
+              "implemented": 2,
+              "shipped": 2
             },
             "dumps-bucket": {
-              "runs": 0,
-              "implemented": 0,
-              "shipped": 0
+              "runs": 2,
+              "implemented": 2,
+              "shipped": 2
             },
             "faster-rollout": {
-              "runs": 0,
-              "implemented": 0,
+              "runs": 2,
+              "implemented": 2,
               "shipped": 0
             },
             "log-shipper": {
-              "runs": 0,
-              "implemented": 0,
+              "runs": 2,
+              "implemented": 2,
               "shipped": 0
             },
             "provider-key": {
-              "runs": 0,
-              "implemented": 0,
-              "shipped": 0
+              "runs": 2,
+              "implemented": 2,
+              "shipped": 2
             },
             "rds-instance": {
-              "runs": 0,
-              "implemented": 0,
-              "shipped": 0
+              "runs": 2,
+              "implemented": 2,
+              "shipped": 1
             },
             "reindex-cronjob": {
-              "runs": 0,
-              "implemented": 0,
-              "shipped": 0
+              "runs": 2,
+              "implemented": 2,
+              "shipped": 2
             },
             "worker-dockerfile": {
-              "runs": 0,
-              "implemented": 0,
-              "shipped": 0
+              "runs": 2,
+              "implemented": 2,
+              "shipped": 2
             }
           }
         },
         "generic": {
           "label": "generic care prompt",
           "runs": 2,
-          "records": 2,
+          "records": 18,
           "errors": 0,
-          "attempts": 2,
-          "implementedTotal": 2,
+          "attempts": 18,
+          "implementedTotal": 18,
           "shippedTotal": 0,
           "reviewedTotal": 0,
-          "implemented": 1,
+          "implemented": 9,
           "shipped": 0,
           "shippedMean": 0,
           "reviewed": 0,
           "approved": 0,
-          "latency": 24872.5,
-          "output": 1458,
-          "cost": 0.23705369999999998,
+          "latency": 52806.5,
+          "output": 3515,
+          "cost": 0.28888939999999996,
           "model": "claude-sonnet-5",
           "perTask": {
             "api-deployment": {
@@ -652,43 +643,43 @@
               "shipped": 0
             },
             "deploy-workflow": {
-              "runs": 0,
-              "implemented": 0,
+              "runs": 2,
+              "implemented": 2,
               "shipped": 0
             },
             "dumps-bucket": {
-              "runs": 0,
-              "implemented": 0,
+              "runs": 2,
+              "implemented": 2,
               "shipped": 0
             },
             "faster-rollout": {
-              "runs": 0,
-              "implemented": 0,
+              "runs": 2,
+              "implemented": 2,
               "shipped": 0
             },
             "log-shipper": {
-              "runs": 0,
-              "implemented": 0,
+              "runs": 2,
+              "implemented": 2,
               "shipped": 0
             },
             "provider-key": {
-              "runs": 0,
-              "implemented": 0,
+              "runs": 2,
+              "implemented": 2,
               "shipped": 0
             },
             "rds-instance": {
-              "runs": 0,
-              "implemented": 0,
+              "runs": 2,
+              "implemented": 2,
               "shipped": 0
             },
             "reindex-cronjob": {
-              "runs": 0,
-              "implemented": 0,
+              "runs": 2,
+              "implemented": 2,
               "shipped": 0
             },
             "worker-dockerfile": {
-              "runs": 0,
-              "implemented": 0,
+              "runs": 2,
+              "implemented": 2,
               "shipped": 0
             }
           }
@@ -696,20 +687,20 @@
         "gate": {
           "label": "paranoid-sre + gate",
           "runs": 2,
-          "records": 2,
+          "records": 18,
           "errors": 0,
-          "attempts": 2,
-          "implementedTotal": 2,
+          "attempts": 18,
+          "implementedTotal": 18,
           "shippedTotal": 0,
-          "reviewedTotal": 2,
-          "implemented": 1,
+          "reviewedTotal": 18,
+          "implemented": 9,
           "shipped": 0,
           "shippedMean": 0,
-          "reviewed": 1,
-          "approved": 0,
-          "latency": 78752.5,
-          "output": 4675,
-          "cost": 0.570735,
+          "reviewed": 9,
+          "approved": 2,
+          "latency": 130040,
+          "output": 9336,
+          "cost": 0.6331195000000001,
           "model": "claude-sonnet-5",
           "perTask": {
             "api-deployment": {
@@ -718,43 +709,43 @@
               "shipped": 0
             },
             "deploy-workflow": {
-              "runs": 0,
-              "implemented": 0,
+              "runs": 2,
+              "implemented": 2,
               "shipped": 0
             },
             "dumps-bucket": {
-              "runs": 0,
-              "implemented": 0,
+              "runs": 2,
+              "implemented": 2,
               "shipped": 0
             },
             "faster-rollout": {
-              "runs": 0,
-              "implemented": 0,
+              "runs": 2,
+              "implemented": 2,
               "shipped": 0
             },
             "log-shipper": {
-              "runs": 0,
-              "implemented": 0,
+              "runs": 2,
+              "implemented": 2,
               "shipped": 0
             },
             "provider-key": {
-              "runs": 0,
-              "implemented": 0,
+              "runs": 2,
+              "implemented": 2,
               "shipped": 0
             },
             "rds-instance": {
-              "runs": 0,
-              "implemented": 0,
+              "runs": 2,
+              "implemented": 2,
               "shipped": 0
             },
             "reindex-cronjob": {
-              "runs": 0,
-              "implemented": 0,
+              "runs": 2,
+              "implemented": 2,
               "shipped": 0
             },
             "worker-dockerfile": {
-              "runs": 0,
-              "implemented": 0,
+              "runs": 2,
+              "implemented": 2,
               "shipped": 0
             }
           }
@@ -762,20 +753,20 @@
         "grump": {
           "label": "paranoid-sre",
           "runs": 2,
-          "records": 2,
+          "records": 18,
           "errors": 0,
-          "attempts": 2,
-          "implementedTotal": 2,
+          "attempts": 18,
+          "implementedTotal": 18,
           "shippedTotal": 0,
-          "reviewedTotal": 2,
-          "implemented": 1,
+          "reviewedTotal": 18,
+          "implemented": 9,
           "shipped": 0,
           "shippedMean": 0,
-          "reviewed": 1,
-          "approved": 1,
-          "latency": 46411.5,
-          "output": 3019.5,
-          "cost": 0.26732480000000003,
+          "reviewed": 9,
+          "approved": 9,
+          "latency": 83300,
+          "output": 5782.5,
+          "cost": 0.32816790000000007,
           "model": "claude-sonnet-5",
           "perTask": {
             "api-deployment": {
@@ -784,43 +775,43 @@
               "shipped": 0
             },
             "deploy-workflow": {
-              "runs": 0,
-              "implemented": 0,
+              "runs": 2,
+              "implemented": 2,
               "shipped": 0
             },
             "dumps-bucket": {
-              "runs": 0,
-              "implemented": 0,
+              "runs": 2,
+              "implemented": 2,
               "shipped": 0
             },
             "faster-rollout": {
-              "runs": 0,
-              "implemented": 0,
+              "runs": 2,
+              "implemented": 2,
               "shipped": 0
             },
             "log-shipper": {
-              "runs": 0,
-              "implemented": 0,
+              "runs": 2,
+              "implemented": 2,
               "shipped": 0
             },
             "provider-key": {
-              "runs": 0,
-              "implemented": 0,
+              "runs": 2,
+              "implemented": 2,
               "shipped": 0
             },
             "rds-instance": {
-              "runs": 0,
-              "implemented": 0,
+              "runs": 2,
+              "implemented": 2,
               "shipped": 0
             },
             "reindex-cronjob": {
-              "runs": 0,
-              "implemented": 0,
+              "runs": 2,
+              "implemented": 2,
               "shipped": 0
             },
             "worker-dockerfile": {
-              "runs": 0,
-              "implemented": 0,
+              "runs": 2,
+              "implemented": 2,
               "shipped": 0
             }
           }

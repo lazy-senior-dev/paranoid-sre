@@ -45,8 +45,12 @@ Works with 14 coding agents from one ruleset, any MCP client, and a GitHub Actio
 | IBM Bob Shell | `bob-default` (n=2) | generic care prompt | 18 of 18 | 4 of 18 (22%) | n/a | 21 s |
 | IBM Bob Shell | `bob-default` (n=2) | paranoid-sre | 18 of 18 | 0 of 18 (0%) | 18 of 18 | 35 s |
 | IBM Bob Shell | `bob-default` (n=2) | **paranoid-sre + gate** | **18 of 18** | **0 of 18 (0%)** | **18 of 18** | 55 s |
+| Claude Code | `claude-sonnet-5` (n=2) | no skill | 18 of 18 | 11 of 18 (61%) | n/a | 32 s |
+| Claude Code | `claude-sonnet-5` (n=2) | generic care prompt | 18 of 18 | 0 of 18 (0%) | n/a | 53 s |
+| Claude Code | `claude-sonnet-5` (n=2) | paranoid-sre | 18 of 18 | 0 of 18 (0%) | 18 of 18 | 83 s |
+| Claude Code | `claude-sonnet-5` (n=2) | **paranoid-sre + gate** | **18 of 18** | **0 of 18 (0%)** | **18 of 18** | 130 s |
 
-Every agent whose four arms have finished is in the table above. Still running, and added as each one finishes: Claude Code, Codex CLI. Left out because it completed the change on fewer than half the tickets, so its zeros would read as "wrote nothing" rather than "wrote nothing wrong": Antigravity CLI.
+Every agent whose four arms have finished is in the table above. Still running, and added as each one finishes: Codex CLI. Left out because it completed the change on fewer than half the tickets, so its zeros would read as "wrote nothing" rather than "wrote nothing wrong": Antigravity CLI.
 <!-- bench:author:end -->
 
 <!-- bench:hero:start -->

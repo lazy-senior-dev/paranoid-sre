@@ -1,12 +1,12 @@
 {
-  "date": "2026-09-04",
+  "date": "2026-09-05",
   "seeded": 15,
   "clean": 5,
   "needle": 5,
   "agents": {
     "claude": {
       "label": "Claude Code",
-      "calls": 100,
+      "calls": 150,
       "errors": 0,
       "arms": {
         "bare": {
@@ -40,6 +40,22 @@
           "inputTokensMedian": 5798,
           "outputTokensMedian": 1309,
           "latencyMedianMs": 17285
+        },
+        "grump": {
+          "label": "paranoid-sre",
+          "model": "claude-sonnet-5",
+          "runs": 2,
+          "seeded": 15,
+          "clean": 5,
+          "caughtMedian": 15,
+          "caughtMean": 15,
+          "falsePositivesMedian": 1,
+          "blockPrecision": 0.9375,
+          "blocks": 16,
+          "unparseable": 0,
+          "inputTokensMedian": 8034,
+          "outputTokensMedian": 2695,
+          "latencyMedianMs": 31171
         }
       },
       "needle": {
@@ -62,12 +78,22 @@
           "unparseable": 1,
           "inputTokensMedian": 6932,
           "latencyMedianMs": 29130
+        },
+        "grump": {
+          "label": "paranoid-sre",
+          "model": "claude-sonnet-5",
+          "runs": 2,
+          "caughtMedian": 5,
+          "caughtMean": 5,
+          "unparseable": 0,
+          "inputTokensMedian": 9171.5,
+          "latencyMedianMs": 42441.5
         }
       }
     },
     "codex": {
       "label": "Codex CLI",
-      "calls": 100,
+      "calls": 150,
       "errors": 0,
       "arms": {
         "bare": {
@@ -101,6 +127,22 @@
           "inputTokensMedian": 28655,
           "outputTokensMedian": 1022.5,
           "latencyMedianMs": 23917.5
+        },
+        "grump": {
+          "label": "paranoid-sre",
+          "model": "codex-default",
+          "runs": 2,
+          "seeded": 15,
+          "clean": 5,
+          "caughtMedian": 15,
+          "caughtMean": 15,
+          "falsePositivesMedian": 0.5,
+          "blockPrecision": 0.8888888888888888,
+          "blocks": 18,
+          "unparseable": 0,
+          "inputTokensMedian": 15695.5,
+          "outputTokensMedian": 474,
+          "latencyMedianMs": 8760.5
         }
       },
       "needle": {
@@ -123,6 +165,16 @@
           "unparseable": 0,
           "inputTokensMedian": 45295,
           "latencyMedianMs": 32354.5
+        },
+        "grump": {
+          "label": "paranoid-sre",
+          "model": "codex-default",
+          "runs": 2,
+          "caughtMedian": 5,
+          "caughtMean": 5,
+          "unparseable": 0,
+          "inputTokensMedian": 16429,
+          "latencyMedianMs": 12318.5
         }
       }
     },
@@ -215,8 +267,8 @@
     },
     "agy": {
       "label": "Antigravity CLI",
-      "calls": 78,
-      "errors": 4,
+      "calls": 75,
+      "errors": 1,
       "arms": {
         "bare": {
           "label": "no skill",

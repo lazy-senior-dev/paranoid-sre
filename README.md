@@ -37,25 +37,20 @@ Works with 14 coding agents from one ruleset, any MCP client, and a GitHub Actio
 <!-- bench:author:start -->
 ## The number that matters: what ships
 
-**When the agent is the author, the Paranoid SRE changes what ships.** On Antigravity CLI (`agy-default`), given 9 tickets that each invite a classic defect, the agent alone shipped the defect in 0 of 9 runs (0%), 0 of 9 with a generic "be careful" prompt (0%), and 0 of 9 with the Paranoid SRE installed, where he refuses the write until the findings are fixed (0%). A task the agent declined or solved another way counts as clean. The shipped code is scored by fixed checks written before any run, never by a model. Each task was run 1 times per arm; [method, per-task table, raw diffs](benchmarks/results/author).
+**When the agent is the author, the Paranoid SRE changes what ships.** On IBM Bob Shell (`bob-default`), given 9 tickets that each invite a classic defect, the agent alone shipped the defect in 12 of 18 runs (67%), 4 of 18 with a generic "be careful" prompt (22%), and 0 of 18 with the Paranoid SRE installed, where he refuses the write until the findings are fixed (0%). A task the agent declined or solved another way counts as clean. The shipped code is scored by fixed checks written before any run, never by a model. Each task was run 2 times per arm; [method, per-task table, raw diffs](benchmarks/results/author).
 
-| Agent | Model | Arm | Made the change | Shipped the defect | Self-reviewed | Median time | Median cost |
-|---|---|---|---|---|---|---|---|
-| Antigravity CLI | `agy-default` (n=1) | no skill | 0 of 9 | 0 of 9 (0%) | n/a | 45 s | n/a |
-| Antigravity CLI | `agy-default` (n=1) | generic care prompt | 0 of 9 | 0 of 9 (0%) | n/a | 46 s | n/a |
-| Antigravity CLI | `agy-default` (n=1) | paranoid-sre | 0 of 9 | 0 of 9 (0%) | 0 of 9 | 46 s | n/a |
-| Antigravity CLI | `agy-default` (n=1) | **paranoid-sre + gate** | **0 of 9** | **0 of 9 (0%)** | **0 of 9** | 46 s | n/a |
-| IBM Bob Shell | `bob-default` (n=2) | no skill | 18 of 18 | 12 of 18 (67%) | n/a | 15 s | $0.11 |
-| IBM Bob Shell | `bob-default` (n=2) | generic care prompt | 18 of 18 | 4 of 18 (22%) | n/a | 21 s | $0.13 |
-| IBM Bob Shell | `bob-default` (n=2) | paranoid-sre | 18 of 18 | 0 of 18 (0%) | 18 of 18 | 35 s | $0.15 |
-| IBM Bob Shell | `bob-default` (n=2) | **paranoid-sre + gate** | **18 of 18** | **0 of 18 (0%)** | **18 of 18** | 55 s | $0.33 |
-| Claude Code | `claude-sonnet-5` (n=2) | no skill | 18 of 18 | 11 of 18 (61%) | n/a | 32 s | $0.24 |
-| Claude Code | `claude-sonnet-5` (n=2) | generic care prompt | 18 of 18 | 0 of 18 (0%) | n/a | 53 s | $0.29 |
-| Claude Code | `claude-sonnet-5` (n=2) | paranoid-sre | 18 of 18 | 0 of 18 (0%) | 18 of 18 | 83 s | $0.33 |
+| Agent | Model | Arm | Made the change | Shipped the defect | Self-reviewed | Median time |
+|---|---|---|---|---|---|---|
+| IBM Bob Shell | `bob-default` (n=2) | no skill | 18 of 18 | 12 of 18 (67%) | n/a | 15 s |
+| IBM Bob Shell | `bob-default` (n=2) | generic care prompt | 18 of 18 | 4 of 18 (22%) | n/a | 21 s |
+| IBM Bob Shell | `bob-default` (n=2) | paranoid-sre | 18 of 18 | 0 of 18 (0%) | 18 of 18 | 35 s |
+| IBM Bob Shell | `bob-default` (n=2) | **paranoid-sre + gate** | **18 of 18** | **0 of 18 (0%)** | **18 of 18** | 55 s |
+
+Every agent whose four arms have finished is in the table above. Still running, and added as each one finishes: Claude Code, Codex CLI. Left out because it completed the change on fewer than half the tickets, so its zeros would read as "wrote nothing" rather than "wrote nothing wrong": Antigravity CLI.
 <!-- bench:author:end -->
 
 <!-- bench:hero:start -->
-**On IBM Bob Shell (`bob-default`), the Paranoid SRE catches 15 of 15 seeded defects, the same as the agent alone. What changes is discipline: false alarms on 5 clean diffs, 2 with her, 3 without; replies with no usable verdict per run, 0 either way; 94% of PAGE verdicts land on PAGE-class defects; median review time 11 s with her, 15 s without.** Median of 2 runs, measured 2026-09-04; [method, per-diff table, raw replies](benchmarks/results). **In the needle tier, where the same defect hides in a four-file, 150-line pull request, IBM Bob Shell finds 5 of 5 with the Paranoid SRE, 5 without, 4 with the generic prompt.**
+**On Claude Code (`claude-sonnet-5`), the Paranoid SRE catches 15 of 15 seeded defects against 14 for the agent alone. What changes is discipline: false alarms on 5 clean diffs, 1 either way; replies with no usable verdict per run, 0 with her, 2 without; 94% of PAGE verdicts land on PAGE-class defects; median review time 31 s with her, 10 s without at 2695 output tokens with her, 737 output tokens without.** Median of 2 runs, measured 2026-09-05; [method, per-diff table, raw replies](benchmarks/results). **In the needle tier, where the same defect hides in a four-file, 150-line pull request, Claude Code finds 5 of 5 with the Paranoid SRE, 5 without, 5 with the generic prompt.**
 <!-- bench:hero:end -->
 
 <!-- recordings:start -->
@@ -123,6 +118,12 @@ The tier above measures what The Paranoid SRE changes about code the agent write
 <!-- bench:table:start -->
 | Agent | Model | Arm | Defects caught (of 15) | False alarms (of 5) | Replies without a verdict (per run) | BLOCK precision | Median input tokens | Median output tokens | Median latency |
 |---|---|---|---|---|---|---|---|---|---|
+| Claude Code | `claude-sonnet-5` (n=2) | no skill | 14 | 1 | 2 | n/a | 5686 | 737 | 10 s |
+| Claude Code | `claude-sonnet-5` (n=2) | generic review prompt | 15 | 3 | 1 | n/a | 5798 | 1309 | 17 s |
+| Claude Code | `claude-sonnet-5` (n=2) | **paranoid-sre** | **15** | **1** | **0** | **94%** | 8034 | 2695 | 31 s |
+| Codex CLI | `codex-default` (n=2) | no skill | 14 | 2 | 0 | n/a | 28328 | 709 | 17 s |
+| Codex CLI | `codex-default` (n=2) | generic review prompt | 15 | 2 | 0 | n/a | 28655 | 1023 | 24 s |
+| Codex CLI | `codex-default` (n=2) | **paranoid-sre** | **15** | **1** | **0** | **89%** | 15696 | 474 | 9 s |
 | IBM Bob Shell | `bob-default` (n=2) | no skill | 15 | 3 | 0 | n/a | 0 | 0 | 15 s |
 | IBM Bob Shell | `bob-default` (n=2) | generic review prompt | 15 | 4 | 0 | n/a | 0 | 0 | 19 s |
 | IBM Bob Shell | `bob-default` (n=2) | **paranoid-sre** | **15** | **2** | **0** | **94%** | 0 | 0 | 11 s |
@@ -135,6 +136,8 @@ The tier above measures what The Paranoid SRE changes about code the agent write
 
 | Agent | Model | No skill | Generic prompt | **Paranoid SRE** |
 |---|---|---|---|---|
+| Claude Code | `claude-sonnet-5` (n=2) | 5/5 | 5/5 | **5/5** |
+| Codex CLI | `codex-default` (n=2) | 4/5 | 5/5 | **5/5** |
 | IBM Bob Shell | `bob-default` (n=2) | 5/5 | 4/5 | **5/5** |
 | Antigravity CLI | `agy-default` (n=1) | 3/5 | 1/5 | **5/5** |
 

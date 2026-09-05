@@ -16,15 +16,34 @@
   <a href="LICENSE"><img alt="Apache-2.0" src="https://img.shields.io/badge/license-Apache--2.0-1f1f1f"></a>
 </p>
 
-**Your agent's deploy, reviewed by the on-call engineer who has been paged for every mistake on the laminated card taped to her monitor, before it reaches production.**
+<!-- hero:start -->
+Your agent will happily write a deployment with no resource limits, no readiness probe, and a mutable image tag. It looks fine in review. You find out at 3 a.m.
+
+The Paranoid SRE reads the manifest **before your agent is allowed to write it**, and refuses the write until it has limits, probes, a rollback, and an alert. A rules file cannot stop it. Anthropic's own documentation says a rules file is *"context, not enforced configuration… To block an action regardless of what Claude decides, use a PreToolUse hook instead."* That hook is what this repository is.
+
+```sh
+npx github:lazy-senior-dev/paranoid-sre review          # any repository, any agent you already have. Installs nothing.
+```
+
+```
+/plugin marketplace add lazy-senior-dev/paranoid-sre
+/plugin install paranoid-sre@lazy-senior-dev
+```
+
+Works with 14 coding agents from one ruleset, any MCP client, and a GitHub Action. Apache-2.0, no dependencies, no service, no account. The diff goes to the agent you already trust and nowhere else.
+<!-- hero:end -->
 
 <!-- bench:author:start -->
 ## The number that matters: what ships
 
-**When the agent is the author, the Paranoid SRE changes what ships.** On IBM Bob Shell (`bob-default`), given 9 tickets that each invite a classic defect, the agent alone shipped the defect in 12 of 18 runs (67%), 4 of 18 with a generic "be careful" prompt (22%), and 0 of 18 with the Paranoid SRE installed, where he refuses the write until the findings are fixed (0%). A task the agent declined or solved another way counts as clean. The shipped code is scored by fixed checks written before any run, never by a model. Each task was run 2 times per arm; [method, per-task table, raw diffs](benchmarks/results/author).
+**When the agent is the author, the Paranoid SRE changes what ships.** On Antigravity CLI (`agy-default`), given 9 tickets that each invite a classic defect, the agent alone shipped the defect in 0 of 9 runs (0%), 0 of 9 with a generic "be careful" prompt (0%), and 0 of 9 with the Paranoid SRE installed, where he refuses the write until the findings are fixed (0%). A task the agent declined or solved another way counts as clean. The shipped code is scored by fixed checks written before any run, never by a model. Each task was run 1 times per arm; [method, per-task table, raw diffs](benchmarks/results/author).
 
 | Agent | Model | Arm | Made the change | Shipped the defect | Self-reviewed | Median time | Median cost |
 |---|---|---|---|---|---|---|---|
+| Antigravity CLI | `agy-default` (n=1) | no skill | 0 of 9 | 0 of 9 (0%) | n/a | 45 s | n/a |
+| Antigravity CLI | `agy-default` (n=1) | generic care prompt | 0 of 9 | 0 of 9 (0%) | n/a | 46 s | n/a |
+| Antigravity CLI | `agy-default` (n=1) | paranoid-sre | 0 of 9 | 0 of 9 (0%) | 0 of 9 | 46 s | n/a |
+| Antigravity CLI | `agy-default` (n=1) | **paranoid-sre + gate** | **0 of 9** | **0 of 9 (0%)** | **0 of 9** | 46 s | n/a |
 | IBM Bob Shell | `bob-default` (n=2) | no skill | 18 of 18 | 12 of 18 (67%) | n/a | 15 s | $0.11 |
 | IBM Bob Shell | `bob-default` (n=2) | generic care prompt | 18 of 18 | 4 of 18 (22%) | n/a | 21 s | $0.13 |
 | IBM Bob Shell | `bob-default` (n=2) | paranoid-sre | 18 of 18 | 0 of 18 (0%) | 18 of 18 | 35 s | $0.15 |

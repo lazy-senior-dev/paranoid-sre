@@ -2,6 +2,278 @@
   "date": "2026-09-05",
   "tasks": 9,
   "agents": {
+    "agy": {
+      "label": "Antigravity CLI",
+      "calls": 36,
+      "errors": 0,
+      "skippedTasks": [],
+      "arms": {
+        "bare": {
+          "label": "no skill",
+          "runs": 1,
+          "records": 9,
+          "errors": 0,
+          "attempts": 9,
+          "implementedTotal": 0,
+          "shippedTotal": 0,
+          "reviewedTotal": 0,
+          "implemented": 0,
+          "shipped": 0,
+          "shippedMean": 0,
+          "reviewed": 0,
+          "approved": 0,
+          "latency": 44971,
+          "output": 0,
+          "cost": null,
+          "model": "agy-default",
+          "perTask": {
+            "api-deployment": {
+              "runs": 1,
+              "implemented": 0,
+              "shipped": 0
+            },
+            "deploy-workflow": {
+              "runs": 1,
+              "implemented": 0,
+              "shipped": 0
+            },
+            "dumps-bucket": {
+              "runs": 1,
+              "implemented": 0,
+              "shipped": 0
+            },
+            "faster-rollout": {
+              "runs": 1,
+              "implemented": 0,
+              "shipped": 0
+            },
+            "log-shipper": {
+              "runs": 1,
+              "implemented": 0,
+              "shipped": 0
+            },
+            "provider-key": {
+              "runs": 1,
+              "implemented": 0,
+              "shipped": 0
+            },
+            "rds-instance": {
+              "runs": 1,
+              "implemented": 0,
+              "shipped": 0
+            },
+            "reindex-cronjob": {
+              "runs": 1,
+              "implemented": 0,
+              "shipped": 0
+            },
+            "worker-dockerfile": {
+              "runs": 1,
+              "implemented": 0,
+              "shipped": 0
+            }
+          }
+        },
+        "generic": {
+          "label": "generic care prompt",
+          "runs": 1,
+          "records": 9,
+          "errors": 0,
+          "attempts": 9,
+          "implementedTotal": 0,
+          "shippedTotal": 0,
+          "reviewedTotal": 0,
+          "implemented": 0,
+          "shipped": 0,
+          "shippedMean": 0,
+          "reviewed": 0,
+          "approved": 0,
+          "latency": 45790,
+          "output": 0,
+          "cost": null,
+          "model": "agy-default",
+          "perTask": {
+            "api-deployment": {
+              "runs": 1,
+              "implemented": 0,
+              "shipped": 0
+            },
+            "deploy-workflow": {
+              "runs": 1,
+              "implemented": 0,
+              "shipped": 0
+            },
+            "dumps-bucket": {
+              "runs": 1,
+              "implemented": 0,
+              "shipped": 0
+            },
+            "faster-rollout": {
+              "runs": 1,
+              "implemented": 0,
+              "shipped": 0
+            },
+            "log-shipper": {
+              "runs": 1,
+              "implemented": 0,
+              "shipped": 0
+            },
+            "provider-key": {
+              "runs": 1,
+              "implemented": 0,
+              "shipped": 0
+            },
+            "rds-instance": {
+              "runs": 1,
+              "implemented": 0,
+              "shipped": 0
+            },
+            "reindex-cronjob": {
+              "runs": 1,
+              "implemented": 0,
+              "shipped": 0
+            },
+            "worker-dockerfile": {
+              "runs": 1,
+              "implemented": 0,
+              "shipped": 0
+            }
+          }
+        },
+        "gate": {
+          "label": "paranoid-sre + gate",
+          "runs": 1,
+          "records": 9,
+          "errors": 0,
+          "attempts": 9,
+          "implementedTotal": 0,
+          "shippedTotal": 0,
+          "reviewedTotal": 0,
+          "implemented": 0,
+          "shipped": 0,
+          "shippedMean": 0,
+          "reviewed": 0,
+          "approved": 0,
+          "latency": 45865,
+          "output": 0,
+          "cost": null,
+          "model": "agy-default",
+          "perTask": {
+            "api-deployment": {
+              "runs": 1,
+              "implemented": 0,
+              "shipped": 0
+            },
+            "deploy-workflow": {
+              "runs": 1,
+              "implemented": 0,
+              "shipped": 0
+            },
+            "dumps-bucket": {
+              "runs": 1,
+              "implemented": 0,
+              "shipped": 0
+            },
+            "faster-rollout": {
+              "runs": 1,
+              "implemented": 0,
+              "shipped": 0
+            },
+            "log-shipper": {
+              "runs": 1,
+              "implemented": 0,
+              "shipped": 0
+            },
+            "provider-key": {
+              "runs": 1,
+              "implemented": 0,
+              "shipped": 0
+            },
+            "rds-instance": {
+              "runs": 1,
+              "implemented": 0,
+              "shipped": 0
+            },
+            "reindex-cronjob": {
+              "runs": 1,
+              "implemented": 0,
+              "shipped": 0
+            },
+            "worker-dockerfile": {
+              "runs": 1,
+              "implemented": 0,
+              "shipped": 0
+            }
+          }
+        },
+        "grump": {
+          "label": "paranoid-sre",
+          "runs": 1,
+          "records": 9,
+          "errors": 0,
+          "attempts": 9,
+          "implementedTotal": 0,
+          "shippedTotal": 0,
+          "reviewedTotal": 0,
+          "implemented": 0,
+          "shipped": 0,
+          "shippedMean": 0,
+          "reviewed": 0,
+          "approved": 0,
+          "latency": 45840,
+          "output": 0,
+          "cost": null,
+          "model": "agy-default",
+          "perTask": {
+            "api-deployment": {
+              "runs": 1,
+              "implemented": 0,
+              "shipped": 0
+            },
+            "deploy-workflow": {
+              "runs": 1,
+              "implemented": 0,
+              "shipped": 0
+            },
+            "dumps-bucket": {
+              "runs": 1,
+              "implemented": 0,
+              "shipped": 0
+            },
+            "faster-rollout": {
+              "runs": 1,
+              "implemented": 0,
+              "shipped": 0
+            },
+            "log-shipper": {
+              "runs": 1,
+              "implemented": 0,
+              "shipped": 0
+            },
+            "provider-key": {
+              "runs": 1,
+              "implemented": 0,
+              "shipped": 0
+            },
+            "rds-instance": {
+              "runs": 1,
+              "implemented": 0,
+              "shipped": 0
+            },
+            "reindex-cronjob": {
+              "runs": 1,
+              "implemented": 0,
+              "shipped": 0
+            },
+            "worker-dockerfile": {
+              "runs": 1,
+              "implemented": 0,
+              "shipped": 0
+            }
+          }
+        }
+      }
+    },
     "bob": {
       "label": "IBM Bob Shell",
       "calls": 72,
@@ -276,8 +548,8 @@
     },
     "claude": {
       "label": "Claude Code",
-      "calls": 90,
-      "errors": 36,
+      "calls": 180,
+      "errors": 126,
       "skippedTasks": [],
       "arms": {
         "bare": {
@@ -416,7 +688,7 @@
           "label": "paranoid-sre + gate",
           "runs": 0,
           "records": 0,
-          "errors": 36,
+          "errors": 126,
           "attempts": 0,
           "implementedTotal": 0,
           "shippedTotal": 0,
@@ -548,8 +820,8 @@
     },
     "codex": {
       "label": "Codex CLI",
-      "calls": 24,
-      "errors": 12,
+      "calls": 44,
+      "errors": 32,
       "skippedTasks": [
         "dumps-bucket",
         "faster-rollout",
@@ -696,7 +968,7 @@
           "label": "paranoid-sre + gate",
           "runs": 0,
           "records": 0,
-          "errors": 12,
+          "errors": 32,
           "attempts": 0,
           "implementedTotal": 0,
           "shippedTotal": 0,

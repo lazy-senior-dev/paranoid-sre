@@ -393,7 +393,7 @@ No runtime dependencies, no network calls from the hooks, every third-party acti
 
 **Does she fight with the Grump?** No. Her gate fires only on deploy, infra, and CI paths; his fires on everything. A Terraform file gets her review; a Go file gets his; a Helm chart gets hers and, because he reads everything, his too, which is the point of having two reviewers.
 
-**Who wrote this?** [Sandeep Bazar](https://www.linkedin.com/in/sandeepbazar/) ([@sandeepbazar](https://github.com/sandeepbazar)): fourteen years of platform infrastructure at IBM, Kubernetes and storage, and enough 3 a.m. pages to laminate a card.
+**Who wrote this?** [Sandeep Bazar](https://github.com/sandeepbazar) ([@sandeepbazar](https://github.com/sandeepbazar)): fourteen years of platform infrastructure at IBM, Kubernetes and storage, and enough 3 a.m. pages to laminate a card.
 
 ## Contributing
 
@@ -401,6 +401,6 @@ The most valuable contribution is an incident: a change that shipped, paged some
 
 ## License
 
-[Apache-2.0](LICENSE) · by [Sandeep Bazar](https://www.linkedin.com/in/sandeepbazar/). Keep the [NOTICE](NOTICE) file with any redistribution.
+[Apache-2.0](LICENSE) · by [Sandeep Bazar](https://github.com/sandeepbazar). Keep the [NOTICE](NOTICE) file with any redistribution.
 
-Built and maintained by [Sandeep Bazar](https://www.linkedin.com/in/sandeepbazar/), part of [lazy-senior-dev](https://github.com/lazy-senior-dev).
+Built and maintained by [Sandeep Bazar](https://github.com/sandeepbazar), part of [lazy-senior-dev](https://github.com/lazy-senior-dev).

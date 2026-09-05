@@ -168,25 +168,26 @@ One file, [`rules/paranoid-sre.md`](rules/paranoid-sre.md), is the whole ruleset
 
 ## The standards behind the checklist
 
-None of the ten questions is invented. Each one is the operational form of something a published
-operations or hardening reference already asks for.
+None of the ten questions is invented. Each is the operational form of a published control or a named
+section of an operations reference. Two of the ten have no numbered control anywhere, and the table
+says so rather than inventing one.
 
 | Checklist question | What it maps to |
 |---|---|
-| Blast radius | [Google SRE, Reliable Product Launches at Scale](https://sre.google/sre-book/reliable-product-launches/) |
-| Health | [Kubernetes: configure liveness, readiness and startup probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
-| Limits | [Kubernetes: resource management for pods and containers](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) · [CWE-770, allocation without limits](https://cwe.mitre.org/data/definitions/770.html) |
-| Rollout | [Kubernetes deployment strategies](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) · [OWASP CI/CD Top 10, CICD-SEC-1](https://owasp.org/www-project-top-10-ci-cd-security-risks/CICD-SEC-01-Insufficient-Flow-Control-Mechanisms) |
-| Rollback | [Google SRE, Reliable Product Launches at Scale](https://sre.google/sre-book/reliable-product-launches/) |
-| Dependencies | [Google SRE, Addressing Cascading Failures](https://sre.google/sre-book/addressing-cascading-failures/) |
-| Config and secrets | [The Twelve-Factor App: Config](https://12factor.net/config) · [Kubernetes: good practices for Secrets](https://kubernetes.io/docs/concepts/security/secrets-good-practices/) · [CWE-798](https://cwe.mitre.org/data/definitions/798.html) |
-| Alerts | [Google SRE, Monitoring Distributed Systems](https://sre.google/sre-book/monitoring-distributed-systems/) |
-| Capacity | [Google SRE, Handling Overload](https://sre.google/sre-book/handling-overload/) |
-| Cleanup | [CIS Benchmarks](https://www.cisecurity.org/cis-benchmarks) for the platform you deploy to |
+| Blast radius | [AWS REL10-BP03, bulkhead architectures](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/rel_fault_isolation_use_bulkhead.html) · [Google SRE, Reliable Product Launches at Scale](https://sre.google/sre-book/reliable-product-launches/) · [SRE Workbook, Canarying Releases](https://sre.google/workbook/canarying-releases/) |
+| Health | [Checkov CKV_K8S_8 and CKV_K8S_9, liveness and readiness probes](https://www.checkov.io/5.Policy%20Index/kubernetes.html) · [Kubernetes probe documentation](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/). No CIS control exists: that benchmark covers security, not availability |
+| Limits | [Checkov CKV_K8S_10 to CKV_K8S_13, requests and limits](https://www.checkov.io/5.Policy%20Index/kubernetes.html) · [Trivy AVD-KSV-0011 and AVD-KSV-0018](https://avd.aquasec.com/misconfig/) · [CWE-770, allocation without limits](https://cwe.mitre.org/data/definitions/770.html) |
+| Rollout | [AWS OPS06-BP03, safe deployment strategies](https://docs.aws.amazon.com/wellarchitected/latest/operational-excellence-pillar/ops_mit_deploy_risks_deploy_mgmt_sys.html) · [SRE Workbook, Canarying Releases](https://sre.google/workbook/canarying-releases/) · [OWASP CICD-SEC-1](https://owasp.org/www-project-top-10-ci-cd-security-risks/CICD-SEC-01-Insufficient-Flow-Control-Mechanisms) |
+| Rollback | [AWS OPS06-BP01, plan for unsuccessful changes](https://docs.aws.amazon.com/wellarchitected/latest/operational-excellence-pillar/ops_mit_deploy_risks_plan_for_unsucessful_changes.html). No Kubernetes or CIS control covers rollback readiness |
+| Dependencies | [AWS REL05-BP05, set client timeouts](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/rel_mitigate_interaction_failure_client_timeouts.html) · [AWS REL05-BP03, control and limit retry calls](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/rel_mitigate_interaction_failure_limit_retries.html) · [Google SRE, Addressing Cascading Failures](https://sre.google/sre-book/addressing-cascading-failures/) |
+| Config and secrets | [CIS Kubernetes Benchmark 5.4, secrets management](https://www.cisecurity.org/benchmark/kubernetes) · [NSA and CISA Kubernetes Hardening Guidance](https://media.defense.gov/2022/Aug/29/2003066362/-1/-1/0/CTR_KUBERNETES_HARDENING_GUIDANCE_1.2_20220829.PDF) · [Twelve-Factor: Config](https://12factor.net/config) · [CWE-798](https://cwe.mitre.org/data/definitions/798.html) |
+| Alerts | [Google SRE, the four golden signals](https://sre.google/sre-book/monitoring-distributed-systems/) · [SRE Workbook, Alerting on SLOs](https://sre.google/workbook/alerting-on-slos/) · [AWS OPS04-BP01, key performance indicators](https://docs.aws.amazon.com/wellarchitected/latest/operational-excellence-pillar/ops_observability_identify_kpis.html) |
+| Capacity | [AWS REL01-BP01 to BP06, service quotas and constraints](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/rel_manage_service_limits_aware_quotas_and_constraints.html) · [Google SRE, Handling Overload](https://sre.google/sre-book/handling-overload/) |
+| Cleanup | No published standard requires retiring a feature flag or deleting a superseded resource. The nearest anchor is [Google SRE on simplicity](https://sre.google/sre-book/simplicity/) |
 
-Container and cloud findings line up with the [CIS Docker Benchmark](https://www.cisecurity.org/benchmark/docker),
-the [CIS Kubernetes Benchmark](https://www.cisecurity.org/benchmark/kubernetes) and the
-[CIS AWS Foundations Benchmark](https://www.cisecurity.org/benchmark/amazon_web_services), so a
+Container and cloud findings line up with the [CIS Docker](https://www.cisecurity.org/benchmark/docker),
+[CIS Kubernetes](https://www.cisecurity.org/benchmark/kubernetes) and
+[CIS AWS Foundations](https://www.cisecurity.org/benchmark/amazon_web_services) benchmarks, so a
 `PAGE` can be traced to a control rather than to an opinion.
 
 ## What agents actually get wrong

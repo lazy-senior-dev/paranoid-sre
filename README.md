@@ -21,13 +21,17 @@
 <!-- bench:author:start -->
 ## The number that matters: what ships
 
-**When the agent is the author, the Paranoid SRE changes what ships.** On IBM Bob Shell (`bob-default`), given 9 tickets that each invite a classic defect, the agent alone shipped the defect in 12 of 18 runs (67%), 4 of 18 with a generic "be careful" prompt (22%), and 0 of 18 with the Paranoid SRE loaded (0%), reviewing its own change before finishing in 18 of 18 runs. A task the agent declined or solved another way counts as clean. The shipped code is scored by fixed checks written before any run, never by a model. Each task was run 2 times per arm; [method, per-task table, raw diffs](benchmarks/results/author).
+**When the agent is the author, the Paranoid SRE changes what ships.** On IBM Bob Shell (`bob-default`), given 9 tickets that each invite a classic defect, the agent alone shipped the defect in 12 of 18 runs (67%), 4 of 18 with a generic "be careful" prompt (22%), and 0 of 18 with the Paranoid SRE installed, where he refuses the write until the findings are fixed (0%). A task the agent declined or solved another way counts as clean. The shipped code is scored by fixed checks written before any run, never by a model. Each task was run 2 times per arm; [method, per-task table, raw diffs](benchmarks/results/author).
 
 | Agent | Model | Arm | Made the change | Shipped the defect | Self-reviewed | Median time | Median cost |
 |---|---|---|---|---|---|---|---|
 | IBM Bob Shell | `bob-default` (n=2) | no skill | 18 of 18 | 12 of 18 (67%) | n/a | 15 s | $0.11 |
 | IBM Bob Shell | `bob-default` (n=2) | generic care prompt | 18 of 18 | 4 of 18 (22%) | n/a | 21 s | $0.13 |
-| IBM Bob Shell | `bob-default` (n=2) | **paranoid-sre** | **18 of 18** | **0 of 18 (0%)** | **18 of 18** | 35 s | $0.15 |
+| IBM Bob Shell | `bob-default` (n=2) | paranoid-sre | 18 of 18 | 0 of 18 (0%) | 18 of 18 | 35 s | $0.15 |
+| IBM Bob Shell | `bob-default` (n=2) | **paranoid-sre + gate** | **18 of 18** | **0 of 18 (0%)** | **18 of 18** | 55 s | $0.33 |
+| Claude Code | `claude-sonnet-5` (n=2) | no skill | 18 of 18 | 11 of 18 (61%) | n/a | 32 s | $0.24 |
+| Claude Code | `claude-sonnet-5` (n=2) | generic care prompt | 18 of 18 | 0 of 18 (0%) | n/a | 53 s | $0.29 |
+| Claude Code | `claude-sonnet-5` (n=2) | paranoid-sre | 18 of 18 | 0 of 18 (0%) | 18 of 18 | 83 s | $0.33 |
 <!-- bench:author:end -->
 
 <!-- bench:hero:start -->

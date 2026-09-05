@@ -2,9 +2,10 @@
 
 One ruleset, `rules/grump.md`, rendered by `npm run build` into the file each host reads. This page says which file that is, what the host can enforce, how to install, and how to remove it. Nothing here is hand-written twice: if a row disagrees with the repo, the repo wins and this page has a bug.
 
-Hosts fall into two tiers:
+Hosts fall into three tiers:
 
 - **Gate hosts** run lifecycle hooks. The Paranoid SRE is injected every turn and the `PreToolUse` gate can deny a write or a commit until a verdict is printed.
+- **MCP clients** connect to the stdio server in `mcp/` and call its tools. Any client that speaks the Model Context Protocol works without a file in this repository, which covers the editors and desktop apps that have no adapter here.
 - **Instruction hosts** load a rules file. The Paranoid SRE reviews in the conversation; nothing is enforced.
 
 ## What each host reads
@@ -67,6 +68,7 @@ Hosts fall into two tiers:
 | IBM Bob | `npx github:lazy-senior-dev/paranoid-sre uninstall bob` |
 | Any AGENTS.md host | Delete `AGENTS.md` (or the Paranoid SRE section of it) |
 | Everywhere | `rm -rf ~/.config/paranoid-sre` removes the mode setting and scorecards |
+| Any MCP client | mcp | none; the client runs `npx -y github:lazy-senior-dev/paranoid-sre mcp` | tools `sre_review_diff`, `sre_review_staged`, `sre_review_pr`, `sre_parse_verdict` | protocol test in `tests/adapters.test.mjs` | `npm test` |
 
 ## Notes on what is and is not verified
 

@@ -181,6 +181,38 @@ Antigravity: `git clone https://github.com/lazy-senior-dev/paranoid-sre ~/.paran
 
 One review per pull request, inline findings, updated in place. Point it at the same repository as the Grump's Action: one reviews the code, the other the deploy, and each posts its own review.
 
+## Any MCP client
+
+Every editor and desktop app that speaks the Model Context Protocol can use the Paranoid SRE without an adapter in this repository. The server is stdio, has no dependencies, and exposes four tools: `sre_review_diff`, `sre_review_staged`, `sre_review_pr`, and `sre_parse_verdict`, which turns a verdict block into JSON so a script can gate a commit or a merge on the level rather than on prose.
+
+Claude Desktop (`claude_desktop_config.json`), Cursor (`~/.cursor/mcp.json`), Windsurf, and Zed:
+
+```json
+{
+  "mcpServers": {
+    "paranoid-sre": {"command":"npx","args":["-y","github:lazy-senior-dev/paranoid-sre","mcp"]}
+  }
+}
+```
+
+VS Code (`.vscode/mcp.json`):
+
+```json
+{
+  "servers": {
+    "paranoid-sre": { "type": "stdio", "command":"npx","args":["-y","github:lazy-senior-dev/paranoid-sre","mcp"]}
+  }
+}
+```
+
+Claude Code, in one line:
+
+```sh
+claude mcp add paranoid-sre -- npx -y github:lazy-senior-dev/paranoid-sre mcp
+```
+
+The server reviews with whichever headless agent it finds (`claude`, `codex`, `agy`, `bob` with `BOB_API_KEY`, or `ANTHROPIC_API_KEY`), so the client asking for the review and the agent performing it can be different tools. Nothing leaves your machine except the diff, going to the agent you already trust.
+
 ## Commands
 
 | Command | What it does |

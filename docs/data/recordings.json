@@ -8,7 +8,7 @@
     "cost": 0.0524,
     "recordedAt": "2026-09-04",
     "width": 1000,
-    "height": 456,
+    "height": 544,
     "tokensIn": 7771,
     "tokensOut": 3256
   },
@@ -21,7 +21,7 @@
     "cost": null,
     "recordedAt": "2026-09-04",
     "width": 1000,
-    "height": 390,
+    "height": 570,
     "tokensIn": 18469,
     "tokensOut": 2269
   },
@@ -34,7 +34,7 @@
     "cost": null,
     "recordedAt": "2026-09-04",
     "width": 1000,
-    "height": 302,
+    "height": 388,
     "tokensIn": 21006,
     "tokensOut": 32192
   },
@@ -47,7 +47,7 @@
     "cost": 0.0109,
     "recordedAt": "2026-09-04",
     "width": 1000,
-    "height": 324,
+    "height": 414,
     "tokensIn": null,
     "tokensOut": null
   }

@@ -1,10 +1,22 @@
 <p align="center">
-  <img src="assets/paranoid-sre.svg" alt="The Paranoid SRE: hair in a bun, a headset, wide alert eyes, a pager clipped to her collar" width="220">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://lazy-senior-dev.github.io/assets/hero/paranoid-sre-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="https://lazy-senior-dev.github.io/assets/hero/paranoid-sre-light.svg">
+    <img src="https://lazy-senior-dev.github.io/assets/hero/paranoid-sre-light.svg" alt="An agent’s deploy flows through the Paranoid SRE, who holds the write until the blast radius is answered, so production stays up." width="880">
+  </picture>
 </p>
 
 <h1 align="center">paranoid-sre</h1>
 
 <p align="center"><em>It works. Now tell me how it fails.</em></p>
+
+<p align="center">
+  <strong>Star us&nbsp;❤️&nbsp;→</strong>&nbsp;<a href="https://github.com/lazy-senior-dev/paranoid-sre" title="Star paranoid-sre on GitHub"><picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://lazy-senior-dev.github.io/assets/hero/star-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="https://lazy-senior-dev.github.io/assets/hero/star-light.svg">
+    <img src="https://lazy-senior-dev.github.io/assets/hero/star-light.svg" alt="Star this repository on GitHub" width="132" height="34" align="middle">
+  </picture></a>
+</p>
 
 <p align="center"><strong>Site:</strong> <a href="https://lazy-senior-dev.github.io/paranoid-sre/">lazy-senior-dev.github.io/paranoid-sre</a> · <strong>The cast:</strong> <a href="https://lazy-senior-dev.github.io/">lazy-senior-dev.github.io</a></p>
 

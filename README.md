@@ -168,27 +168,35 @@ One file, [`rules/paranoid-sre.md`](rules/paranoid-sre.md), is the whole ruleset
 
 ## The standards behind the checklist
 
-None of the ten questions is invented. Each is the operational form of a published control or a named
-section of an operations reference. Two of the ten have no numbered control anywhere, and the table
-says so rather than inventing one.
+Every reference below is a vendor-neutral standard: MITRE's weakness catalogue, OWASP, NIST, the SEI
+CERT coding standards, the CIS benchmarks, ISO and IETF documents, and open specifications under
+neutral governance. No vendor's engineering handbook, cloud provider's framework, or commercial
+scanner is cited, however useful they are, because a rule you can only check against one company's
+product is not a standard.
+
+That constraint costs more here than anywhere else. The security benchmarks cover hardening and say
+nothing about availability, and no neutral standard names rollback readiness, retry budgets, or
+retiring a flag. Those rows say so.
 
 | Checklist question | What it maps to |
 |---|---|
-| Blast radius | [AWS REL10-BP03, bulkhead architectures](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/rel_fault_isolation_use_bulkhead.html) · [Google SRE, Reliable Product Launches at Scale](https://sre.google/sre-book/reliable-product-launches/) · [SRE Workbook, Canarying Releases](https://sre.google/workbook/canarying-releases/) |
-| Health | [Checkov CKV_K8S_8 and CKV_K8S_9, liveness and readiness probes](https://www.checkov.io/5.Policy%20Index/kubernetes.html) · [Kubernetes probe documentation](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/). No CIS control exists: that benchmark covers security, not availability |
-| Limits | [Checkov CKV_K8S_10 to CKV_K8S_13, requests and limits](https://www.checkov.io/5.Policy%20Index/kubernetes.html) · [Trivy AVD-KSV-0011 and AVD-KSV-0018](https://avd.aquasec.com/misconfig/) · [CWE-770, allocation without limits](https://cwe.mitre.org/data/definitions/770.html) |
-| Rollout | [AWS OPS06-BP03, safe deployment strategies](https://docs.aws.amazon.com/wellarchitected/latest/operational-excellence-pillar/ops_mit_deploy_risks_deploy_mgmt_sys.html) · [SRE Workbook, Canarying Releases](https://sre.google/workbook/canarying-releases/) · [OWASP CICD-SEC-1](https://owasp.org/www-project-top-10-ci-cd-security-risks/CICD-SEC-01-Insufficient-Flow-Control-Mechanisms) |
-| Rollback | [AWS OPS06-BP01, plan for unsuccessful changes](https://docs.aws.amazon.com/wellarchitected/latest/operational-excellence-pillar/ops_mit_deploy_risks_plan_for_unsucessful_changes.html). No Kubernetes or CIS control covers rollback readiness |
-| Dependencies | [AWS REL05-BP05, set client timeouts](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/rel_mitigate_interaction_failure_client_timeouts.html) · [AWS REL05-BP03, control and limit retry calls](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/rel_mitigate_interaction_failure_limit_retries.html) · [Google SRE, Addressing Cascading Failures](https://sre.google/sre-book/addressing-cascading-failures/) |
-| Config and secrets | [CIS Kubernetes Benchmark 5.4, secrets management](https://www.cisecurity.org/benchmark/kubernetes) · [NSA and CISA Kubernetes Hardening Guidance](https://media.defense.gov/2022/Aug/29/2003066362/-1/-1/0/CTR_KUBERNETES_HARDENING_GUIDANCE_1.2_20220829.PDF) · [Twelve-Factor: Config](https://12factor.net/config) · [CWE-798](https://cwe.mitre.org/data/definitions/798.html) |
-| Alerts | [Google SRE, the four golden signals](https://sre.google/sre-book/monitoring-distributed-systems/) · [SRE Workbook, Alerting on SLOs](https://sre.google/workbook/alerting-on-slos/) · [AWS OPS04-BP01, key performance indicators](https://docs.aws.amazon.com/wellarchitected/latest/operational-excellence-pillar/ops_observability_identify_kpis.html) |
-| Capacity | [AWS REL01-BP01 to BP06, service quotas and constraints](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/rel_manage_service_limits_aware_quotas_and_constraints.html) · [Google SRE, Handling Overload](https://sre.google/sre-book/handling-overload/) |
-| Cleanup | No published standard requires retiring a feature flag or deleting a superseded resource. The nearest anchor is [Google SRE on simplicity](https://sre.google/sre-book/simplicity/) |
+| Blast radius | **No neutral control names this.** [CIS Kubernetes Benchmark 5.6](https://www.cisecurity.org/benchmark/kubernetes), on namespaces as administrative boundaries, is the nearest |
+| Health | [Kubernetes probe documentation](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/). **No CIS control exists**: that benchmark covers security, not availability |
+| Limits | [CWE-770, allocation without limits](https://cwe.mitre.org/data/definitions/770.html) · [CWE-400, uncontrolled resource consumption](https://cwe.mitre.org/data/definitions/400.html) · [Kubernetes resource management](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) · [NIST SP 800-190, §4.5](https://csrc.nist.gov/pubs/sp/800/190/final) |
+| Rollout | [OWASP CICD-SEC-1, insufficient flow control](https://owasp.org/www-project-top-10-ci-cd-security-risks/CICD-SEC-01-Insufficient-Flow-Control-Mechanisms) · [Kubernetes deployment strategies](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) |
+| Rollback | **No standard names deploy revertability.** [NIST SSDF PS.3](https://csrc.nist.gov/projects/ssdf), on archiving each release so it can be restored, is the nearest neutral obligation |
+| Dependencies | [CWE-1088, synchronous access of remote resource without timeout](https://cwe.mitre.org/data/definitions/1088.html) · [CWE-770](https://cwe.mitre.org/data/definitions/770.html) · [ASVS 5.0, V16.5.2](https://github.com/OWASP/ASVS), on graceful degradation |
+| Config and secrets | [CIS Kubernetes Benchmark 5.4](https://www.cisecurity.org/benchmark/kubernetes) · [NSA and CISA Kubernetes Hardening Guidance](https://media.defense.gov/2022/Aug/29/2003066362/-1/-1/0/CTR_KUBERNETES_HARDENING_GUIDANCE_1.2_20220829.PDF) · [OWASP Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html) · [Twelve-Factor: Config](https://12factor.net/config) · [CWE-798](https://cwe.mitre.org/data/definitions/798.html) |
+| Alerts | [OWASP A09:2025 Security Logging and Alerting Failures](https://owasp.org/Top10/2025/) · [CWE-778, insufficient logging](https://cwe.mitre.org/data/definitions/778.html) · [OpenTelemetry semantic conventions](https://opentelemetry.io/docs/specs/semconv/) |
+| Capacity | [CWE-400, uncontrolled resource consumption](https://cwe.mitre.org/data/definitions/400.html) · [NIST SP 800-190](https://csrc.nist.gov/pubs/sp/800/190/final) |
+| Cleanup | **No standard requires retiring a feature flag or deleting a superseded resource.** [ASVS 5.0, V15.2.3](https://github.com/OWASP/ASVS), on production containing only required functionality, is the nearest |
 
 Container and cloud findings line up with the [CIS Docker](https://www.cisecurity.org/benchmark/docker),
 [CIS Kubernetes](https://www.cisecurity.org/benchmark/kubernetes) and
-[CIS AWS Foundations](https://www.cisecurity.org/benchmark/amazon_web_services) benchmarks, so a
-`PAGE` can be traced to a control rather than to an opinion.
+[CIS AWS Foundations](https://www.cisecurity.org/benchmark/amazon_web_services) benchmarks and with
+[NIST SP 800-190](https://csrc.nist.gov/pubs/sp/800/190/final), so a `PAGE` can be traced to a
+published control rather than to an opinion.
+
 
 ## What agents actually get wrong
 

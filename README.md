@@ -146,7 +146,7 @@ npx github:lazy-senior-dev/paranoid-sre review            # working tree
 npx github:lazy-senior-dev/paranoid-sre pr 123            # a pull request, via gh
 ```
 
-Finds `claude`, `codex`, `agy`, or `bob` on your PATH, sends the diff with her ruleset, prints the verdict, and exits 1 on anything but `SHIP`.
+Finds `claude`, `codex`, `agy`, or `bob` on your PATH, or any other agent through `LSD_AGENT_CMD`, sends the diff with her ruleset, prints the verdict, and exits 1 on anything but `SHIP`.
 
 ## Install
 

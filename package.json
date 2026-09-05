@@ -18,10 +18,12 @@
     "rules/",
     "hooks/",
     "skills/",
+    "mcp/",
     "action/",
     "action.yml",
     ".claude-plugin/",
     "AGENTS.md",
+    "persona.json",
     "README.md",
     "LICENSE",
     "NOTICE",
@@ -52,5 +54,6 @@
   ],
   "bin": {
     "sre": "bin/sre.mjs"
-  }
+  },
+  "mcpName": "io.github.lazy-senior-dev/paranoid-sre"
 }

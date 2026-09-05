@@ -163,6 +163,36 @@ One file, [`rules/paranoid-sre.md`](rules/paranoid-sre.md), is the whole ruleset
 
 **The gate** fires only for files in her scope (manifests, charts, Terraform, Dockerfiles, CI, config). Code files are the Grump's job; she does not read them. **Modes**: `nag` (default), `gate`, `off`, shared with every persona through `GRUMPY_MODE`, a repository's `.grumpy.json`, or `~/.config/grumpy-reviewer/config.json`.
 
+## The standards behind the checklist
+
+None of the ten questions is invented. Each one is the operational form of something a published
+operations or hardening reference already asks for.
+
+| Checklist question | What it maps to |
+|---|---|
+| Blast radius | [Google SRE, Reliable Product Launches at Scale](https://sre.google/sre-book/reliable-product-launches/) |
+| Health | [Kubernetes: configure liveness, readiness and startup probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
+| Limits | [Kubernetes: resource management for pods and containers](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) · [CWE-770, allocation without limits](https://cwe.mitre.org/data/definitions/770.html) |
+| Rollout | [Kubernetes deployment strategies](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) · [OWASP CI/CD Top 10, CICD-SEC-1](https://owasp.org/www-project-top-10-ci-cd-security-risks/CICD-SEC-01-Insufficient-Flow-Control-Mechanisms) |
+| Rollback | [Google SRE, Reliable Product Launches at Scale](https://sre.google/sre-book/reliable-product-launches/) |
+| Dependencies | [Google SRE, Addressing Cascading Failures](https://sre.google/sre-book/addressing-cascading-failures/) |
+| Config and secrets | [The Twelve-Factor App: Config](https://12factor.net/config) · [Kubernetes: good practices for Secrets](https://kubernetes.io/docs/concepts/security/secrets-good-practices/) · [CWE-798](https://cwe.mitre.org/data/definitions/798.html) |
+| Alerts | [Google SRE, Monitoring Distributed Systems](https://sre.google/sre-book/monitoring-distributed-systems/) |
+| Capacity | [Google SRE, Handling Overload](https://sre.google/sre-book/handling-overload/) |
+| Cleanup | [CIS Benchmarks](https://www.cisecurity.org/cis-benchmarks) for the platform you deploy to |
+
+Container and cloud findings line up with the [CIS Docker Benchmark](https://www.cisecurity.org/benchmark/docker),
+the [CIS Kubernetes Benchmark](https://www.cisecurity.org/benchmark/kubernetes) and the
+[CIS AWS Foundations Benchmark](https://www.cisecurity.org/benchmark/amazon_web_services), so a
+`PAGE` can be traced to a control rather than to an opinion.
+
+## What agents actually get wrong
+
+Every mistake these reviewers look for was recorded being made. [What coding agents actually get wrong](https://github.com/lazy-senior-dev/lazy-senior-dev.github.io/blob/main/SIGNS.md)
+is an open catalogue built from the benchmark runs in these repositories: each entry names how often
+an agent shipped it, on which agents, the code one of them actually wrote, and the published standard
+it maps to. Nothing in it is written from memory.
+
 ## Where to get it, and how it is vetted
 
 - **npm** — not published yet; the first tagged release will do it. Until then, `npx github:lazy-senior-dev/paranoid-sre review` works today and needs only git. The release workflow publishes through [OIDC trusted publishing](https://docs.npmjs.com/trusted-publishers), so no long-lived token is ever stored here, and npm records build provenance for the package.

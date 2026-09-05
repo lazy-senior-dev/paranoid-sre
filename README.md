@@ -162,6 +162,20 @@ One file, [`rules/paranoid-sre.md`](rules/paranoid-sre.md), is the whole ruleset
 
 **The gate** fires only for files in her scope (manifests, charts, Terraform, Dockerfiles, CI, config). Code files are the Grump's job; she does not read them. **Modes**: `nag` (default), `gate`, `off`, shared with every persona through `GRUMPY_MODE`, a repository's `.grumpy.json`, or `~/.config/grumpy-reviewer/config.json`.
 
+## Why not just a rules file, or a pull-request bot?
+
+Those are the two things you already have, and they fail in opposite directions. One is advice the agent may ignore; the other arrives after the code exists.
+
+|  | A rules file<br>(`CLAUDE.md`, `.cursorrules`) | A pull-request reviewer | paranoid-sre |
+|---|---|---|---|
+| **When it runs** | Every turn, as context | After the code is written and pushed | Before the write is allowed to land |
+| **When it disagrees** | Nothing happens. The agent may ignore it | Leaves a comment for a human to read | The Paranoid SRE denies the write until the finding is fixed |
+| **What you can gate on** | Nothing | Prose | `SHIP` / `HOLD` / `PAGE`, parsed to JSON |
+| **Where it works** | One file format per host, maintained by hand | The forge you host on | 14 agents, any MCP client, and a GitHub Action, from one ruleset |
+| **How you know it helps** | You do not | Vendor's own blog post | Two benchmark tiers in this repository, every raw reply committed, rerun it yourself |
+
+The first column is not a strawman. Anthropic's own documentation says a rules file is *"context, not enforced configuration"* and that *"to block an action regardless of what Claude decides, use a PreToolUse hook instead."* That hook is what this repository is.
+
 ## Try her in 60 seconds, install nothing
 
 ```

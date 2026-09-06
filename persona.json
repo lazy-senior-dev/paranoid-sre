@@ -45,5 +45,6 @@
   "test": {
     "dir": "deploy/k8s",
     "ext": ".yaml"
-  }
+  },
+  "incompleteVerdict": "HOLD"
 }

@@ -11,9 +11,9 @@
 <p align="center"><em>It works. Now tell me how it fails.</em></p>
 
 <!-- headline:start -->
-**The gate is the part a prompt cannot replace.** When the agent writes the code itself, 27% of unaided runs shipped the defect, 7% with a generic "be careful" prompt, 2% with the ruleset loaded, and **2% with the gate**, which refuses the write until the findings are fixed. Measured on IBM Bob Shell (`bob-default`), 5 runs per arm; [method and raw diffs](benchmarks/results/author).
+**The ruleset is the part a prompt cannot replace, and the gate holds the floor.** When the agent writes the code itself, 27% of unaided runs shipped the defect, 7% with a generic "be careful" prompt, 2% with the ruleset loaded, and **2% with the gate**, which refuses the write until the findings are fixed. Measured on IBM Bob Shell (`bob-default`), 5 runs per arm; [method and raw diffs](benchmarks/results/author).
 
-**It is quiet on code that is fine.** Across the agents tested, the median run objects to 1.5 of 5 clean changes unaided and 1 with the Paranoid SRE loaded; the worst agent goes from 2.5 to 1.5. That happens on every review, not only the ones with a bug in them, which is why it is the first thing worth knowing; [per-diff table](benchmarks/results).
+**It is quiet on code that is fine.** Across the 4 agents tested, the median run objects to 1.5 of 5 clean changes unaided and 1 with the Paranoid SRE loaded; the worst agent goes from 2.5 to 1.5. It does not buy that quiet by approving more: the median run still catches 15 of 15 seeded defects, against 14 unaided. That happens on every review, not only the ones with a bug in them, which is why it is the first thing worth knowing; [per-diff table](benchmarks/results).
 <!-- headline:end -->
 
 <!-- refusals:start -->

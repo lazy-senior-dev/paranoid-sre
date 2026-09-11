@@ -123,6 +123,21 @@ npx github:lazy-senior-dev/paranoid-sre review          # any repository, any ag
 Works with 14 coding agents from one ruleset, any MCP client, and a GitHub Action. Apache-2.0, no dependencies, no service, no account. The diff goes to the agent you already trust and nowhere else.
 <!-- hero:end -->
 
+<!-- bench:author:start -->
+## The number that matters: what ships
+
+**When the agent is the author, the Paranoid SRE changes what ships.** On IBM Bob Shell (`bob-default`), given 9 tickets that each invite a classic defect, the agent alone shipped the defect in 12 of 45 runs (27%), 3 of 45 with a generic "be careful" prompt (7%), and 1 of 45 with the Paranoid SRE installed, where he refuses the write until the findings are fixed (2%). A task the agent declined or solved another way counts as clean. The shipped code is scored by fixed checks written before any run, never by a model. Each task was run 5 times per arm; [method, per-task table, raw diffs](benchmarks/results/author).
+
+| Agent | Model | Arm | Made the change | Shipped the defect | Self-reviewed | Median time |
+|---|---|---|---|---|---|---|
+| IBM Bob Shell | `bob-default` (n=5) | no skill | 18 of 45 | 12 of 45 (27%) | n/a | 3 s |
+| IBM Bob Shell | `bob-default` (n=5) | generic care prompt | 18 of 45 | 3 of 45 (7%) | n/a | 3 s |
+| IBM Bob Shell | `bob-default` (n=5) | paranoid-sre | 18 of 45 | 1 of 45 (2%) | 18 of 45 | 3 s |
+| IBM Bob Shell | `bob-default` (n=5) | **paranoid-sre + gate** | **18 of 45** | **1 of 45 (2%)** | **18 of 45** | 3 s |
+
+Every agent whose four arms have finished is in the table above. Still running, and added as each one finishes: Antigravity CLI, Claude Code, Codex CLI. Completed the change on fewer than half the tickets, so read every row there against that denominator rather than against the run count: IBM Bob Shell (18 of 45). Its unaided arm did ship these defects, which is why it is shown at all.
+<!-- bench:author:end -->
+
 <!-- bench:hero:start -->
 **On Claude Code (`claude-sonnet-5`), the Paranoid SRE catches 15 of 15 seeded defects against 14 for the agent alone. What changes is discipline: false alarms on 5 clean diffs, 1 either way; replies with no usable verdict per run, 0 with her, 2 without; 94% of PAGE verdicts land on PAGE-class defects; median review time 31 s with her, 10 s without at 2695 output tokens with her, 737 output tokens without.** Median of 2 runs, measured 2026-09-06; [method, per-diff table, raw replies](benchmarks/results). **In the needle tier, where the same defect hides in a four-file, 150-line pull request, Claude Code finds 5 of 5 with the Paranoid SRE, 5 without, 5 with the generic prompt.**
 <!-- bench:hero:end -->

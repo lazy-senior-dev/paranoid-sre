@@ -11,7 +11,7 @@
 <p align="center"><em>It works. Now tell me how it fails.</em></p>
 
 <!-- headline:start -->
-**The ruleset is the part a prompt cannot replace, and the gate holds the floor.** When the agent writes the code itself, 27% of unaided runs shipped the defect, 7% with a generic "be careful" prompt, 2% with the ruleset loaded, and **2% with the gate**, which refuses the write until the findings are fixed. Measured on IBM Bob Shell (`bob-default`), 5 runs per arm; [method and raw diffs](benchmarks/results/author).
+**On Claude Code a careful prompt reaches the same floor; on the rest it does not.** When the agent writes the code itself, 64% of unaided runs shipped the defect, 47% with a generic "be careful" prompt, 2% with the ruleset loaded, and **0% with the gate**, which refuses the write until the findings are fixed. Measured on Antigravity CLI (`gemini-3.6-flash-medium`), 5 runs per arm. The same arms on the other hosts measured so far: 27% to **2%** on IBM Bob Shell (`bob-default`), 60% to **0%** on Claude Code (`claude-sonnet-5`); [method and raw diffs](benchmarks/results/author).
 
 **It is quiet on code that is fine.** Across the 4 agents tested, the median run objects to 1.5 of 5 clean changes unaided and 1 with the Paranoid SRE loaded; the worst agent goes from 2.5 to 1.5. It does not buy that quiet by approving more: the median run still catches 15 of 15 seeded defects, against 14 unaided. That happens on every review, not only the ones with a bug in them, which is why it is the first thing worth knowing; [per-diff table](benchmarks/results).
 <!-- headline:end -->
@@ -24,6 +24,23 @@ it before it reached the branch. Regenerate with `npm run bench:report` and this
 the runs.
 
 <table>
+<tr><td>
+
+**PLAT-433 "Deploys take too long"**
+
+Your agent wrote:
+
+```yaml
+  strategy:
+    type: RollingUpdate
+    rollingUpdate: { maxSurge: 1, maxUnavailable: 0 }
+```
+
+**It was refused:** deploy/k8s/web-deployment.yaml:8 — maxSurge:100%/maxUnavailable:0 on 2 replicas brings up both new pods at once and cuts every user over to the new version in a single step once they pass readiness, with no canary or partial exposure — cap maxSurge at 25% (or 1 pod) so a bad image only reaches a fraction of traffic first
+
+<sub>Recorded run, Claude Code. Task `faster-rollout`.</sub>
+
+</td></tr>
 <tr><td>
 
 **WRK-14 "Container image for the Python worker"**
@@ -46,42 +63,22 @@ COPY worker/ worker/
 </td></tr>
 <tr><td>
 
-**PAY-31 "Give the payments service its provider key"**
+**CI-58 "Deploy main to production automatically"**
 
 Your agent wrote:
 
 ```yaml
-          env:
-            - name: PROVIDER_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: payments-provider
-                  key: provider-key
+name: deploy
+on:
+  workflow_run:
+    workflows: ["ci"]
+    branches: ["main"]
+    types:
 ```
 
-**It was refused:** deploy/k8s/payments-secret.yaml:8 — live payment provider key committed in plain text; now in git history and reachable from every clone, mirror, and CI runner — rotate the key immediately, delete this file from the repo (including history via git filter-repo or equivalent), and provision the secret out-of-band (Vault, Sealed Secrets, or an external-secrets operator); the manifest must never contain the value
+**It was refused:** .github/workflows/deploy.yml:30 — failed rollout leaves broken pods serving traffic with no automatic rollback — add an on-failure step running kubectl rollout undo deployment/web -n shop
 
-<sub>Recorded run, IBM Bob Shell. Task `provider-key`.</sub>
-
-</td></tr>
-<tr><td>
-
-**PLAT-410 "Deploy the new api service"**
-
-Your agent wrote:
-
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: api
-  namespace: shop
-spec:
-```
-
-**It was refused:** deploy/k8s/api-deployment.yaml:21 — readiness and liveness probe to the same port with no distinct paths confirmed distinct — /healthz and /livez are named separately which is correct, but readinessProbe has no failureThreshold or initialDelaySeconds, so a slow-starting container is marked unready and killed by liveness before it ever serves traffic — add initialDelaySeconds: 10 and failureThreshold: 3 to the readinessProbe
-
-<sub>Recorded run, IBM Bob Shell. Task `api-deployment`.</sub>
+<sub>Recorded run, Antigravity CLI. Task `deploy-workflow`.</sub>
 
 </td></tr>
 </table>
@@ -126,20 +123,28 @@ Works with 14 coding agents from one ruleset, any MCP client, and a GitHub Actio
 <!-- bench:author:start -->
 ## The number that matters: what ships
 
-**When the agent is the author, the Paranoid SRE changes what ships.** On IBM Bob Shell (`bob-default`), given 9 tickets that each invite a classic defect, the agent alone shipped the defect in 12 of 45 runs (27%), 3 of 45 with a generic "be careful" prompt (7%), and 1 of 45 with the Paranoid SRE installed, where he refuses the write until the findings are fixed (2%). A task the agent declined or solved another way counts as clean. The shipped code is scored by fixed checks written before any run, never by a model. Each task was run 5 times per arm; [method, per-task table, raw diffs](benchmarks/results/author).
+**When the agent is the author, the Paranoid SRE changes what ships.** On Antigravity CLI (`gemini-3.6-flash-medium`), given 9 tickets that each invite a classic defect, the agent alone shipped the defect in 29 of 45 runs (64%), 21 of 45 with a generic "be careful" prompt (47%), and 0 of 45 with the Paranoid SRE installed, where he refuses the write until the findings are fixed (0%). A task the agent declined or solved another way counts as clean. The shipped code is scored by fixed checks written before any run, never by a model. Each task was run 5 times per arm; [method, per-task table, raw diffs](benchmarks/results/author).
 
 | Agent | Model | Arm | Made the change | Shipped the defect | Self-reviewed | Median time |
 |---|---|---|---|---|---|---|
+| Antigravity CLI | `gemini-3.6-flash-medium` (n=5) | no skill | 43 of 45 | 29 of 45 (64%) | n/a | 49 s |
+| Antigravity CLI | `gemini-3.6-flash-medium` (n=5) | generic care prompt | 44 of 45 | 21 of 45 (47%) | n/a | 54 s |
+| Antigravity CLI | `gemini-3.6-flash-medium` (n=5) | paranoid-sre | 34 of 45 | 1 of 45 (2%) | 43 of 45 | 34 s |
+| Antigravity CLI | `gemini-3.6-flash-medium` (n=5) | **paranoid-sre + gate** | **31 of 45** | **0 of 45 (0%)** | **43 of 45** | 36 s |
+| Claude Code | `claude-sonnet-5` (n=5) | no skill | 45 of 45 | 27 of 45 (60%) | n/a | 46 s |
+| Claude Code | `claude-sonnet-5` (n=5) | generic care prompt | 45 of 45 | 0 of 45 (0%) | n/a | 84 s |
+| Claude Code | `claude-sonnet-5` (n=5) | paranoid-sre | 45 of 45 | 0 of 45 (0%) | 44 of 45 | 113 s |
+| Claude Code | `claude-sonnet-5` (n=5) | **paranoid-sre + gate** | **45 of 45** | **0 of 45 (0%)** | **45 of 45** | 145 s |
 | IBM Bob Shell | `bob-default` (n=5) | no skill | 18 of 45 | 12 of 45 (27%) | n/a | 3 s |
 | IBM Bob Shell | `bob-default` (n=5) | generic care prompt | 18 of 45 | 3 of 45 (7%) | n/a | 3 s |
 | IBM Bob Shell | `bob-default` (n=5) | paranoid-sre | 18 of 45 | 1 of 45 (2%) | 18 of 45 | 3 s |
 | IBM Bob Shell | `bob-default` (n=5) | **paranoid-sre + gate** | **18 of 45** | **1 of 45 (2%)** | **18 of 45** | 3 s |
 
-Every agent whose four arms have finished is in the table above. Still running, and added as each one finishes: Antigravity CLI, Claude Code, Codex CLI. Completed the change on fewer than half the tickets, so read every row there against that denominator rather than against the run count: IBM Bob Shell (18 of 45). Its unaided arm did ship these defects, which is why it is shown at all.
+Every agent whose four arms have finished is in the table above. Completed the change on fewer than half the tickets, so read every row there against that denominator rather than against the run count: IBM Bob Shell (18 of 45). Its unaided arm did ship these defects, which is why it is shown at all.
 <!-- bench:author:end -->
 
 <!-- bench:hero:start -->
-**On Claude Code (`claude-sonnet-5`), the Paranoid SRE catches 15 of 15 seeded defects against 14 for the agent alone. What changes is discipline: false alarms on 5 clean diffs, 1 either way; replies with no usable verdict per run, 0 with her, 2 without; 94% of PAGE verdicts land on PAGE-class defects; median review time 31 s with her, 10 s without at 2695 output tokens with her, 737 output tokens without.** Median of 2 runs, measured 2026-09-06; [method, per-diff table, raw replies](benchmarks/results). **In the needle tier, where the same defect hides in a four-file, 150-line pull request, Claude Code finds 5 of 5 with the Paranoid SRE, 5 without, 5 with the generic prompt.**
+**On Claude Code (`claude-sonnet-5`), the Paranoid SRE catches 15 of 15 seeded defects against 14 for the agent alone. What changes is discipline: false alarms on 5 clean diffs, 1 either way; replies with no usable verdict per run, 0 with her, 2 without; 94% of PAGE verdicts land on PAGE-class defects; median review time 31 s with her, 10 s without at 2695 output tokens with her, 737 output tokens without.** Median of 2 runs, measured 2026-09-12; [method, per-diff table, raw replies](benchmarks/results). **In the needle tier, where the same defect hides in a four-file, 150-line pull request, Claude Code finds 5 of 5 with the Paranoid SRE, 5 without, 5 with the generic prompt.**
 <!-- bench:hero:end -->
 
 <!-- recordings:start -->

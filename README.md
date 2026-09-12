@@ -140,7 +140,7 @@ Works with 14 coding agents from one ruleset, any MCP client, and a GitHub Actio
 | IBM Bob Shell | `bob-default` (n=5) | paranoid-sre | 18 of 45 | 1 of 45 (2%) | 18 of 45 | 3 s |
 | IBM Bob Shell | `bob-default` (n=5) | **paranoid-sre + gate** | **18 of 45** | **1 of 45 (2%)** | **18 of 45** | 3 s |
 
-Every agent whose four arms have finished is in the table above. Completed the change on fewer than half the tickets, so read every row there against that denominator rather than against the run count: IBM Bob Shell (18 of 45). Its unaided arm did ship these defects, which is why it is shown at all.
+Every agent whose four arms have finished is in the table above. Completed the change on fewer than half the tickets, so read every row there against that denominator rather than against the run count: IBM Bob Shell (18 of 45). Its unaided arm did ship these defects, which is why it is shown at all. It is not free. The gate finished fewer tickets than the unaided agent on Antigravity CLI (31 against 43, 28% fewer; 67% of completed tickets shipped a defect unaided against 0% gated) — a refused write is sometimes a write the agent abandons rather than fixes. Counted per ticket actually completed the improvement still holds, so the shortfall is a cost to weigh, not the explanation for it; an unfinished ticket is at least visible.
 <!-- bench:author:end -->
 
 <!-- bench:hero:start -->

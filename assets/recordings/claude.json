@@ -3,18 +3,16 @@
   "agent": "claude",
   "case": "s24-k8s-latest-tag",
   "command": "npx github:lazy-senior-dev/paranoid-sre review --staged --agent claude",
-  "durationMs": 40021,
+  "durationMs": 9715,
   "exitCode": 1,
   "stderr": [
     "Reading the staged changes (45 lines) with Claude Code (claude-sonnet-5). The Paranoid SRE does not skim; give it a moment.",
-    "40 s · 7771 in / 3256 out tokens · $0.0524"
+    "10 s · 8151 in / 637 out tokens · $0.0278"
   ],
   "stdout": [
-    "SRE: PAGE",
-    "1. deploy/k8s/api-deployment.yaml:17 — image is pinned to :latest, so there is no previous version to redeploy and no rollback path — pin to an immutable tag or digest (git SHA) built by CI",
-    "2. deploy/k8s/api-deployment.yaml:29 — only a readinessProbe is defined, no liveness probe, so a hung process that still answers TCP on 8080 never gets restarted and keeps serving dead traffic — add a livenessProbe (process-level, no dependency checks)",
-    "3. deploy/k8s/api-deployment.yaml:6 — replicas: 2 with no PodDisruptionBudget, so a single node drain or cluster upgrade can evict both pods at once and take the service fully down — add a PDB with minAvailable: 1",
-    "4. deploy/k8s/api-deployment.yaml:1 — no alert or annotation ties this workload to an on-call rotation, so a crashloop here pages nobody — confirm/attach an existing rule (e.g. KubePodCrashLooping) scoped to app=api, namespace=staging"
+    "SRE: HOLD",
+    "1. deploy/k8s/api-deployment.yaml:16 — image tag :latest makes every rollout non-reproducible and rollback impossible, so a bad deploy has no known-good version to return to — pin to a digest or immutable version tag",
+    "2. deploy/k8s/api-deployment.yaml:29 — no liveness probe, so a deadlocked process that still answers readiness stays serving traffic forever — add a livenessProbe distinct from readiness"
   ],
-  "recordedAt": "2026-09-04T18:47:49.389Z"
+  "recordedAt": "2026-09-13T16:13:56.660Z"
 }

@@ -147,6 +147,17 @@ Works with 14 coding agents from one ruleset, any MCP client, and a GitHub Actio
 Every agent whose four arms have finished is in the table above. Completed the change on fewer than half the tickets, so read every row there against that denominator rather than against the run count: IBM Bob Shell (18 of 45). Its unaided arm did ship these defects, which is why it is shown at all. It is not free. The gate finished fewer tickets than the unaided agent on Antigravity CLI (31 against 43, 28% fewer; 67% of completed tickets shipped a defect unaided against 0% gated) — a refused write is sometimes a write the agent abandons rather than fixes. Counted per ticket actually completed the improvement still holds, so the shortfall is a cost to weigh, not the explanation for it; an unfinished ticket is at least visible.
 <!-- bench:author:end -->
 
+<!-- live:start -->
+## Verified in the host, not only in the harness
+
+**The thing you install is the thing that was measured.** The table above scores the ruleset by re-running the review over a staged diff. This runs the shipped plugin inside a real Claude Code session (`claude-sonnet-5`, gate mode), gives it the same 9 tickets, and records what the host itself decided: the persona arrived on 9 of 9 sessions, and the gate refused 13 writes across 8 of them. The agent still finished the ticket in 1 of 9, and shipped the seeded defect in 0. One session per ticket: this shows the gate fires and what it costs, not a rate to compare with the table above. Measured 2026-09-13; reproduce with `npm run verify:live`, which exits non-zero if no write is ever refused.
+
+The host's own words, from the recorded stream:
+
+> No verdict found for this write to api-deployment.yaml. If you have not reviewed it yet: answer the ten checklist questions in writing and print the SRE: block (SHIP, HOLD, or PAGE with numbered file:line — failure — smallest fix lines; name the files an SHIP ...
+
+<!-- live:end -->
+
 <!-- bench:hero:start -->
 **On Claude Code (`claude-sonnet-5`), the Paranoid SRE catches 15 of 15 seeded defects against 14 for the agent alone. What changes is discipline: false alarms on 5 clean diffs, 1 either way; replies with no usable verdict per run, 0 with her, 2 without; 94% of PAGE verdicts land on PAGE-class defects; median review time 31 s with her, 10 s without at 2695 output tokens with her, 737 output tokens without.** Median of 2 runs, measured 2026-09-13; [method, per-diff table, raw replies](benchmarks/results). **In the needle tier, where the same defect hides in a four-file, 150-line pull request, Claude Code finds 5 of 5 with the Paranoid SRE, 5 without, 5 with the generic prompt.**
 <!-- bench:hero:end -->
@@ -154,17 +165,17 @@ Every agent whose four arms have finished is in the table above. Completed the c
 <!-- recordings:start -->
 ## Watch her work on every agent
 
-The same staged diff, one CLI, 4 agents. Each recording is a real run captured with `node scripts/capture-run.mjs --agent <name>` and rendered frame by frame from the transcript, nothing typed by hand and nothing cut. The captions come from the recording itself. Captured 2026-09-04.
+The same staged diff, one CLI, 4 agents. Each recording is a real run captured with `node scripts/capture-run.mjs --agent <name>` and rendered frame by frame from the transcript, nothing typed by hand and nothing cut. The captions come from the recording itself. Captured 2026-09-13.
 
 | Claude Code | Codex CLI |
 |---|---|
-| <img src="assets/recordings/claude.gif" alt="Terminal recording of the Paranoid SRE reviewing a staged diff with Claude Code: SRE: PAGE with 4 numbered findings" width="440"> | <img src="assets/recordings/codex.gif" alt="Terminal recording of the Paranoid SRE reviewing a staged diff with Codex CLI: SRE: PAGE with 4 numbered findings" width="440"> |
-| <b>Verdict</b> SRE: PAGE<br><b>Findings</b> 4<br><b>Time</b> 40 s<br><b>Tokens</b> 7,771 in / 3,256 out | <b>Verdict</b> SRE: PAGE<br><b>Findings</b> 4<br><b>Time</b> 30 s<br><b>Tokens</b> 18,469 in / 2,269 out |
+| <img src="assets/recordings/claude.gif" alt="Terminal recording of the Paranoid SRE reviewing a staged diff with Claude Code: SRE: HOLD with 2 numbered findings" width="440"> | <img src="assets/recordings/codex.gif" alt="Terminal recording of the Paranoid SRE reviewing a staged diff with Codex CLI: SRE: PAGE with 4 numbered findings" width="440"> |
+| <b>Verdict</b> SRE: HOLD<br><b>Findings</b> 2<br><b>Time</b> 10 s<br><b>Tokens</b> 8,151 in / 637 out | <b>Verdict</b> SRE: PAGE<br><b>Findings</b> 4<br><b>Time</b> 30 s<br><b>Tokens</b> 18,469 in / 2,269 out |
 
 | Antigravity CLI | IBM Bob Shell |
 |---|---|
-| <img src="assets/recordings/agy.gif" alt="Terminal recording of the Paranoid SRE reviewing a staged diff with Antigravity CLI: SRE: PAGE with 2 numbered findings" width="440"> | <img src="assets/recordings/bob.gif" alt="Terminal recording of the Paranoid SRE reviewing a staged diff with IBM Bob Shell: SRE: PAGE with 2 numbered findings" width="440"> |
-| <b>Verdict</b> SRE: PAGE<br><b>Findings</b> 2<br><b>Time</b> 86 s<br><b>Tokens</b> 21,006 in / 32,192 out | <b>Verdict</b> SRE: PAGE<br><b>Findings</b> 2<br><b>Time</b> 17 s<br><b>Tokens</b> not reported by the host |
+| <img src="assets/recordings/agy.gif" alt="Terminal recording of the Paranoid SRE reviewing a staged diff with Antigravity CLI: SRE: HOLD with 1 numbered findings" width="440"> | <img src="assets/recordings/bob.gif" alt="Terminal recording of the Paranoid SRE reviewing a staged diff with IBM Bob Shell: SRE: HOLD with 4 numbered findings" width="440"> |
+| <b>Verdict</b> SRE: HOLD<br><b>Findings</b> 1<br><b>Time</b> 59 s<br><b>Tokens</b> 29,202 in / 35,013 out | <b>Verdict</b> SRE: HOLD<br><b>Findings</b> 4<br><b>Time</b> 10 s<br><b>Tokens</b> not reported by the host |
 
 Each card reads the same way. **Verdict** is what The Paranoid SRE concluded: SHIP lets the change through, HOLD asks for fixes, PAGE stops it. **Findings** counts the numbered problems he listed, each naming a file, a line, and the smallest fix. **Time** is how long the whole review took, start to finish. **Tokens** is what the host reported it read and wrote, and says so plainly when a host reports nothing. Agents that narrate the whole checklist before the verdict are shown from the verdict block down; the CLI prints it the same way. Re-capture any of them with `--agent claude|codex|agy|bob`; Bob needs `BOB_API_KEY`.
 <!-- recordings:end -->

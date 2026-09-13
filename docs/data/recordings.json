@@ -2,15 +2,15 @@
   {
     "agent": "claude",
     "label": "Claude Code",
-    "verdict": "PAGE",
-    "findings": 4,
-    "seconds": 40,
-    "cost": 0.0524,
-    "recordedAt": "2026-09-04",
+    "verdict": "HOLD",
+    "findings": 2,
+    "seconds": 10,
+    "cost": 0.0278,
+    "recordedAt": "2026-09-13",
     "width": 1000,
-    "height": 544,
-    "tokensIn": 7771,
-    "tokensOut": 3256
+    "height": 388,
+    "tokensIn": 8151,
+    "tokensOut": 637
   },
   {
     "agent": "codex",
@@ -28,26 +28,26 @@
   {
     "agent": "agy",
     "label": "Antigravity CLI",
-    "verdict": "PAGE",
-    "findings": 2,
-    "seconds": 86,
+    "verdict": "HOLD",
+    "findings": 1,
+    "seconds": 59,
     "cost": null,
-    "recordedAt": "2026-09-04",
+    "recordedAt": "2026-09-13",
     "width": 1000,
-    "height": 388,
-    "tokensIn": 21006,
-    "tokensOut": 32192
+    "height": 310,
+    "tokensIn": 29202,
+    "tokensOut": 35013
   },
   {
     "agent": "bob",
     "label": "IBM Bob Shell",
-    "verdict": "PAGE",
-    "findings": 2,
-    "seconds": 17,
-    "cost": 0.0109,
-    "recordedAt": "2026-09-04",
+    "verdict": "HOLD",
+    "findings": 4,
+    "seconds": 10,
+    "cost": 0.0106,
+    "recordedAt": "2026-09-13",
     "width": 1000,
-    "height": 414,
+    "height": 648,
     "tokensIn": null,
     "tokensOut": null
   }

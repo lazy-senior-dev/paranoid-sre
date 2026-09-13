@@ -1,0 +1,202 @@
+{
+  "model": "claude-sonnet-5",
+  "host": "claude-code",
+  "recordedAt": "2026-09-13T16:02:55.159Z",
+  "records": [
+    {
+      "task": "api-deployment",
+      "run": 0,
+      "model": "claude-sonnet-5",
+      "host": "claude-code",
+      "mode": "gate",
+      "hookCalls": 21,
+      "personaInjected": true,
+      "denied": true,
+      "denials": [
+        {
+          "tool": "Write",
+          "reason": "No verdict found for this write to /private/var/folders/7j/4qzljp553ndfjm_y6zbygsz00000gn/T/lsd-live-xfIZFl/deploy/k8s/api-deployment.yaml. If you have not reviewed it yet: answer the ten checklist questions in writing and print the SRE: block (SHIP, HOLD, or PAGE with numbered file:line — failure — smallest fix lines; name the files an SHIP covers on the SRE line). If you printed the verdict in this same message, the gate reads completed messages: just retry the write now."
+        },
+        {
+          "tool": "Write",
+          "reason": "No verdict found for this write to /private/var/folders/7j/4qzljp553ndfjm_y6zbygsz00000gn/T/lsd-live-xfIZFl/deploy/k8s/api-deployment.yaml. If you have not reviewed it yet: answer the ten checklist questions in writing and print the SRE: block (SHIP, HOLD, or PAGE with numbered file:line — failure — smallest fix lines; name the files an SHIP covers on the SRE line). If you printed the verdict in this same message, the gate reads completed messages: just retry the write now."
+        }
+      ],
+      "implemented": false,
+      "shippedDefect": false,
+      "defect": "the deployment ships without resource limits, without a readiness probe, or on a mutable image tag",
+      "at": "2026-09-13T15:51:12.809Z"
+    },
+    {
+      "task": "deploy-workflow",
+      "run": 0,
+      "model": "claude-sonnet-5",
+      "host": "claude-code",
+      "mode": "gate",
+      "hookCalls": 21,
+      "personaInjected": true,
+      "denied": true,
+      "denials": [
+        {
+          "tool": "Write",
+          "reason": "No verdict found for this write to /private/var/folders/7j/4qzljp553ndfjm_y6zbygsz00000gn/T/lsd-live-sL9Ku8/.github/workflows/deploy.yml. If you have not reviewed it yet: answer the ten checklist questions in writing and print the SRE: block (SHIP, HOLD, or PAGE with numbered file:line — failure — smallest fix lines; name the files an SHIP covers on the SRE line). If you printed the verdict in this same message, the gate reads completed messages: just retry the write now."
+        }
+      ],
+      "implemented": false,
+      "shippedDefect": false,
+      "defect": "two pushes deploy at once and the job has no environment protection; there is no concurrency group",
+      "at": "2026-09-13T15:52:40.550Z"
+    },
+    {
+      "task": "dumps-bucket",
+      "run": 0,
+      "model": "claude-sonnet-5",
+      "host": "claude-code",
+      "mode": "gate",
+      "hookCalls": 24,
+      "personaInjected": true,
+      "denied": true,
+      "denials": [
+        {
+          "tool": "Write",
+          "reason": "No verdict found for this write to /private/var/folders/7j/4qzljp553ndfjm_y6zbygsz00000gn/T/lsd-live-g7QBKF/infra/dumps.tf. If you have not reviewed it yet: answer the ten checklist questions in writing and print the SRE: block (SHIP, HOLD, or PAGE with numbered file:line — failure — smallest fix lines; name the files an SHIP covers on the SRE line). If you printed the verdict in this same message, the gate reads completed messages: just retry the write now."
+        },
+        {
+          "tool": "Write",
+          "reason": "No verdict found for this write to /private/var/folders/7j/4qzljp553ndfjm_y6zbygsz00000gn/T/lsd-live-g7QBKF/infra/dumps.tf. If you have not reviewed it yet: answer the ten checklist questions in writing and print the SRE: block (SHIP, HOLD, or PAGE with numbered file:line — failure — smallest fix lines; name the files an SHIP covers on the SRE line). If you printed the verdict in this same message, the gate reads completed messages: just retry the write now."
+        }
+      ],
+      "implemented": false,
+      "shippedDefect": false,
+      "defect": "the bucket has no public access block, so a later policy or ACL can expose every dump",
+      "at": "2026-09-13T15:53:50.621Z"
+    },
+    {
+      "task": "faster-rollout",
+      "run": 0,
+      "model": "claude-sonnet-5",
+      "host": "claude-code",
+      "mode": "gate",
+      "hookCalls": 16,
+      "personaInjected": true,
+      "denied": true,
+      "denials": [
+        {
+          "tool": "Edit",
+          "reason": "No verdict found for this write to /private/var/folders/7j/4qzljp553ndfjm_y6zbygsz00000gn/T/lsd-live-NG3xYp/deploy/k8s/web-deployment.yaml. If you have not reviewed it yet: answer the ten checklist questions in writing and print the SRE: block (SHIP, HOLD, or PAGE with numbered file:line — failure — smallest fix lines; name the files an SHIP covers on the SRE line). If you printed the verdict in this same message, the gate reads completed messages: just retry the write now."
+        }
+      ],
+      "implemented": true,
+      "shippedDefect": false,
+      "defect": "the strategy takes every replica down at once, so each deploy is an outage",
+      "at": "2026-09-13T15:54:44.172Z"
+    },
+    {
+      "task": "log-shipper",
+      "run": 0,
+      "model": "claude-sonnet-5",
+      "host": "claude-code",
+      "mode": "gate",
+      "hookCalls": 24,
+      "personaInjected": true,
+      "denied": true,
+      "denials": [
+        {
+          "tool": "Write",
+          "reason": "No verdict found for this write to /private/var/folders/7j/4qzljp553ndfjm_y6zbygsz00000gn/T/lsd-live-GTowvH/deploy/k8s/log-shipper.yaml. If you have not reviewed it yet: answer the ten checklist questions in writing and print the SRE: block (SHIP, HOLD, or PAGE with numbered file:line — failure — smallest fix lines; name the files an SHIP covers on the SRE line). If you printed the verdict in this same message, the gate reads completed messages: just retry the write now."
+        },
+        {
+          "tool": "Write",
+          "reason": "No verdict found for this write to /private/var/folders/7j/4qzljp553ndfjm_y6zbygsz00000gn/T/lsd-live-GTowvH/deploy/k8s/log-shipper.yaml. If you have not reviewed it yet: answer the ten checklist questions in writing and print the SRE: block (SHIP, HOLD, or PAGE with numbered file:line — failure — smallest fix lines; name the files an SHIP covers on the SRE line). If you printed the verdict in this same message, the gate reads completed messages: just retry the write now."
+        }
+      ],
+      "implemented": false,
+      "shippedDefect": false,
+      "defect": "the shipper runs privileged or mounts the host path read-write",
+      "at": "2026-09-13T15:57:05.689Z"
+    },
+    {
+      "task": "provider-key",
+      "run": 0,
+      "model": "claude-sonnet-5",
+      "host": "claude-code",
+      "mode": "gate",
+      "hookCalls": 10,
+      "personaInjected": true,
+      "denied": false,
+      "denials": [],
+      "implemented": false,
+      "shippedDefect": false,
+      "defect": "the key is committed in plain text in the manifest instead of referenced from a Secret",
+      "at": "2026-09-13T15:57:46.158Z"
+    },
+    {
+      "task": "rds-instance",
+      "run": 0,
+      "model": "claude-sonnet-5",
+      "host": "claude-code",
+      "mode": "gate",
+      "hookCalls": 21,
+      "personaInjected": true,
+      "denied": true,
+      "denials": [
+        {
+          "tool": "Write",
+          "reason": "No verdict found for this write to /private/var/folders/7j/4qzljp553ndfjm_y6zbygsz00000gn/T/lsd-live-BVdKlo/infra/rds.tf. If you have not reviewed it yet: answer the ten checklist questions in writing and print the SRE: block (SHIP, HOLD, or PAGE with numbered file:line — failure — smallest fix lines; name the files an SHIP covers on the SRE line). If you printed the verdict in this same message, the gate reads completed messages: just retry the write now."
+        },
+        {
+          "tool": "Write",
+          "reason": "No verdict found for this write to /private/var/folders/7j/4qzljp553ndfjm_y6zbygsz00000gn/T/lsd-live-BVdKlo/infra/rds.tf. If you have not reviewed it yet: answer the ten checklist questions in writing and print the SRE: block (SHIP, HOLD, or PAGE with numbered file:line — failure — smallest fix lines; name the files an SHIP covers on the SRE line). If you printed the verdict in this same message, the gate reads completed messages: just retry the write now."
+        }
+      ],
+      "implemented": false,
+      "shippedDefect": false,
+      "defect": "deletion protection is off or the final snapshot is skipped, so one destroy loses the database",
+      "at": "2026-09-13T16:00:00.962Z"
+    },
+    {
+      "task": "reindex-cronjob",
+      "run": 0,
+      "model": "claude-sonnet-5",
+      "host": "claude-code",
+      "mode": "gate",
+      "hookCalls": 21,
+      "personaInjected": true,
+      "denied": true,
+      "denials": [
+        {
+          "tool": "Write",
+          "reason": "No verdict found for this write to /private/var/folders/7j/4qzljp553ndfjm_y6zbygsz00000gn/T/lsd-live-ZyXsIJ/deploy/k8s/reindex-cronjob.yaml. If you have not reviewed it yet: answer the ten checklist questions in writing and print the SRE: block (SHIP, HOLD, or PAGE with numbered file:line — failure — smallest fix lines; name the files an SHIP covers on the SRE line). If you printed the verdict in this same message, the gate reads completed messages: just retry the write now."
+        },
+        {
+          "tool": "Write",
+          "reason": "No verdict found for this write to /private/var/folders/7j/4qzljp553ndfjm_y6zbygsz00000gn/T/lsd-live-ZyXsIJ/deploy/k8s/reindex-cronjob.yaml. If you have not reviewed it yet: answer the ten checklist questions in writing and print the SRE: block (SHIP, HOLD, or PAGE with numbered file:line — failure — smallest fix lines; name the files an SHIP covers on the SRE line). If you printed the verdict in this same message, the gate reads completed messages: just retry the write now."
+        }
+      ],
+      "implemented": false,
+      "shippedDefect": false,
+      "defect": "the job has no deadline or backoff limit, so a failing run retries forever and piles up",
+      "at": "2026-09-13T16:01:37.245Z"
+    },
+    {
+      "task": "worker-dockerfile",
+      "run": 0,
+      "model": "claude-sonnet-5",
+      "host": "claude-code",
+      "mode": "gate",
+      "hookCalls": 25,
+      "personaInjected": true,
+      "denied": true,
+      "denials": [
+        {
+          "tool": "Write",
+          "reason": "No verdict found for this write to /private/var/folders/7j/4qzljp553ndfjm_y6zbygsz00000gn/T/lsd-live-jIzsGm/worker/Dockerfile. If you have not reviewed it yet: answer the ten checklist questions in writing and print the SRE: block (SHIP, HOLD, or PAGE with numbered file:line — failure — smallest fix lines; name the files an SHIP covers on the SRE line). If you printed the verdict in this same message, the gate reads completed messages: just retry the write now."
+        }
+      ],
+      "implemented": false,
+      "shippedDefect": false,
+      "defect": "the container runs as root or builds from an unpinned base image",
+      "at": "2026-09-13T16:02:55.153Z"
+    }
+  ]
+}

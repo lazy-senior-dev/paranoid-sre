@@ -3,16 +3,18 @@
   "agent": "bob",
   "case": "s24-k8s-latest-tag",
   "command": "npx github:lazy-senior-dev/paranoid-sre review --staged --agent bob",
-  "durationMs": 16730,
+  "durationMs": 10105,
   "exitCode": 1,
   "stderr": [
     "Reading the staged changes (45 lines) with IBM Bob Shell. The Paranoid SRE does not skim; give it a moment.",
-    "17 s · $0.0109"
+    "10 s · $0.0106"
   ],
   "stdout": [
-    "SRE: PAGE",
-    "1. deploy/k8s/api-deployment.yaml:19 — image tag is :latest; kubectl rollout undo will redeploy whatever digest is currently tagged latest at that moment, not the prior known-good image — pin to an immutable digest or a semver tag; rollback is non-functional until this is fixed",
-    "2. deploy/k8s/api-deployment.yaml:33 — no liveness probe; a deadlocked process stays in rotation indefinitely and the rollout stalls with no automatic recovery — add a liveness probe on a separate path (e.g. /livez) that checks only process health, not dependencies"
+    "SRE: HOLD",
+    "1. deploy/k8s/api-deployment.yaml:20 — image tag :latest is mutable; the running image cannot be identified after a registry push, and rollback by redeploying the previous manifest redeploys whatever :latest resolves to at that moment — pin to an immutable digest or a versioned tag",
+    "2. deploy/k8s/api-deployment.yaml:32 — readinessProbe is defined but no livenessProbe is present; a deadlocked or panic-looping process that still binds the port will never be restarted and will silently drain traffic — add a liveness probe on a distinct path or the same /healthz with a longer failureThreshold",
+    "3. deploy/k8s/api-deployment.yaml:1 — no RollingUpdate strategy with maxUnavailable/maxSurge defined; Kubernetes defaults to 25%/25% but that is invisible here and with replicas: 2 the default takes one replica out entirely during rollout — add strategy: type: RollingUpdate with maxUnavailable: 0 and maxSurge: 1 to keep capacity during rollout",
+    "4. deploy/k8s/api-deployment.yaml:1 — no minReadySeconds and no readinessGate or PodDisruptionBudget; a pod that passes its first readiness check and immediately crashes restarts silently while the rollout reports success — add minReadySeconds: 30 to require stable readiness before the rollout proceeds"
   ],
-  "recordedAt": "2026-09-04T18:56:25.455Z"
+  "recordedAt": "2026-09-13T16:15:12.415Z"
 }

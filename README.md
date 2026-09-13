@@ -11,7 +11,7 @@
 <p align="center"><em>It works. Now tell me how it fails.</em></p>
 
 <!-- headline:start -->
-**On Claude Code a careful prompt reaches the same floor; on the rest it does not.** When the agent writes the code itself, 64% of unaided runs shipped the defect, 47% with a generic "be careful" prompt, 2% with the ruleset loaded, and **0% with the gate**, which refuses the write until the findings are fixed. Measured on Antigravity CLI (`gemini-3.6-flash-medium`), 5 runs per arm. The same arms on the other hosts measured so far: 27% to **2%** on IBM Bob Shell (`bob-default`), 60% to **0%** on Claude Code (`claude-sonnet-5`); [method and raw diffs](benchmarks/results/author).
+**On Claude Code a careful prompt reaches the same floor; on the rest it does not.** When the agent writes the code itself, 64% of unaided runs shipped the defect, 47% with a generic "be careful" prompt, 2% with the ruleset loaded, and **0% with the gate**, which refuses the write until the findings are fixed. Measured on Antigravity CLI (`gemini-3.6-flash-medium`), 5 runs per arm. The same arms on the other hosts measured so far: 27% to **2%** on IBM Bob Shell (`bob-default`), 60% to **0%** on Claude Code (`claude-sonnet-5`), 67% to **8%** on Codex CLI (`gpt-5.5`); [method and raw diffs](benchmarks/results/author).
 
 **It is quiet on code that is fine.** Across the 4 agents tested, the median run objects to 1.5 of 5 clean changes unaided and 1 with the Paranoid SRE loaded; the worst agent goes from 2.5 to 1.5. It does not buy that quiet by approving more: the median run still catches 15 of 15 seeded defects, against 14 unaided. That happens on every review, not only the ones with a bug in them, which is why it is the first thing worth knowing; [per-diff table](benchmarks/results).
 <!-- headline:end -->
@@ -135,6 +135,10 @@ Works with 14 coding agents from one ruleset, any MCP client, and a GitHub Actio
 | Claude Code | `claude-sonnet-5` (n=5) | generic care prompt | 45 of 45 | 0 of 45 (0%) | n/a | 84 s |
 | Claude Code | `claude-sonnet-5` (n=5) | paranoid-sre | 45 of 45 | 0 of 45 (0%) | 44 of 45 | 113 s |
 | Claude Code | `claude-sonnet-5` (n=5) | **paranoid-sre + gate** | **45 of 45** | **0 of 45 (0%)** | **45 of 45** | 145 s |
+| Codex CLI | `gpt-5.5` (n=4) | no skill | 35 of 36 | 24 of 36 (67%) | n/a | 35 s |
+| Codex CLI | `gpt-5.5` (n=4) | generic care prompt | 36 of 36 | 4 of 36 (11%) | n/a | 74 s |
+| Codex CLI | `gpt-5.5` (n=4) | paranoid-sre | 36 of 36 | 5 of 36 (14%) | 36 of 36 | 82 s |
+| Codex CLI | `gpt-5.5` (n=4) | **paranoid-sre + gate** | **34 of 36** | **3 of 36 (8%)** | **36 of 36** | 102 s |
 | IBM Bob Shell | `bob-default` (n=5) | no skill | 18 of 45 | 12 of 45 (27%) | n/a | 3 s |
 | IBM Bob Shell | `bob-default` (n=5) | generic care prompt | 18 of 45 | 3 of 45 (7%) | n/a | 3 s |
 | IBM Bob Shell | `bob-default` (n=5) | paranoid-sre | 18 of 45 | 1 of 45 (2%) | 18 of 45 | 3 s |
@@ -144,7 +148,7 @@ Every agent whose four arms have finished is in the table above. Completed the c
 <!-- bench:author:end -->
 
 <!-- bench:hero:start -->
-**On Claude Code (`claude-sonnet-5`), the Paranoid SRE catches 15 of 15 seeded defects against 14 for the agent alone. What changes is discipline: false alarms on 5 clean diffs, 1 either way; replies with no usable verdict per run, 0 with her, 2 without; 94% of PAGE verdicts land on PAGE-class defects; median review time 31 s with her, 10 s without at 2695 output tokens with her, 737 output tokens without.** Median of 2 runs, measured 2026-09-12; [method, per-diff table, raw replies](benchmarks/results). **In the needle tier, where the same defect hides in a four-file, 150-line pull request, Claude Code finds 5 of 5 with the Paranoid SRE, 5 without, 5 with the generic prompt.**
+**On Claude Code (`claude-sonnet-5`), the Paranoid SRE catches 15 of 15 seeded defects against 14 for the agent alone. What changes is discipline: false alarms on 5 clean diffs, 1 either way; replies with no usable verdict per run, 0 with her, 2 without; 94% of PAGE verdicts land on PAGE-class defects; median review time 31 s with her, 10 s without at 2695 output tokens with her, 737 output tokens without.** Median of 2 runs, measured 2026-09-13; [method, per-diff table, raw replies](benchmarks/results). **In the needle tier, where the same defect hides in a four-file, 150-line pull request, Claude Code finds 5 of 5 with the Paranoid SRE, 5 without, 5 with the generic prompt.**
 <!-- bench:hero:end -->
 
 <!-- recordings:start -->

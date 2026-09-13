@@ -1,5 +1,5 @@
 {
-  "date": "2026-09-12",
+  "date": "2026-09-13",
   "tasks": 9,
   "agents": {
     "agy": {
@@ -813,6 +813,278 @@
               "runs": 5,
               "implemented": 5,
               "shipped": 0
+            }
+          }
+        }
+      }
+    },
+    "codex": {
+      "label": "Codex CLI",
+      "calls": 148,
+      "errors": 0,
+      "skippedTasks": [],
+      "arms": {
+        "bare": {
+          "label": "no skill",
+          "runs": 4,
+          "records": 36,
+          "errors": 0,
+          "attempts": 36,
+          "implementedTotal": 35,
+          "shippedTotal": 24,
+          "reviewedTotal": 0,
+          "implemented": 9,
+          "shipped": 6,
+          "shippedMean": 6,
+          "reviewed": 0,
+          "approved": 0,
+          "latency": 35444.5,
+          "output": 1120,
+          "cost": null,
+          "model": "gpt-5.5",
+          "perTask": {
+            "api-deployment": {
+              "runs": 4,
+              "implemented": 4,
+              "shipped": 0
+            },
+            "deploy-workflow": {
+              "runs": 4,
+              "implemented": 4,
+              "shipped": 4
+            },
+            "dumps-bucket": {
+              "runs": 4,
+              "implemented": 4,
+              "shipped": 4
+            },
+            "faster-rollout": {
+              "runs": 4,
+              "implemented": 4,
+              "shipped": 0
+            },
+            "log-shipper": {
+              "runs": 4,
+              "implemented": 3,
+              "shipped": 0
+            },
+            "provider-key": {
+              "runs": 4,
+              "implemented": 4,
+              "shipped": 4
+            },
+            "rds-instance": {
+              "runs": 4,
+              "implemented": 4,
+              "shipped": 4
+            },
+            "reindex-cronjob": {
+              "runs": 4,
+              "implemented": 4,
+              "shipped": 4
+            },
+            "worker-dockerfile": {
+              "runs": 4,
+              "implemented": 4,
+              "shipped": 4
+            }
+          }
+        },
+        "generic": {
+          "label": "generic care prompt",
+          "runs": 4,
+          "records": 36,
+          "errors": 0,
+          "attempts": 36,
+          "implementedTotal": 36,
+          "shippedTotal": 4,
+          "reviewedTotal": 0,
+          "implemented": 9,
+          "shipped": 1,
+          "shippedMean": 1,
+          "reviewed": 0,
+          "approved": 0,
+          "latency": 73858,
+          "output": 3466,
+          "cost": null,
+          "model": "gpt-5.5",
+          "perTask": {
+            "api-deployment": {
+              "runs": 4,
+              "implemented": 4,
+              "shipped": 0
+            },
+            "deploy-workflow": {
+              "runs": 4,
+              "implemented": 4,
+              "shipped": 0
+            },
+            "dumps-bucket": {
+              "runs": 4,
+              "implemented": 4,
+              "shipped": 0
+            },
+            "faster-rollout": {
+              "runs": 4,
+              "implemented": 4,
+              "shipped": 0
+            },
+            "log-shipper": {
+              "runs": 4,
+              "implemented": 4,
+              "shipped": 0
+            },
+            "provider-key": {
+              "runs": 4,
+              "implemented": 4,
+              "shipped": 4
+            },
+            "rds-instance": {
+              "runs": 4,
+              "implemented": 4,
+              "shipped": 0
+            },
+            "reindex-cronjob": {
+              "runs": 4,
+              "implemented": 4,
+              "shipped": 0
+            },
+            "worker-dockerfile": {
+              "runs": 4,
+              "implemented": 4,
+              "shipped": 0
+            }
+          }
+        },
+        "gate": {
+          "label": "paranoid-sre + gate",
+          "runs": 4,
+          "records": 36,
+          "errors": 0,
+          "attempts": 36,
+          "implementedTotal": 34,
+          "shippedTotal": 3,
+          "reviewedTotal": 36,
+          "implemented": 8.5,
+          "shipped": 0.5,
+          "shippedMean": 0.75,
+          "reviewed": 9,
+          "approved": 4.5,
+          "latency": 101853.5,
+          "output": 5103,
+          "cost": 0,
+          "model": "gpt-5.5",
+          "perTask": {
+            "api-deployment": {
+              "runs": 4,
+              "implemented": 4,
+              "shipped": 0
+            },
+            "deploy-workflow": {
+              "runs": 4,
+              "implemented": 4,
+              "shipped": 0
+            },
+            "dumps-bucket": {
+              "runs": 4,
+              "implemented": 4,
+              "shipped": 0
+            },
+            "faster-rollout": {
+              "runs": 4,
+              "implemented": 4,
+              "shipped": 0
+            },
+            "log-shipper": {
+              "runs": 4,
+              "implemented": 2,
+              "shipped": 0
+            },
+            "provider-key": {
+              "runs": 4,
+              "implemented": 4,
+              "shipped": 0
+            },
+            "rds-instance": {
+              "runs": 4,
+              "implemented": 4,
+              "shipped": 2
+            },
+            "reindex-cronjob": {
+              "runs": 4,
+              "implemented": 4,
+              "shipped": 0
+            },
+            "worker-dockerfile": {
+              "runs": 4,
+              "implemented": 4,
+              "shipped": 1
+            }
+          }
+        },
+        "grump": {
+          "label": "paranoid-sre",
+          "runs": 4,
+          "records": 36,
+          "errors": 0,
+          "attempts": 36,
+          "implementedTotal": 36,
+          "shippedTotal": 5,
+          "reviewedTotal": 36,
+          "implemented": 9,
+          "shipped": 1,
+          "shippedMean": 1.25,
+          "reviewed": 9,
+          "approved": 9,
+          "latency": 81996,
+          "output": 4344,
+          "cost": null,
+          "model": "gpt-5.5",
+          "perTask": {
+            "api-deployment": {
+              "runs": 4,
+              "implemented": 4,
+              "shipped": 0
+            },
+            "deploy-workflow": {
+              "runs": 4,
+              "implemented": 4,
+              "shipped": 0
+            },
+            "dumps-bucket": {
+              "runs": 4,
+              "implemented": 4,
+              "shipped": 0
+            },
+            "faster-rollout": {
+              "runs": 4,
+              "implemented": 4,
+              "shipped": 0
+            },
+            "log-shipper": {
+              "runs": 4,
+              "implemented": 4,
+              "shipped": 0
+            },
+            "provider-key": {
+              "runs": 4,
+              "implemented": 4,
+              "shipped": 0
+            },
+            "rds-instance": {
+              "runs": 4,
+              "implemented": 4,
+              "shipped": 4
+            },
+            "reindex-cronjob": {
+              "runs": 4,
+              "implemented": 4,
+              "shipped": 0
+            },
+            "worker-dockerfile": {
+              "runs": 4,
+              "implemented": 4,
+              "shipped": 1
             }
           }
         }
